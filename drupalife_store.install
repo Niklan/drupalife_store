@@ -56,6 +56,26 @@ function drupalife_store_install() {
       'cache' => -1,
     ),
     array(
+      'module' => 'nivo_slider',
+      'delta' => 'nivo_slider',
+      'theme' => $default_theme,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'content_front',
+      'pages' => '',
+      'cache' => 4,
+    ),
+    array(
+      'module' => 'views',
+      'delta' => 'news-frontpage',
+      'theme' => $default_theme,
+      'status' => 1,
+      'weight' => 1,
+      'region' => 'content_front',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
       'module' => 'system',
       'delta' => 'main',
       'theme' => $admin_theme,
@@ -159,7 +179,7 @@ function drupalife_store_install() {
 
   variable_set('field_bundle_settings_taxonomy_term__shop_category', unserialize('a:2:{s:10:"view_modes";a:3:{s:11:"term_teaser";a:1:{s:15:"custom_settings";b:1;}s:4:"full";a:1:{s:15:"custom_settings";b:0;}s:5:"token";a:1:{s:15:"custom_settings";b:0;}}s:12:"extra_fields";a:2:{s:4:"form";a:0:{}s:7:"display";a:1:{s:11:"description";a:2:{s:7:"default";a:2:{s:6:"weight";s:1:"0";s:7:"visible";b:1;}s:11:"term_teaser";a:2:{s:6:"weight";s:1:"0";s:7:"visible";b:1;}}}}}'));
 
-  // Указываем валюту по умолчанию.
+  // Set default site currency.
   variable_set('commerce_default_currency', 'RUB');
 
   // Set default settings to our theme. This will disable 'rebuild theme

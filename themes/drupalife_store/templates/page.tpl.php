@@ -89,15 +89,7 @@ global $user;
       <?php print $messages; ?>
       <?php print render($tabs); ?>
       <?php print render($page['help']); ?>
-
-      <?php
-      // Slider.
-      $block = module_invoke('nivo_slider', 'block_view', 'nivo_slider');
-      print render($block['content']);
-      ?>
-
-      <h2><a href="/news">Последние новости</a></h2>
-      <?php print views_embed_view('news','frontpage'); ?>
+      <?php print render($page['content_front']); ?>
     <?php else: ?>
       <div id="main-content" class="<?php print $main_content_class; ?> left" role="main">
         <?php print render($page['highlighted']); ?>

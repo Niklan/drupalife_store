@@ -91,6 +91,7 @@ regions[navigation]     = Navigation bar
 regions[highlighted]    = Highlighted
 regions[help]           = Help
 regions[content]        = Содержимое
+regions[content_front]  = Содержимое на главной
 regions[sidebar_first]  = Сайдбар
 regions[footer]         = Footer
 

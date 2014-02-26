@@ -22,7 +22,7 @@ function drupalife_store_news_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Новости';
+  $handler->display->display_options['title'] = 'Последние новости';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'ещё';
   $handler->display->display_options['access']['type'] = 'perm';
@@ -119,8 +119,9 @@ function drupalife_store_news_views_default_views() {
     'page' => 'page',
   );
 
-  /* Display: Последние 3 новости на главной */
-  $handler = $view->new_display('attachment', 'Последние 3 новости на главной', 'frontpage');
+  /* Display: (front) Last 3 news */
+  $handler = $view->new_display('block', '(front) Last 3 news', 'frontpage');
+  $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '3';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -132,9 +133,31 @@ function drupalife_store_news_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'node';
   $handler->display->display_options['row_options']['view_mode'] = 'frontpage';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Критерий фильтра: Содержимое: Опубликовано */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Критерий фильтра: Содержимое: Тип */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'news' => 'news',
+  );
+  /* Критерий фильтра: Содержимое: Промо-изображение (field_promo_image:fid) */
+  $handler->display->display_options['filters']['field_promo_image_fid']['id'] = 'field_promo_image_fid';
+  $handler->display->display_options['filters']['field_promo_image_fid']['table'] = 'field_data_field_promo_image';
+  $handler->display->display_options['filters']['field_promo_image_fid']['field'] = 'field_promo_image_fid';
+  $handler->display->display_options['filters']['field_promo_image_fid']['operator'] = 'not empty';
   $translatables['news'] = array(
     t('Master'),
-    t('Новости'),
+    t('Последние новости'),
     t('ещё'),
     t('Применить'),
     t('Сбросить'),
@@ -154,7 +177,7 @@ function drupalife_store_news_views_default_views() {
     t('UID Автора'),
     t('Page'),
     t('Feed'),
-    t('Последние 3 новости на главной'),
+    t('(front) Last 3 news'),
   );
   $export['news'] = $view;
 
