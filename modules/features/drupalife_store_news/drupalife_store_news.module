@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Drupalife Store - News feature.
+ */
+
+include_once 'drupalife_store_news.features.inc';

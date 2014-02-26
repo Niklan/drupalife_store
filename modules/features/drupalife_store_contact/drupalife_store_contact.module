@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Drupalife Store - Contact feature.
+ */
+
+include_once 'drupalife_store_contact.features.inc';

@@ -1,0 +1,4 @@
+name = Drupalife Store Custom
+description = Custom code and functional.
+core = 7.x
+package = Drupalife Store

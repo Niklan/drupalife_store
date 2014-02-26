@@ -1,0 +1,15 @@
+<?php
+/**
+* @file
+* Fixes needed to distribution.
+*/
+
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function drupalife_store_custom_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'addressfield') {
+    return 'plugins/' . $plugin;
+  }
+}

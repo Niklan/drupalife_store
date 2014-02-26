@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Drupalife Store - Pages feature.
+ */
+
+include_once 'drupalife_store_pages.features.inc';

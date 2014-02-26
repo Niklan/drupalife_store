@@ -1,0 +1,46 @@
+; Drupalife Store Distribution
+name = "Drupalife Store"
+description = "Installation Drupalife Store distribution."
+;exclusive = "1"
+core = "7.x"
+files[] = drupalife_store.profile
+; ----------
+; Dependencies
+; ----------
+; Core
+dependencies[] = block
+dependencies[] = color
+dependencies[] = comment
+dependencies[] = contextual
+dependencies[] = field
+dependencies[] = field_sql_storage
+dependencies[] = field_ui
+dependencies[] = file
+dependencies[] = filter
+dependencies[] = image
+dependencies[] = list
+dependencies[] = locale
+dependencies[] = menu
+dependencies[] = node
+dependencies[] = number
+dependencies[] = options
+dependencies[] = path
+dependencies[] = rdf
+dependencies[] = search
+dependencies[] = system
+dependencies[] = taxonomy
+dependencies[] = text
+dependencies[] = toolbar
+dependencies[] = update
+dependencies[] = user
+; Other libs
+dependencies[] = fancybox
+dependencies[] = menu_trail_by_path
+; Features - they make other dependencies automatically.
+dependencies[] = features
+dependencies[] = commerce_features
+dependencies[] = drupalife_store_contact
+dependencies[] = drupalife_store_core_shop
+dependencies[] = drupalife_store_news
+dependencies[] = drupalife_store_pages
+dependencies[] = drupalife_store_slider

@@ -1,0 +1,3 @@
+# Ignore JetBrains project files
+.idea/*
+themes/drupalife_store/.idea/*

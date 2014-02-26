@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="PHP">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../addressfield" />
+          <root url="file://$MODULE_DIR$/../rules" />
+          <root url="file://$MODULE_DIR$/../features" />
+          <root url="file://$MODULE_DIR$/../devel" />
+          <root url="file://$MODULE_DIR$/../../../../includes" />
+          <root url="file://$MODULE_DIR$/../token" />
+          <root url="file://$MODULE_DIR$/../ctools" />
+          <root url="file://$MODULE_DIR$/../commerce" />
+          <root url="file://$MODULE_DIR$/../views" />
+          <root url="file://$MODULE_DIR$/../filefield_paths" />
+          <root url="file://$MODULE_DIR$/../path_breadcrumbs" />
+          <root url="file://$MODULE_DIR$/../profiler_builder" />
+          <root url="file://$MODULE_DIR$/../l10n_update" />
+          <root url="file://$MODULE_DIR$/../ds" />
+          <root url="file://$MODULE_DIR$/../../../../modules" />
+          <root url="file://$MODULE_DIR$/../entity" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/../addressfield" />
+          <root url="file://$MODULE_DIR$/../rules" />
+          <root url="file://$MODULE_DIR$/../features" />
+          <root url="file://$MODULE_DIR$/../devel" />
+          <root url="file://$MODULE_DIR$/../../../../includes" />
+          <root url="file://$MODULE_DIR$/../token" />
+          <root url="file://$MODULE_DIR$/../ctools" />
+          <root url="file://$MODULE_DIR$/../commerce" />
+          <root url="file://$MODULE_DIR$/../views" />
+          <root url="file://$MODULE_DIR$/../filefield_paths" />
+          <root url="file://$MODULE_DIR$/../path_breadcrumbs" />
+          <root url="file://$MODULE_DIR$/../profiler_builder" />
+          <root url="file://$MODULE_DIR$/../l10n_update" />
+          <root url="file://$MODULE_DIR$/../ds" />
+          <root url="file://$MODULE_DIR$/../../../../modules" />
+          <root url="file://$MODULE_DIR$/../entity" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+  </component>
+</module>
+

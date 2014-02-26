@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Drupalife Store - Core shop feature.
+ */
+
+include_once 'drupalife_store_core_shop.features.inc';
