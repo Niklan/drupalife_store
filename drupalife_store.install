@@ -347,6 +347,26 @@ function drupalife_store_advanced_settings_form() {
     ),
   );
 
+  // Mail system.
+  $form['mail_system'] = array(
+    '#type' => 'fieldset',
+    '#title' => st('Mail system'),
+    '#description' => st('Here you can change default mail system to another one.'),
+    '#weight' => 3,
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+
+  $form['mail_system']['mail_module'] = array(
+    '#type' => 'radios',
+    '#title' => st('Search type'),
+    '#default_value' => 0,
+    '#options' => array(
+      0 => st('Use default mail system'),
+      1 => st('MimeMail (html mail)'),
+    ),
+  );
+
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Submit'),
@@ -371,6 +391,11 @@ function drupalife_store_advanced_settings_form_submit($form, $form_state) {
   // WYSIWYG editor.
   if ($form_state['values']['wysiwyg_editor'] == 1) {
     $todo_list[] = array('drupalife_store_install_ckeditor', array());
+  }
+
+  // Mail system.
+  if ($form_state['values']['mail_module'] == 1) {
+    $todo_list[] = array('drupalife_store_install_mimemail', array());
   }
 
   if (!empty($todo_list)) {
@@ -424,4 +449,25 @@ function drupalife_store_install_displaysuite_search() {
 function drupalife_store_install_ckeditor() {
   // Enable CKEditor.
   module_enable(array('ckeditor'));
+}
+
+/**
+ * Install MimeMail module and configure it,
+ */
+function drupalife_store_install_mimemail() {
+  // Enable modules.
+  module_enable(array(
+    'mailsystem',
+    'mimemail',
+  ));
+
+  // Import config.
+  variable_set('mail_system', unserialize('a:2:{s:14:"default-system";s:14:"MimeMailSystem";s:8:"mimemail";s:14:"MimeMailSystem";}'));
+  variable_set('mimemail_engine', 'mimemail');
+  variable_set('mimemail_format', 'full_html');
+  variable_set('mimemail_incoming', 0);
+  variable_set('mimemail_linkonly', 0);
+  variable_set('mimemail_simple_address', 0);
+  variable_set('mimemail_sitestyle', 0);
+  variable_set('mimemail_textonly', 0);
 }

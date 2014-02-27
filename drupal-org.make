@@ -28,6 +28,8 @@ projects[taxonomy_display][version] = "1.1"
 projects[token][version] = "1.5"
 projects[transliteration][version] = "3.1"
 projects[views][version] = "3.7"
+projects[mailsystem][version] = "2.34"
+projects[mimemail][version] = "1.0-beta2"
 
 ; Themes
 projects[zen][version] = "5.4"
