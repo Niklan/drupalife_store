@@ -227,3 +227,17 @@ function drupalife_store_process_html(&$variables) {
     _color_html_alter($variables);
   }
 }
+
+/**
+ * Implements hook_block_view_alter().
+ */
+function drupalife_store_block_view_alter(&$data, $block) {
+  // Alter views block for search api to theme.
+  // This is exposed filter (block) from search page view.
+  if ($block->module == 'views' && $block->delta == '-exp-search-page') {
+    // Add grid classes, to make form 100%;
+    $data['content']['#markup'] = str_replace('views-widget-filter-search_api_views_fulltext', 'views-widget-filter-search_api_views_fulltext grid-4-6 left', $data['content']['#markup']);
+    $data['content']['#markup'] = str_replace('views-submit-button', 'views-submit-button grid-1-6 left', $data['content']['#markup']);
+    $data['content']['#markup'] = str_replace('views-reset-button', 'views-reset-button grid-1-6 left', $data['content']['#markup']);
+  }
+}

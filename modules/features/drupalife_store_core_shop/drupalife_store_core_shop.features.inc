@@ -357,7 +357,7 @@ function drupalife_store_core_shop_image_default_styles() {
 function drupalife_store_core_shop_node_info() {
   $items = array(
     'product_display' => array(
-      'name' => t('Отображение товара'),
+      'name' => t('Карточка товара'),
       'base' => 'node_content',
       'description' => t('Добавление товаров со склада на сайт.'),
       'has_title' => '1',

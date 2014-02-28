@@ -706,7 +706,9 @@ a.tabledrag-handle .handle {
 .search .url {
     color: #55BE0F;
 }
-.block-indexisto-search input {
+.block-indexisto-search input,
+#search-api-header input[type="text"],
+#views-exposed-form-search-page input[type="text"] {
     width: 100%;
     box-shadow: inset 0px 2px 3px 0 #EBEBEB;
     padding: 8px 36px 8px 8px !important;
@@ -720,6 +722,82 @@ a.tabledrag-handle .handle {
 }
 .indx_widget_title_holder *:after {
     display: inline-block;
+}
+/* Search api */
+.view.search.page .col {
+    display: inline-block;
+    margin: 0px 10px 20px;
+}
+.view.search.page .col:first-child {
+    margin-left: 0;
+}
+.view.search.page .col:last-child {
+    margin-right: 0;
+}
+.block-facetapi ul {
+    list-style: none;
+    padding: 0 0 0 20px;
+}
+.block-facetapi .facetapi-facetapi-checkbox-links {
+    padding: 0;
+}
+.block-facetapi .ui-slider-range {
+    background: #8A73BB;
+}
+.block-facetapi .ui-slider-handle {
+    border-radius: 30px;
+    background: #FFF;
+    border: 2px solid #8A73BB;
+    box-shadow: 0px 0px 0px 2px #FFF;
+}
+.block-facetapi .range-slider-box {
+    width: 93%;
+    margin-left: 8px;
+}
+#search-api-header {
+    position: relative;
+}
+#search-api-header .submit-wrapper {
+    position: absolute;
+    z-index: 10;
+    top: 0px;
+    right: 0px;
+}
+#search-api-header .submit-wrapper:before {
+    content: '';
+    font-family: fontello;
+    position: absolute;
+    top: 6px;
+    right: 10px;
+}
+#search-api-header .submit-wrapper input[type="submit"] {
+    background: none;
+    position: relative;
+    top: 0px;
+    right: 0px;
+    width: 33px;
+    height: 33px;
+    padding: 0;
+    margin: 0;
+}
+#views-exposed-form-search-page .views-exposed-widgets {
+    margin: 10px 0 20px;
+}
+#views-exposed-form-search-page #edit-s-wrapper,
+#views-exposed-form-search-page .views-submit-button,
+#views-exposed-form-search-page .views-reset-button,
+#views-exposed-form-search-page .views-exposed-widgets input {
+    margin: 0;
+    padding: 0;
+}
+#views-exposed-form-search-page .views-submit-button input,
+#views-exposed-form-search-page .views-reset-button input {
+    padding: 9px;
+    border-radius: 0;
+    width: 100%;
+}
+#views-exposed-form-search-page .views-submit-button input {
+    box-shadow: inset -1px 0px 0px 0px rgba(0, 0, 0, 0.09);
 }
 
 /* ------- Блок авторизации ------- */

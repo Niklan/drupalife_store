@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Drupalife Store - Search API feature.
+ */
+
+include_once 'drupalife_store_search_api.features.inc';

@@ -13,3 +13,9 @@ a {
 .product.teaser .field-commerce-price {
     background: #8a73bb
 }
+.block-facetapi .ui-slider-range {
+    background: #8a73bb
+}
+.block-facetapi .ui-slider-handle {
+    border-color: #8a73bb;
+}

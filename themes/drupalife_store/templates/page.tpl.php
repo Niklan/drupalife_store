@@ -48,11 +48,24 @@ global $user;
 
       <div class="grid-1-3 left">
         <?php
-        $block = module_invoke('search', 'block_view', 0);
-        $block['content']['actions']['submit']['#value'] = "";
-        $block['content']['search_block_form']['#attributes'] = array('placeholder' => 'Введите поисковый запрос');
-        echo render($block['content']);
+        $site_search = variable_get('drupalife_store_selected_search', 'search_api');
+
+        if ($site_search == 'default') {
+          $block = module_invoke('search', 'block_view', 0);
+          $block['content']['actions']['submit']['#value'] = "";
+          $block['content']['search_block_form']['#attributes'] = array('placeholder' => 'Введите поисковый запрос');
+          echo render($block['content']);
+        }
+        else if ($site_search == 'search_api') {
+          if (arg(0) == 'search') {
+            $default_query = isset($_GET['s']) ? $_GET['s'] : '';
+          }
         ?>
+          <form action="/search" id="search-api-header">
+            <input name="s" value="<?php isset($default_query) ? print $default_query : print ''; ?>" maxlength="128" class="form-text" type="text" placeholder="Введите поисковый запрос">
+            <div class="submit-wrapper"><input type="submit" value=""></div>
+          </form>
+        <?php } ?>
       </div>
 
       <div class="grid-1-3 left">
