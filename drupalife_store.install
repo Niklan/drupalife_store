@@ -11,6 +11,23 @@ function drupalife_store_install() {
   variable_set('theme_default', $default_theme);
   variable_set('admin_theme', $admin_theme);
 
+  db_update('system')
+    ->fields(array(
+      'status' => 1,
+    ))
+    ->condition('name', $default_theme)
+    ->condition('type', 'theme')
+    ->execute();
+
+  // Disable Drupal default theme.
+  db_update('system')
+    ->fields(array(
+      'status' => 0,
+    ))
+    ->condition('name', 'bartik')
+    ->condition('type', 'theme')
+    ->execute();
+
   // Activate admin theme when editing a node.
   variable_set('node_admin_theme', '1');
 
@@ -100,7 +117,16 @@ function drupalife_store_install() {
   db_delete('block')->condition('module', 'system')->execute();
   db_delete('block')->condition('module', 'user')->execute();
   // add in our blocks defined above
-  $query = db_insert('block')->fields(array('module', 'delta', 'theme', 'status', 'weight', 'region', 'pages', 'cache'));
+  $query = db_insert('block')->fields(array(
+    'module',
+    'delta',
+    'theme',
+    'status',
+    'weight',
+    'region',
+    'pages',
+    'cache'
+  ));
   foreach ($blocks as $block) {
     $query->values($block);
   }
@@ -148,10 +174,10 @@ function drupalife_store_install() {
   variable_set('nivo_slider_theme', 'default');
 
   // Set jQuery version to 1.8
-  variable_set('jquery_update_jquery_version','1.7');
+  variable_set('jquery_update_jquery_version', '1.7');
 
   // Set default values to Path Breadcrubms.
-  variable_set('path_breadcrumbs_rich_snippets','1');
+  variable_set('path_breadcrumbs_rich_snippets', '1');
   // Taxonomy display.
   $query = db_insert('taxonomy_display')
     ->fields(array(
@@ -237,7 +263,7 @@ function drupalife_store_install() {
       'path' => 'node/%nid',
       'data' => 'a:6:{s:6:"titles";a:2:{i:0;s:14:"Каталог";i:1;s:48:"%nid:field-product-display-category:pb-join:name";}s:5:"paths";a:2:{i:0;s:7:"catalog";i:1;s:47:"%nid:field-product-display-category:pb-join:url";}s:4:"home";i:1;s:12:"translatable";i:0;s:9:"arguments";a:1:{s:3:"nid";a:3:{s:8:"position";i:1;s:8:"argument";s:14:"entity_id:node";s:8:"settings";a:1:{s:10:"identifier";s:20:"Материал: ID";}}}s:6:"access";a:2:{s:7:"plugins";a:1:{i:0;a:4:{s:4:"name";s:9:"node_type";s:8:"settings";a:1:{s:4:"type";a:1:{s:15:"product_display";s:15:"product_display";}}s:7:"context";s:3:"nid";s:3:"not";b:0;}}s:5:"logic";s:3:"and";}}',
       'weight' => 0,
-      ))
+    ))
     ->execute();
   db_insert('path_breadcrumbs')
     ->fields(array(
@@ -254,8 +280,26 @@ function drupalife_store_install() {
   variable_set('drupalife_store_selected_search', 'default');
 
   // Work with permissions.
-  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access checkout', 'access comments', 'access content', 'create commerce_order entities', 'post comments', 'search content', 'view any commerce_product entity'));
-  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access checkout', 'access comments', 'access content', 'create commerce_order entities', 'post comments', 'search content', 'skip comment approval', 'view any commerce_product entity', 'view own commerce_order entities'));
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array(
+    'access checkout',
+    'access comments',
+    'access content',
+    'create commerce_order entities',
+    'post comments',
+    'search content',
+    'view any commerce_product entity'
+  ));
+  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array(
+    'access checkout',
+    'access comments',
+    'access content',
+    'create commerce_order entities',
+    'post comments',
+    'search content',
+    'skip comment approval',
+    'view any commerce_product entity',
+    'view own commerce_order entities'
+  ));
 
   // ignore any rebuild messages
   node_access_needs_rebuild(FALSE);
@@ -391,8 +435,10 @@ function drupalife_store_advanced_settings_form_submit($form, $form_state) {
   if ($form_state['values']['search_type'] == 1) {
     $todo_list[] = array('drupalife_store_install_displaysuite_search', array());
   }
-  else if ($form_state['values']['search_type'] == 2) {
-    $todo_list[] = array('drupalife_store_install_search_api', array());
+  else {
+    if ($form_state['values']['search_type'] == 2) {
+      $todo_list[] = array('drupalife_store_install_search_api', array());
+    }
   }
 
   // WYSIWYG editor.
@@ -491,16 +537,56 @@ function drupalife_store_install_search_api() {
     ->condition('name', 'search')
     ->execute();
 
-  // Enable modules.
+  // Enable modules in that priority, cuz Search API + Features + Commerce DB
+  // have some problems.
+  module_enable(array('search_api_db'));
   module_enable(array(
-    'search_api_db',
-    'search_api_ranges',
-    'facetapi',
-    'commerce_search_api',
-  ));
+     'facetapi',
+     'search_api_facetapi',
+     'search_api_ranges',
+     'search_api_views',
+     'commerce_search_api',
+   ));
+
   module_enable(array('drupalife_store_search_api'));
-  // Revert to default.
-  //features_revert(array('drupalife_store_search_api'));
+
+  // Change settings.
+  $index_entity = entity_load('search_api_index', array(1));
+  $index_settings = $index_entity['1'];
+  $index_settings->options['data_alter_callbacks']['search_api_alter_add_hierarchy'] = array(
+    'status' => 1,
+    'weight' => 0,
+    'settings' => array(
+      'fields' => array(
+        'field_product_display_category:parent' => 'field_product_display_category:parent',
+        'field_product_display_category:parents_all' => 'field_product_display_category:parents_all',
+      ),
+    ),
+  );
+  $index_settings->options['processors'] = array(
+    'search_api_case_ignore' => array(
+      'status' => 1,
+      'weight' => 0,
+      'settings' => array(
+        'fields' => array(
+          'search_api_aggregation_1' => TRUE,
+          'search_api_aggregation_2' => TRUE,
+        ),
+      ),
+    ),
+    'search_api_highlighting' => array(
+      'status' => 1,
+      'weight' => 35,
+      'settings' => array(
+        'prefix' => '<strong>',
+        'suffix' => '</strong>',
+        'excerpt' => 1,
+        'excerpt_length' => 256,
+        'highlight' => 'always',
+      ),
+    ),
+  );
+  entity_save('search_api_index', $index_settings);
 
   // Change block's region and visibility.
   // Search block (exposed filter).
@@ -508,29 +594,43 @@ function drupalife_store_install_search_api() {
     ->fields(array(
       'weight' => -10,
       'region' => 'content',
+      'pages' => 'search'
     ))
     ->condition('module', 'views')
-    ->condition('delta', '-exp-search-page')
+    ->condition('delta', '-exp-Search-page')
+    ->condition('theme', 'drupalife_store')
     ->execute();
+
   // Facet API - price.
   db_update('block')
     ->fields(array(
       'weight' => -10,
       'region' => 'sidebar_first',
+      'title' => 'Фильтрация по цене',
     ))
     ->condition('module', 'facetapi')
-    ->condition('delta', 'eUql62WyfFMGgz42ZEmFllY4VrQC7oB0')
+    ->condition('delta', 'QjWzY1OW3LLst9QkfvsA05ttxV3jWo0q')
+    ->condition('theme', 'drupalife_store')
     ->execute();
+
   // Facet API - category.
   db_update('block')
     ->fields(array(
       'weight' => -9,
       'region' => 'sidebar_first',
+      'title' => 'Фильтрация по категории',
     ))
     ->condition('module', 'facetapi')
-    ->condition('delta', 'QjWzY1OW3LLst9QkfvsA05ttxV3jWo0q')
+    ->condition('delta', 'eUql62WyfFMGgz42ZEmFllY4VrQC7oB0')
+    ->condition('theme', 'drupalife_store')
     ->execute();
 
   // This variable used by page.tpl.php for changing search boxes.
   variable_set('drupalife_store_selected_search', 'search_api');
+
+  variable_set('search_api_facets_search_ids', unserialize('a:1:{s:15:"product_display";a:1:{s:28:"search_api_views:search:page";s:28:"search_api_views:search:page";}}'));
+
+  // For hiding commerce_search_api warning, which does not work properly and
+  // misleading.
+  drupal_get_messages();
 }

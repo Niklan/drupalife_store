@@ -11,7 +11,7 @@ function drupalife_store_search_api_views_default_views() {
   $export = array();
 
   $view = new view();
-  $view->name = 'search';
+  $view->name = 'Search';
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'search_api_index_product_display';
@@ -22,7 +22,7 @@ function drupalife_store_search_api_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Поиск';
+  $handler->display->display_options['title'] = 'Search';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'ещё';
   $handler->display->display_options['access']['type'] = 'none';
@@ -78,19 +78,16 @@ function drupalife_store_search_api_views_default_views() {
     1 => 0,
     3 => 0,
   );
-  $handler->display->display_options['filters']['search_api_views_fulltext']['fields'] = array(
-    'search_api_aggregation_1' => 'search_api_aggregation_1',
-    'search_api_aggregation_2' => 'search_api_aggregation_2',
-  );
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['path'] = 'search';
-  $translatables['search'] = array(
+  $translatables['Search'] = array(
     t('Master'),
-    t('Поиск'),
+    t('Search'),
     t('ещё'),
+    t('Поиск'),
     t('Сбросить'),
     t('Сортировать по'),
     t('По возрастанию'),
@@ -109,8 +106,7 @@ function drupalife_store_search_api_views_default_views() {
     t('Page'),
     t('more'),
   );
-
-  $export['search'] = $view;
+  $export['Search'] = $view;
 
   return $export;
 }
