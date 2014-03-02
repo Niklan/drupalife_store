@@ -370,7 +370,7 @@ function drupalife_store_advanced_settings_form() {
     '#options' => array(
       0 => st('Standart Drupal search'),
       1 => st('Standart Drupal search + DisplaySuite Search'),
-      //2 => st('Search API + Facet API'),
+      2 => st('Search API + Facet API'),
     ),
     '#description' => st('If you need search other the default Drupal Search, you can chose one here.'),
   );
@@ -563,6 +563,14 @@ function drupalife_store_install_search_api() {
       ),
     ),
   );
+  $index_settings->options['fields'] = array(
+    'title' => array(
+      'boost' => '2.0',
+    ),
+    'body:value' => array(
+      'type' => 'text',
+    ),
+  );
   $index_settings->options['processors'] = array(
     'search_api_case_ignore' => array(
       'status' => 1,
@@ -589,39 +597,44 @@ function drupalife_store_install_search_api() {
   entity_save('search_api_index', $index_settings);
 
   // Change block's region and visibility.
+  _block_rehash('drupalife_store');
   // Search block (exposed filter).
   db_update('block')
     ->fields(array(
+      'status' => 1,
       'weight' => -10,
       'region' => 'content',
-      'pages' => 'search'
+      'pages' => 'search',
+      'visibility' => 1,
     ))
     ->condition('module', 'views')
-    ->condition('delta', '-exp-Search-page')
+    ->condition('delta', '-exp-search-page')
     ->condition('theme', 'drupalife_store')
     ->execute();
 
   // Facet API - price.
   db_update('block')
     ->fields(array(
+      'status' => 1,
       'weight' => -10,
       'region' => 'sidebar_first',
       'title' => 'Фильтрация по цене',
     ))
     ->condition('module', 'facetapi')
-    ->condition('delta', 'QjWzY1OW3LLst9QkfvsA05ttxV3jWo0q')
+    ->condition('delta', 'eUql62WyfFMGgz42ZEmFllY4VrQC7oB0')
     ->condition('theme', 'drupalife_store')
     ->execute();
 
   // Facet API - category.
   db_update('block')
     ->fields(array(
+      'status' => 1,
       'weight' => -9,
       'region' => 'sidebar_first',
       'title' => 'Фильтрация по категории',
     ))
     ->condition('module', 'facetapi')
-    ->condition('delta', 'eUql62WyfFMGgz42ZEmFllY4VrQC7oB0')
+    ->condition('delta', 'QjWzY1OW3LLst9QkfvsA05ttxV3jWo0q')
     ->condition('theme', 'drupalife_store')
     ->execute();
 
