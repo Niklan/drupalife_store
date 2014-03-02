@@ -31,9 +31,11 @@ projects[views][version] = "3.7"
 projects[mailsystem][version] = "2.34"
 projects[mimemail][version] = "1.0-beta2"
 projects[search_api][version] = "1.11"
+projects[search_api_db][type] = "module"
 projects[search_api_db‎][version] = "1.2"
 projects[commerce_search_api][version] = "1.3"
 projects[facetapi][version] = "1.3"
+projects[search_api_ranges][type] = "module"
 projects[search_api_ranges‎][version] = "1.5"
 
 ; Themes
