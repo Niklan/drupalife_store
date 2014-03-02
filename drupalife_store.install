@@ -540,14 +540,9 @@ function drupalife_store_install_search_api() {
   // Enable modules in that priority, cuz Search API + Features + Commerce DB
   // have some problems.
   module_enable(array('search_api_db'));
-  module_enable(array(
-     'facetapi',
-     'search_api_facetapi',
-     'search_api_ranges',
-     'search_api_views',
-     'commerce_search_api',
-   ));
-
+  module_enable(array('search_api_facetapi'));
+  module_enable(array('search_api_ranges','search_api_views'));
+  module_enable(array('commerce_search_api'));
   module_enable(array('drupalife_store_search_api'));
 
   // Change settings.
@@ -563,13 +558,12 @@ function drupalife_store_install_search_api() {
       ),
     ),
   );
-  $index_settings->options['fields'] = array(
-    'title' => array(
-      'boost' => '2.0',
-    ),
-    'body:value' => array(
-      'type' => 'text',
-    ),
+  $index_settings->options['fields']['title'] = array(
+    'type' => 'string',
+    'boost' => '2.0',
+  );
+  $index_settings->options['fields']['body:value'] = array(
+    'type' => 'text',
   );
   $index_settings->options['processors'] = array(
     'search_api_case_ignore' => array(
@@ -647,3 +641,4 @@ function drupalife_store_install_search_api() {
   // misleading.
   drupal_get_messages();
 }
+
