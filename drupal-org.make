@@ -35,16 +35,12 @@ projects[search_api_db][version] = "1.2"
 projects[search_api_ranges][version] = "1.5"
 projects[commerce_search_api][version] = "1.3"
 projects[facetapi][version] = "1.3"
+projects[superfish][version] = "1.9"
 
 ; Themes
 projects[zen][version] = "5.4"
 
 ; Libraries
-libraries[fancybox][download][type] = "get"
-libraries[fancybox][download][url] = "http://fancybox.googlecode.com/files/jquery.fancybox-1.3.4.zip"
-libraries[fancybox][directory_name] = "fancybox"
-libraries[fancybox][type] = "library"
-
 libraries[ckeditor][download][type] = "get"
 libraries[ckeditor][download][url] = "http://download.cksource.com/CKEditor/CKEditor/CKEditor%204.3.3/ckeditor_4.3.3_full.zip"
 libraries[ckeditor][directory_name] = "ckeditor"
@@ -55,3 +51,7 @@ libraries[nivo-slider][download][url] = "https://github.com/gilbitron/Nivo-Slide
 libraries[nivo-slider][directory_name] = "nivo-slider"
 libraries[nivo-slider][type] = "library"
 
+libraries[nivo-slider][download][type] = "get"
+libraries[nivo-slider][download][url] = "https://github.com/mehrpadin/Superfish-for-Drupal/archive/1.x.zip"
+libraries[nivo-slider][directory_name] = "superfish"
+libraries[nivo-slider][type] = "library"

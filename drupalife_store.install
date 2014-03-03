@@ -276,6 +276,23 @@ function drupalife_store_install() {
     ))
     ->execute();
 
+  // Setup superfish module.
+  variable_set('superfish_number', 1);
+  variable_set('superfish_name_1', 'Main Menu');
+  variable_set('superfish_style_1', 'none');
+  _block_rehash('drupalife_store');
+  db_update('block')
+    ->fields(array(
+      'status' => 1,
+      'weight' => -11,
+      'region' => 'navigation',
+      'title' => '<none>',
+    ))
+    ->condition('module', 'superfish')
+    ->condition('delta', '1')
+    ->condition('theme', 'drupalife_store')
+    ->execute();
+
   // Set default value for search type.
   variable_set('drupalife_store_selected_search', 'default');
 
@@ -324,8 +341,6 @@ function installation_profile_set_theme($theme) {
  * Implements hook_install_tasks().
  */
 function drupalife_store_install_tasks(&$install_state) {
-  //installation_profile_set_theme('drupalife_store');
-
   $advanced_settings_batch_ready = variable_get('drupalife_store_install_advanced_settings_batch_ready', FALSE);
 
   $tasks['drupalife_store_advanced_settings_form'] = array(
@@ -641,4 +656,3 @@ function drupalife_store_install_search_api() {
   // misleading.
   drupal_get_messages();
 }
-

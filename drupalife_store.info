@@ -36,6 +36,7 @@ dependencies[] = user
 ; Other libs
 dependencies[] = fancybox
 dependencies[] = menu_trail_by_path
+dependencies[] = superfish
 ; Features - they make other dependencies automatically.
 dependencies[] = features
 dependencies[] = commerce_features

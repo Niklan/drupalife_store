@@ -86,14 +86,12 @@ scripts[] = js/script.js
 ; And you'll use this variable in maintenance-page.tpl.php:
 ;   <?php print $header_top; ?>
 
-regions[header]         = Header
-regions[navigation]     = Navigation bar
-regions[highlighted]    = Highlighted
-regions[help]           = Help
+regions[navigation]     = Меню навигации
+regions[help]           = Помощь
 regions[content]        = Содержимое
 regions[content_front]  = Содержимое на главной
 regions[sidebar_first]  = Сайдбар
-regions[footer]         = Footer
+regions[footer]         = Подвал
 
 ; The page_top and page_bottom regions are hidden, which means they will not
 ; show up on the blocks administration page. But they are required in order for

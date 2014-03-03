@@ -12,6 +12,7 @@
 // - http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth
 (function ($, Drupal, window, document, undefined) {
     $(document).ready(function() {
+        // Generate select menu for mobile phones.
         $("<select />").appendTo("#main-menu");
 
         $("<option />", {

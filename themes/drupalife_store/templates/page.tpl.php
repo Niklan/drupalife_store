@@ -73,20 +73,7 @@ global $user;
       </div>
     </div>
 
-    <nav id="main-menu" role="navigation">
-      <?php
-      print theme('links__system_main_menu', array(
-        'links' => $main_menu,
-        'attributes' => array(
-          'class' => array('links', 'inline', 'clearfix'),
-        ),
-        'heading' => array(
-          'text' => t('Main menu'),
-          'level' => 'h2',
-          'class' => array('element-invisible'),
-        ),
-      )); ?>
-    </nav>
+    <?php print render($page['navigation']); ?>
   </header>
 
   <?php if ($title && !$is_front): ?>

@@ -27,6 +27,7 @@ body {
     font-family: 'Arimo', sans-serif;
     font-size: 13px;
     color: #6F757C;
+    text-rendering: optimizeLegibility
 }
 a {
     color: #8a73bb;
@@ -339,46 +340,99 @@ a.tabledrag-handle .handle {
 #cart-wrapper.empty .icon-bag {
     color: #616161;
 }
-#main-menu {
+
+/* ------- Навигация ------- */
+.region-navigation {
     margin: 10px 20px 20px;
+}
+.region-navigation ul.sf-style-none {
+    padding: 0;
+    margin: 0;
+    list-style: none;
     background: #8a73bb;
     border-radius: 4px;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.11), inset 0px 2px 0 0 rgba(255, 255, 255, 0.38), inset 0px 1px 0 0 rgba(0, 0, 0, 0.21);
 }
-#main-menu ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-#main-menu ul li {
+.region-navigation ul.sf-style-none li {
     float: left;
     border-right: 1px solid rgba(0, 0, 0, 0.08);
     border-left: 1px solid rgba(255, 255, 255, 0.19);
 }
-#main-menu ul li:first-child {
+.region-navigation ul.sf-style-none li:first-child {
     border-left: none;
 }
-#main-menu ul li:last-child {
+.region-navigation ul.sf-style-none li:last-child {
     border-right: none;
 }
-#main-menu ul li a {
+.region-navigation ul.sf-style-none li.menuparent a {
+    padding-right: 20px;
+}
+.region-navigation ul.sf-style-none li a .sf-sub-indicator {
+    right: 5px;
+    top: 50%;
+    margin-top: -5px;
+}
+.region-navigation ul.sf-style-none li a {
     display: block;
-    padding: 10px;
+    padding: 12px;
     color: #FFF;
     font-size: 16px;
     text-shadow: 0px 2px 0 rgba(0, 0, 0, 0.13);
 }
-#main-menu ul li:hover a {
+.region-navigation ul.sf-style-none li:hover > a {
     background: rgba(255, 255, 255, 0.23);
     text-decoration: none;
 }
-#main-menu ul li.active-trail a {
+.region-navigation ul.sf-style-none li.active-trail > a {
     background: rgba(255, 255, 255, 0.23);
+    box-shadow: 1px 0px 0px 0px rgba(255, 255, 255, 0.37);
     text-decoration: none;
 }
-#main-menu select {
-    display: none;
+.region-navigation ul.sf-style-none > li.menuparent > ul {
+    margin-top: 10px;
 }
+.sf-menu.sf-horizontal.sf-shadow ul  {
+    padding: 0px !important;
+}
+.region-navigation ul.sf-style-none li.menuparent ul {
+    background: #8A73BB;
+    border: 2px solid rgba(0, 0, 0, 0.11);
+    border-radius: 3px;
+    box-shadow: inset 0px 1px 0 0 rgba(255, 255, 255, 0.33), 0px 0px 3px 0 rgba(0, 0, 0, 0.3);
+}
+.region-navigation ul.sf-style-none li.menuparent ul li {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.44);
+}
+.region-navigation ul.sf-style-none li.menuparent ul li:first-child {
+    border-top:none;
+}
+.region-navigation ul.sf-style-none li.menuparent ul li:last-child {
+    border-bottom: none;
+}
+.region-navigation ul.sf-style-none li.menuparent ul li a {
+    line-height: normal;
+    padding: 5px;
+    font-size: 14px;
+}
+/* This is work around superfish's bug, when submenus not appear on third level */
+.region-navigation ul.sf-style-none * {
+    overflow:visible !important;
+}
+.region-navigation #superfish-1-select {
+    background: #8a73bb;
+    border-radius: 4px;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.11), inset 0px 2px 0 0 rgba(255, 255, 255, 0.38), inset 0px 1px 0 0 rgba(0, 0, 0, 0.21);
+    width: 100%;
+    color: white;
+    padding: 10px;
+}
+.region-navigation #superfish-1-select option {
+    background: white;
+    color: #999;
+}
+
+/* ------- Заголовок ------- */
 #page-title-wrapper {
     background: #F7F7F7;
     padding: 10px 20px;

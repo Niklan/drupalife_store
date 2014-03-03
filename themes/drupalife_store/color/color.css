@@ -7,7 +7,10 @@ a {
 #cart-wrapper .icon-bag {
     background: #8a73bb;
 }
-#main-menu {
+.region-navigation ul.sf-style-none {
+    background: #8a73bb;
+}
+.region-navigation ul.sf-style-none li.menuparent ul {
     background: #8a73bb;
 }
 .product.teaser .field-commerce-price {
