@@ -161,6 +161,25 @@ function drupalife_store_install() {
 
   features_revert($features);
 
+  // Set default image for taxonomy category term.
+  $image_file = DRUPAL_ROOT . '/profiles/drupalife_store/themes/drupalife_store/noimage.png';
+  $image = file_get_contents($image_file);
+  $file = file_save_data($image, 'public://default_images/noimage.png',FILE_EXISTS_REPLACE);
+  // Change default image in field settings.
+  $result = db_select('field_config_instance', 'c')
+    ->fields('c')
+    ->condition('c.field_name', 'field_shop_category_image')
+    ->execute()
+    ->fetchAssoc();
+  $new_data = unserialize($result['data']);
+  $new_data['settings']['default_image'] = $file->fid;
+  db_update('field_config_instance')
+    ->fields(array(
+      'data' => serialize($new_data),
+    ))
+    ->condition('field_name', 'field_shop_category_image')
+    ->execute();
+
   // Set default pathauto patterns.
   variable_set('pathauto_node_news_pattern', 'news/[node:nid]-[node:title]');
   variable_set('pathauto_node_page_pattern', '[node:title]');
@@ -212,10 +231,12 @@ function drupalife_store_install() {
   // registry on every page' and some other things.
   variable_set('theme_drupalife_store_settings', unserialize('a:24:{s:11:"toggle_logo";i:1;s:11:"toggle_name";i:1;s:13:"toggle_slogan";i:1;s:24:"toggle_node_user_picture";i:1;s:27:"toggle_comment_user_picture";i:1;s:14:"toggle_favicon";i:1;s:16:"toggle_main_menu";i:1;s:21:"toggle_secondary_menu";i:1;s:12:"default_logo";i:1;s:9:"logo_path";s:0:"";s:11:"logo_upload";s:0:"";s:15:"default_favicon";i:1;s:12:"favicon_path";s:0:"";s:14:"favicon_upload";s:0:"";s:14:"zen_breadcrumb";s:3:"yes";s:24:"zen_breadcrumb_separator";s:5:" › ";s:19:"zen_breadcrumb_home";i:1;s:23:"zen_breadcrumb_trailing";i:0;s:20:"zen_breadcrumb_title";i:0;s:20:"zen_skip_link_anchor";s:9:"main-menu";s:18:"zen_skip_link_text";s:18:"Jump to navigation";s:22:"zen_html5_respond_meta";a:3:{s:7:"respond";s:7:"respond";s:5:"html5";s:5:"html5";s:4:"meta";s:4:"meta";}s:20:"zen_rebuild_registry";i:0;s:14:"zen_wireframes";i:0;}'));
 
-  // FancyBox settings.
-  $fancybox = variable_get('fancybox_settings');
-  $fancybox['settings']['selectors'] = '.fancybox';
-  variable_set('fancybox_settings', $fancybox);
+  // Colorbox settings.
+  variable_set('colorbox_load', 1);
+  variable_set('colorbox_text_close', 'Закрыть');
+  variable_set('colorbox_text_current', '{current} из {total}');
+  variable_set('colorbox_text_next', 'Следующий »');
+  variable_set('colorbox_text_previous', '« Предыдущий');
 
   // Metatag default settings.
   db_insert('metatag_config')

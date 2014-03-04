@@ -14,7 +14,7 @@ if ($element['#view_mode'] == "node_full") {
   $full_img = file_create_url($items[0]['#item']['uri']);
 ?>
   <div class="first-photo">
-    <a href="<?php print $full_img; ?>" rel="product" class="fancybox">
+    <a href="<?php print $full_img; ?>" rel="product" class="colorbox-load">
       <?php print render($items[0]); ?>
     </a>
   </div>
@@ -29,7 +29,7 @@ if ($element['#view_mode'] == "node_full") {
       $thumb_img = image_style_url('product_thumb', $item['#item']['uri']);
       ?>
       <li class="photo <?php print $delta % 2 ? 'odd' : 'even'; ?>"<?php print $item_attributes[$delta]; ?>>
-        <a href="<?php print $full_img; ?>" rel="product" class="fancybox">
+        <a href="<?php print $full_img; ?>" rel="product" class="colorbox-load">
           <?php print render($item); ?>
         </a>
       </li>

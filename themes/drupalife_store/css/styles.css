@@ -353,7 +353,7 @@ a.tabledrag-handle .handle {
     border-radius: 4px;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.11), inset 0px 2px 0 0 rgba(255, 255, 255, 0.38), inset 0px 1px 0 0 rgba(0, 0, 0, 0.21);
 }
-.region-navigation ul.sf-style-none li {
+.region-navigation ul.sf-style-none > li {
     float: left;
     border-right: 1px solid rgba(0, 0, 0, 0.08);
     border-left: 1px solid rgba(255, 255, 255, 0.19);
@@ -402,7 +402,7 @@ a.tabledrag-handle .handle {
 }
 .region-navigation ul.sf-style-none li.menuparent ul li {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    border-top: 1px solid rgba(255, 255, 255, 0.44);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 .region-navigation ul.sf-style-none li.menuparent ul li:first-child {
     border-top:none;

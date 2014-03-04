@@ -34,7 +34,7 @@ dependencies[] = toolbar
 dependencies[] = update
 dependencies[] = user
 ; Other libs
-dependencies[] = fancybox
+dependencies[] = colorbox
 dependencies[] = menu_trail_by_path
 dependencies[] = superfish
 ; Features - they make other dependencies automatically.
