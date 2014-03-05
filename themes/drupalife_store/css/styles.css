@@ -47,6 +47,11 @@ img {
     vertical-align: bottom;
 }
 
+/* ------- Фиксы ------- */
+body.toolbar-drawer {
+    padding: 0;
+}
+
 /* ------- Таблицы ------- */
 table {
     width: 100%;

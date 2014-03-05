@@ -27,12 +27,30 @@ function drupalife_store_core_shop_menu_default_menu_links() {
     'external' => 1,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -50,
+    'weight' => 0,
     'customized' => 1,
+  );
+  // Exported menu link: main-menu_:catalog
+  $menu_links['main-menu_:catalog'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'catalog',
+    'router_path' => 'catalog',
+    'link_title' => 'Каталог',
+    'options' => array(
+      'identifier' => 'main-menu_:catalog',
+    ),
+    'module' => 'system',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 1,
+    'customized' => 0,
   );
   // Translatables
   // Included for use with string extractors like potx.
   t('Главная');
+  t('Каталог');
 
 
   return $menu_links;

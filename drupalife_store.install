@@ -147,20 +147,6 @@ function drupalife_store_install() {
     ->fields(array('uid' => 1, 'rid' => $admin_role->rid))
     ->execute();
 
-  // Update the menu router information.
-  menu_rebuild();
-
-  // revert features to ensure they are all installed
-  $features = array(
-    'drupalife_store_contact',
-    'drupalife_store_core_shop',
-    'drupalife_store_news',
-    'drupalife_store_pages',
-    'drupalife_store_slider'
-  );
-
-  features_revert($features);
-
   // Set default image for taxonomy category term.
   $image_file = DRUPAL_ROOT . '/profiles/drupalife_store/themes/drupalife_store/noimage.png';
   $image = file_get_contents($image_file);
@@ -178,6 +164,31 @@ function drupalife_store_install() {
       'data' => serialize($new_data),
     ))
     ->condition('field_name', 'field_shop_category_image')
+    ->execute();
+
+  // Commerce order (addressfield) settings.
+  $addressfield = db_select('field_config_instance', 'c')
+    ->fields('c')
+    ->condition('c.field_name', 'commerce_customer_address')
+    ->execute()
+    ->fetchAssoc();
+  $addressfield_new = unserialize($addressfield['data']);
+  $addressfield_new['widget']['active'] = 1;
+  $addressfield_new['widget']['settings']['available_countries'] = array(
+    'RU' => 'RU',
+  );
+  $addressfield_new['widget']['settings']['format_handlers'] = array(
+    'address' => 'address',
+    'address-hide-country' => 'address-hide-country',
+    'organisation' => 'organisation',
+    'name-oneline' => 'name-oneline',
+    'name-full' => 0,
+  );
+  db_update('field_config_instance')
+    ->fields(array(
+      'data' => serialize($addressfield_new),
+    ))
+    ->condition('field_name', 'commerce_customer_address')
     ->execute();
 
   // Set default pathauto patterns.
@@ -339,6 +350,19 @@ function drupalife_store_install() {
     'view own commerce_order entities'
   ));
 
+  // Update the menu router information.
+  menu_rebuild();
+
+  // revert features to ensure they are all installed
+  $features = array(
+    'drupalife_store_contact',
+    'drupalife_store_core_shop',
+    'drupalife_store_news',
+    'drupalife_store_pages',
+    'drupalife_store_slider'
+  );
+
+  features_revert($features);
   // ignore any rebuild messages
   node_access_needs_rebuild(FALSE);
   // ignore any other install messages
@@ -451,6 +475,23 @@ function drupalife_store_advanced_settings_form() {
     ),
   );
 
+  // Commerce settings.
+  $form['commerce_settings'] = array(
+    '#type' => 'fieldset',
+    '#title' => st('Commerce settings'),
+    '#description' => st('Here you can change the settings store.'),
+    '#weight' => 4,
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+
+  $form['commerce_settings']['hide_state_field'] = array(
+    '#type' => 'checkbox',
+    '#title' => st('Hide State field in checkout'),
+    '#default_value' => 1,
+    '#description' => st('This option hide the State field. For ex., Russia don\'t need this field, so we can hide it.')
+  );
+
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Submit'),
@@ -485,6 +526,11 @@ function drupalife_store_advanced_settings_form_submit($form, $form_state) {
   // Mail system.
   if ($form_state['values']['mail_module'] == 1) {
     $todo_list[] = array('drupalife_store_install_mimemail', array());
+  }
+
+  // Hide state field.
+  if ($form_state['values']['hide_state_field'] == 1) {
+    $todo_list[] = array('drupalife_store_install_hide_state_field', array());
   }
 
   if (!empty($todo_list)) {
@@ -676,4 +722,25 @@ function drupalife_store_install_search_api() {
   // For hiding commerce_search_api warning, which does not work properly and
   // misleading.
   drupal_get_messages();
+}
+
+/**
+ * Hiding state field on checkout page.
+ */
+function drupalife_store_install_hide_state_field() {
+  // Enable module which contain ctools plugin for doing that.
+  module_enable(array('drupalife_store_custom'));
+  $addressfield = db_select('field_config_instance', 'c')
+    ->fields('c')
+    ->condition('c.field_name', 'commerce_customer_address')
+    ->execute()
+    ->fetchAssoc();
+  $addressfield_new = unserialize($addressfield['data']);
+  $addressfield_new['widget']['settings']['format_handlers']['hide_state'] = 'hide_state';
+  db_update('field_config_instance')
+    ->fields(array(
+      'data' => serialize($addressfield_new),
+    ))
+    ->condition('field_name', 'commerce_customer_address')
+    ->execute();
 }
