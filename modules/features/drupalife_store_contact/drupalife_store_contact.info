@@ -18,5 +18,4 @@ features[field_base][] = field_contact_name
 features[field_instance][] = entityform-contact-field_contact_email
 features[field_instance][] = entityform-contact-field_contact_message
 features[field_instance][] = entityform-contact-field_contact_name
-features[menu_links][] = main-menu_:eform/submit/contact
 features_exclude[menu_custom][main-menu] = main-menu

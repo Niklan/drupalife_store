@@ -355,14 +355,62 @@ function drupalife_store_install() {
 
   // revert features to ensure they are all installed
   $features = array(
-    'drupalife_store_contact',
     'drupalife_store_core_shop',
+    'drupalife_store_contact',
     'drupalife_store_news',
     'drupalife_store_pages',
     'drupalife_store_slider'
   );
 
   features_revert($features);
+
+  // Add menu entries.
+  $menus = array(
+    array(
+      'menu_name' => 'main-menu',
+      'link_path' => '<front>',
+      'router_path' => 0,
+      'link_title' => 'Главная',
+      'options' => 'a:1:{s:10:"attributes";a:1:{s:5:"title";s:0:"";}}',
+      'module' => 'menu',
+      'external' => 1,
+      'weight' => 0,
+      'depth' => 1,
+      'customized' => 1,
+      'p1' => 686,
+    ),
+    array(
+      'menu_name' => 'main-menu',
+      'link_path' => 'eform/submit/contact',
+      'router_path' => 'eform/submit/%',
+      'link_title' => 'Контакты',
+      'options' => 'a:1:{s:10:"attributes";a:1:{s:5:"title";s:0:"";}}',
+      'module' => 'menu',
+      'external' => 1,
+      'weight' => 50,
+      'depth' => 1,
+      'customized' => 1,
+      'p1' => 687,
+    ),
+  );
+  $query = db_insert('menu_links')->fields(array(
+    'menu_name',
+    'link_path',
+    'router_path',
+    'link_title',
+    'options',
+    'module',
+    'external',
+    'weight',
+    'depth',
+    'customized',
+    'p1'
+  ));
+  foreach ($menus as $menu) {
+    $query->values($menu);
+  }
+  $query->execute();
+
   // ignore any rebuild messages
   node_access_needs_rebuild(FALSE);
   // ignore any other install messages

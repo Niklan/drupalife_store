@@ -73,8 +73,9 @@ function drupalife_store_core_shop_views_default_views() {
   /* Display: Страница категорий */
   $handler = $view->new_display('page', 'Страница категорий', 'catalog_page');
   $handler->display->display_options['path'] = 'catalog';
+  $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Каталог';
-  $handler->display->display_options['menu']['weight'] = '1';
+  $handler->display->display_options['menu']['weight'] = '2';
   $handler->display->display_options['menu']['name'] = 'main-menu';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
