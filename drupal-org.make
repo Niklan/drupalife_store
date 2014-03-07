@@ -55,7 +55,7 @@ libraries[nivo-slider][download][url] = "https://github.com/gilbitron/Nivo-Slide
 libraries[nivo-slider][directory_name] = "nivo-slider"
 libraries[nivo-slider][type] = "library"
 
-libraries[nivo-slider][download][type] = "get"
-libraries[nivo-slider][download][url] = "https://github.com/mehrpadin/Superfish-for-Drupal/archive/1.x.zip"
-libraries[nivo-slider][directory_name] = "superfish"
-libraries[nivo-slider][type] = "library"
+libraries[superfish][download][type] = "get"
+libraries[superfish][download][url] = "https://github.com/mehrpadin/Superfish-for-Drupal/archive/1.x.zip"
+libraries[superfish][directory_name] = "superfish"
+libraries[superfish][type] = "library"
