@@ -16,11 +16,31 @@ global $user;
 <div id="page-wrapper">
   <header id="header">
     <div id="header-top-line">
-      <?php if ($logged_in): ?>
-        <a href="/user">Мой профиль</a> | <a href="/user/<?php print $user->uid; ?>/orders">Мои заказы</a>
-      <?php else: ?>
-        Добро пожаловать, вы можете <a href="/user">авторизоваться</a> или <a href="/user/register">зарегистрироваться</a> на сайте.
-      <?php endif; ?>
+      <div class="grid-2-3 left">
+        <?php if ($logged_in): ?>
+          <a href="/user">Мой профиль</a> | <a href="/user/<?php print $user->uid; ?>/orders">Мои заказы</a>
+        <?php else: ?>
+          Добро пожаловать, вы можете <a href="/user">авторизоваться</a> или <a href="/user/register">зарегистрироваться</a> на сайте.
+        <?php endif; ?>
+      </div>
+
+      <div id="socials" class="grid-1-3 right">
+        <?php
+        // Выводим соц. кнопки на основе настроек темы.
+        if ($vk = theme_get_setting('social_vk')) {
+          print "<a href='{$vk}' target='_blank' class='social vk'>&nbsp;</a>";
+        }
+        if ($fb = theme_get_setting('social_facebook')) {
+          print "<a href='{$fb}' target='_blank' class='social fb'>&nbsp;</a>";
+        }
+        if ($ggl = theme_get_setting('social_google')) {
+          print "<a href='{$ggl}' target='_blank' class='social ggl'>&nbsp;</a>";
+        }
+        if ($tw = theme_get_setting('social_twitter')) {
+          print "<a href='{$tw}' target='_blank' class='social twitter'>&nbsp;</a>";
+        }
+        ?>
+      </div>
     </div>
 
     <div id="header-site-info" class="grid-full" role="banner">
@@ -48,11 +68,11 @@ global $user;
 
       <div class="grid-1-3 left">
         <?php
-        $site_search = variable_get('drupalife_store_selected_search', 'search_api');
+        $site_search = variable_get('drupalife_store_selected_search');
 
         if ($site_search == 'default') {
           $block = module_invoke('search', 'block_view', 0);
-          $block['content']['actions']['submit']['#value'] = "";
+          $block['content']['actions']['submit']['#value'] = "";
           $block['content']['search_block_form']['#attributes'] = array('placeholder' => 'Введите поисковый запрос');
           echo render($block['content']);
         }

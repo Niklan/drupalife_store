@@ -28,19 +28,28 @@ function STARTERKIT_preprocess_maintenance_page(&$variables, $hook) {
 
 /**
  * Override or insert variables into the html templates.
- *
- * @param $variables
- *   An array of variables to pass to the theme template.
- * @param $hook
- *   The name of the template being rendered ("html" in this case.)
  */
-/* -- Delete this line if you want to use this function
-function STARTERKIT_preprocess_html(&$variables, $hook) {
-  $variables['sample_variable'] = t('Lorem ipsum.');
+function drupalife_store_preprocess_html(&$variables, $hook) {
+  // Change bg image if new is set in theme settings.
+  if (variable_get('drupalife_store_theme_background_image', FALSE)) {
+    $file = file_load(variable_get('drupalife_store_theme_background_image'));
+    if ($file->fid) {
+      $bg_url = file_create_url($file->uri);
+      $bg_x = theme_get_setting('background_image_x') ? theme_get_setting('background_image_x') : 'center';
+      $bg_y = theme_get_setting('background_image_y') ? theme_get_setting('background_image_y') : 'center';
+      $bg_size = theme_get_setting('background_image_size') ? theme_get_setting('background_image_size') : 'auto';
+      $bg_repeat = theme_get_setting('background_image_repeat') ? theme_get_setting('background_image_repeat') : 'no-repeat';
 
-  // The body tag's classes are controlled by the $classes_array variable. To
-  // remove a class from $classes_array, use array_diff().
-  //$variables['classes_array'] = array_diff($variables['classes_array'], array('class-to-remove'));
+      $bg_style = "style='background: url(\"{$bg_url}\") {$bg_repeat} {$bg_x} {$bg_y}; background-size: {$bg_size};'";
+      $variables['bg_style'] = $bg_style;
+    }
+    else {
+      $variables['bg_style'] = FALSE;
+    }
+  }
+  else {
+    $variables['bg_style'] = FALSE;
+  }
 }
 // */
 

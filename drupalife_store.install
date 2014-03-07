@@ -495,7 +495,7 @@ function drupalife_store_advanced_settings_form() {
 
   $form['content_editing']['wysiwyg_editor'] = array(
     '#type' => 'radios',
-    '#title' => st('Search type'),
+    '#title' => st('WYSIWYG editor'),
     '#default_value' => 0,
     '#options' => array(
       0 => st('Do not install WYSIWYG Editors'),
@@ -515,7 +515,7 @@ function drupalife_store_advanced_settings_form() {
 
   $form['mail_system']['mail_module'] = array(
     '#type' => 'radios',
-    '#title' => st('Search type'),
+    '#title' => st('Mail system'),
     '#default_value' => 0,
     '#options' => array(
       0 => st('Use default mail system'),

@@ -1,8 +1,12 @@
 
-.icon-login:before { content: '\e805'; } /* '' */
+.icon-login:before { content: '\e800'; } /* '' */
+.icon-gplus:before { content: '\e809'; } /* '' */
+.icon-key:before { content: '\e802'; } /* '' */
+.icon-calendar:before { content: '\e803'; } /* '' */
+.icon-user:before { content: '\e804'; } /* '' */
 .icon-bag:before { content: '\e801'; } /* '' */
-.icon-key:before { content: '\e806'; } /* '' */
-.icon-calendar:before { content: '\e802'; } /* '' */
-.icon-user:before { content: '\e803'; } /* '' */
-.icon-comment-alt:before { content: '\e804'; } /* '' */
-.icon-search:before { content: '\e800'; } /* '' */
+.icon-search:before { content: '\e806'; } /* '' */
+.icon-vkontakte:before { content: '\e807'; } /* '' */
+.icon-twitter:before { content: '\e80a'; } /* '' */
+.icon-facebook:before { content: '\e808'; } /* '' */
+.icon-comment-alt:before { content: '\e805'; } /* '' */
