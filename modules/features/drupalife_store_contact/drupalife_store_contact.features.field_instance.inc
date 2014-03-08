@@ -8,6 +8,7 @@
  * Implements hook_field_default_field_instances().
  */
 function drupalife_store_contact_field_default_field_instances() {
+  $t = get_t();
   $field_instances = array();
 
   // Exported field_instance: 'entityform-contact-field_contact_email'
@@ -61,7 +62,7 @@ function drupalife_store_contact_field_default_field_instances() {
     ),
     'entity_type' => 'entityform',
     'field_name' => 'field_contact_message',
-    'label' => 'Сообщение',
+    'label' => $t('Message'),
     'required' => 1,
     'settings' => array(
       'text_processing' => 0,
@@ -95,7 +96,7 @@ function drupalife_store_contact_field_default_field_instances() {
     ),
     'entity_type' => 'entityform',
     'field_name' => 'field_contact_name',
-    'label' => 'Ваше имя',
+    'label' => $t('Your name'),
     'required' => 1,
     'settings' => array(
       'text_processing' => 0,
@@ -111,12 +112,6 @@ function drupalife_store_contact_field_default_field_instances() {
       'weight' => 1,
     ),
   );
-
-  // Translatables
-  // Included for use with string extractors like potx.
-  t('E-Mail');
-  t('Ваше имя');
-  t('Сообщение');
 
   return $field_instances;
 }

@@ -8,6 +8,7 @@
  * Implements hook_views_default_views().
  */
 function drupalife_store_core_shop_views_default_views() {
+  $t = get_t();
   $export = array();
 
   $view = new view();
@@ -15,25 +16,25 @@ function drupalife_store_core_shop_views_default_views() {
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'taxonomy_term_data';
-  $view->human_name = 'Категории товаров';
+  $view->human_name = $t('Categories');
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Категории магазина';
+  $handler->display->display_options['title'] = 'Store categories';
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['use_more_text'] = 'ещё';
+  $handler->display->display_options['use_more_text'] = 'more';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Применить';
-  $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Сбросить';
-  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Сортировать по';
-  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'По возрастанию';
-  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'По убыванию';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Apply';
+  $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Reset';
+  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sort by';
+  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Ascending';
+  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Descending';
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'grid';
@@ -56,7 +57,7 @@ function drupalife_store_core_shop_views_default_views() {
   $handler->display->display_options['arguments']['parent']['table'] = 'taxonomy_term_hierarchy';
   $handler->display->display_options['arguments']['parent']['field'] = 'parent';
   $handler->display->display_options['arguments']['parent']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['parent']['exception']['title'] = 'Все';
+  $handler->display->display_options['arguments']['parent']['exception']['title'] = 'All';
   $handler->display->display_options['arguments']['parent']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['parent']['default_argument_options']['argument'] = '0';
   $handler->display->display_options['arguments']['parent']['summary']['number_of_records'] = '0';
@@ -70,24 +71,24 @@ function drupalife_store_core_shop_views_default_views() {
     'shop_category' => 'shop_category',
   );
 
-  /* Display: Страница категорий */
-  $handler = $view->new_display('page', 'Страница категорий', 'catalog_page');
+  /* Display: Categories page */
+  $handler = $view->new_display('page', 'Categories page', 'catalog_page');
   $handler->display->display_options['path'] = 'catalog';
   $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Каталог';
+  $handler->display->display_options['menu']['title'] = 'Catalog';
   $handler->display->display_options['menu']['weight'] = '2';
   $handler->display->display_options['menu']['name'] = 'main-menu';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
 
-  /* Display: Дочерние категории */
-  $handler = $view->new_display('block', 'Дочерние категории', 'catalog_category_subcategory');
+  /* Display: Child categories */
+  $handler = $view->new_display('block', 'Child categories', 'catalog_category_subcategory');
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Header: Global: Text area */
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<h3>Подкатегории «%1»</h3>';
+  $handler->display->display_options['header']['area']['content'] = '<h3>Subcategories «%1»</h3>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['header']['area']['tokenize'] = TRUE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
@@ -102,26 +103,26 @@ function drupalife_store_core_shop_views_default_views() {
   $handler->display->display_options['arguments']['tid']['field'] = 'tid';
   $handler->display->display_options['arguments']['tid']['relationship'] = 'parent';
   $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['tid']['exception']['title'] = 'Все';
+  $handler->display->display_options['arguments']['tid']['exception']['title'] = 'All';
   $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'taxonomy_tid';
   $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';
   $translatables['catalog'] = array(
-    t('Master'),
-    t('Категории магазина'),
-    t('ещё'),
-    t('Применить'),
-    t('Сбросить'),
-    t('Сортировать по'),
-    t('По возрастанию'),
-    t('По убыванию'),
-    t('Parent'),
-    t('Все'),
-    t('Страница категорий'),
-    t('more'),
-    t('Дочерние категории'),
-    t('<h3>Подкатегории «%1»</h3>'),
+    $t('Master'),
+    $t('Store categories'),
+    $t('more'),
+    $t('Apply'),
+    $t('Reset'),
+    $t('Sort by'),
+    $t('Ascending'),
+    $t('Descending'),
+    $t('Parent'),
+    $t('All'),
+    $t('Categories page'),
+    $t('more'),
+    $t('Child categories'),
+    $t('<h3>Subcategories «%1»</h3>'),
   );
   $export['catalog'] = $view;
 
@@ -139,28 +140,28 @@ function drupalife_store_core_shop_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Shop';
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['use_more_text'] = 'ещё';
+  $handler->display->display_options['use_more_text'] = 'more';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Применить';
-  $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Сбросить';
-  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Сортировать по';
-  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'По возрастанию';
-  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'По убыванию';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Apply';
+  $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Reset';
+  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sort by';
+  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Ascending';
+  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Descending';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '24';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
-  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Элементов на страницу';
-  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Все -';
-  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Пропустить';
-  $handler->display->display_options['pager']['options']['tags']['first'] = '« первая';
-  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ предыдущая';
-  $handler->display->display_options['pager']['options']['tags']['next'] = 'следующая ›';
-  $handler->display->display_options['pager']['options']['tags']['last'] = 'последняя »';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Items per page';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- All -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Skip';
+  $handler->display->display_options['pager']['options']['tags']['first'] = '« first';
+  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ previous';
+  $handler->display->display_options['pager']['options']['tags']['next'] = 'next ›';
+  $handler->display->display_options['pager']['options']['tags']['last'] = 'last »';
   $handler->display->display_options['style_plugin'] = 'grid';
   $handler->display->display_options['row_plugin'] = 'node';
   /* Header: Global: View area */
@@ -173,7 +174,7 @@ function drupalife_store_core_shop_views_default_views() {
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area']['content'] = 'Товары в данной категории отсутствуют.';
+  $handler->display->display_options['empty']['area']['content'] = 'Products in this category are not available.';
   $handler->display->display_options['empty']['area']['format'] = 'full_html';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -192,7 +193,7 @@ function drupalife_store_core_shop_views_default_views() {
   $handler->display->display_options['arguments']['term_node_tid_depth']['table'] = 'node';
   $handler->display->display_options['arguments']['term_node_tid_depth']['field'] = 'term_node_tid_depth';
   $handler->display->display_options['arguments']['term_node_tid_depth']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['term_node_tid_depth']['exception']['title'] = 'Все';
+  $handler->display->display_options['arguments']['term_node_tid_depth']['exception']['title'] = 'All';
   $handler->display->display_options['arguments']['term_node_tid_depth']['title_enable'] = TRUE;
   $handler->display->display_options['arguments']['term_node_tid_depth']['title'] = '%1';
   $handler->display->display_options['arguments']['term_node_tid_depth']['default_argument_type'] = 'taxonomy_tid';
@@ -220,26 +221,26 @@ function drupalife_store_core_shop_views_default_views() {
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'taxonomy/term/%';
   $translatables['shop'] = array(
-    t('Master'),
-    t('Shop'),
-    t('ещё'),
-    t('Применить'),
-    t('Сбросить'),
-    t('Сортировать по'),
-    t('По возрастанию'),
-    t('По убыванию'),
-    t('Элементов на страницу'),
-    t('- Все -'),
-    t('Пропустить'),
-    t('« первая'),
-    t('‹ предыдущая'),
-    t('следующая ›'),
-    t('последняя »'),
-    t('Товары в данной категории отсутствуют.'),
-    t('Все'),
-    t('%1'),
-    t('Page'),
-    t('more'),
+    $t('Master'),
+    $t('Shop'),
+    $t('more'),
+    $t('Apply'),
+    $t('Reset'),
+    $t('Sort by'),
+    $t('Ascending'),
+    $t('Descending'),
+    $t('Items per page'),
+    $t('- All -'),
+    $t('Skip'),
+    $t('« first'),
+    $t('‹ previous'),
+    $t('next ›'),
+    $t('last »'),
+    $t('Products in this category are not available.'),
+    $t('All'),
+    $t('%1'),
+    $t('Page'),
+    $t('more'),
   );
   $export['shop'] = $view;
 

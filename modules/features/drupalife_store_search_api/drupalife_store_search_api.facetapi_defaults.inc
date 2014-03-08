@@ -8,6 +8,7 @@
  * Implements hook_facetapi_default_facet_settings().
  */
 function drupalife_store_search_api_facetapi_default_facet_settings() {
+  $t = get_t();
   $export = array();
 
   $facet = new stdClass();
@@ -74,7 +75,7 @@ function drupalife_store_search_api_facetapi_default_facet_settings() {
     'soft_limit' => '20',
     'nofollow' => 1,
     'show_expanded' => 0,
-    'name' => 'Стоимость',
+    'name' => $t('Price'),
     'prefix' => '',
     'suffix' => ' руб.',
     'auto-submit-delay' => '1500',

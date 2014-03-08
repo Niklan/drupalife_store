@@ -32,8 +32,8 @@ function drupalife_store_news_image_default_styles() {
     'label' => 'News (full)',
     'effects' => array(
       2 => array(
-        'label' => 'Масштабирование и обрезка',
-        'help' => '«Масштабирование и обрезка» сначала масштабирует изображение, а затем обрезает большее значение. Это наиболее эффективный способ создания миниатюр без искажения пропорций исходного изображения.',
+        'label' => 'Scale and crop',
+        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
         'effect callback' => 'image_scale_and_crop_effect',
         'dimensions callback' => 'image_resize_dimensions',
         'form callback' => 'image_resize_form',
@@ -55,8 +55,8 @@ function drupalife_store_news_image_default_styles() {
     'label' => 'News (teaser)',
     'effects' => array(
       1 => array(
-        'label' => 'Масштабирование и обрезка',
-        'help' => '«Масштабирование и обрезка» сначала масштабирует изображение, а затем обрезает большее значение. Это наиболее эффективный способ создания миниатюр без искажения пропорций исходного изображения.',
+        'label' => 'Scale and crop',
+        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
         'effect callback' => 'image_scale_and_crop_effect',
         'dimensions callback' => 'image_resize_dimensions',
         'form callback' => 'image_resize_form',
@@ -79,13 +79,14 @@ function drupalife_store_news_image_default_styles() {
  * Implements hook_node_info().
  */
 function drupalife_store_news_node_info() {
+  $t = get_t();
   $items = array(
     'news' => array(
-      'name' => t('Новость'),
+      'name' => $t('News'),
       'base' => 'node_content',
-      'description' => t('Добавление новостей на сайт.'),
+      'description' => $t('Adding news to the site.'),
       'has_title' => '1',
-      'title_label' => t('Заголовок новости'),
+      'title_label' => $t('Title'),
       'help' => '',
     ),
   );

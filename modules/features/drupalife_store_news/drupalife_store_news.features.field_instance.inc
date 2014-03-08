@@ -8,6 +8,7 @@
  * Implements hook_field_default_field_instances().
  */
 function drupalife_store_news_field_default_field_instances() {
+  $t = get_t();
   $field_instances = array();
 
   // Exported field_instance: 'node-news-body'
@@ -59,7 +60,7 @@ function drupalife_store_news_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'body',
-    'label' => 'Содержимое',
+    'label' => $t('Body'),
     'required' => 1,
     'settings' => array(
       'display_summary' => 1,
@@ -111,7 +112,7 @@ function drupalife_store_news_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_promo_image',
-    'label' => 'Промо-изображение',
+    'label' => $t('Promo image'),
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
@@ -154,11 +155,6 @@ function drupalife_store_news_field_default_field_instances() {
       'weight' => 1,
     ),
   );
-
-  // Translatables
-  // Included for use with string extractors like potx.
-  t('Промо-изображение');
-  t('Содержимое');
 
   return $field_instances;
 }

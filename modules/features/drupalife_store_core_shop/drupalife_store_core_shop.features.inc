@@ -8,11 +8,12 @@
  * Implements hook_commerce_product_default_types().
  */
 function drupalife_store_core_shop_commerce_product_default_types() {
+  $t = get_t();
   $items = array(
     'product' => array(
       'type' => 'product',
-      'name' => 'Продукт',
-      'description' => 'Базовый тип продукта.',
+      'name' => $t('Product'),
+      'description' => $t('Basic product type.'),
       'help' => '',
       'revision' => 1,
     ),
@@ -51,8 +52,8 @@ function drupalife_store_core_shop_image_default_styles() {
     'label' => 'Category Teaser',
     'effects' => array(
       7 => array(
-        'label' => 'Смена соотношения сторон',
-        'help' => 'Использование различных эффектов в зависимости от того, в портретном',
+        'label' => 'Aspect switcher',
+        'help' => 'Use different effects depending on whether the image is landscape of portrait shaped. This re-uses other preset definitions, and just chooses between them based on the rule.',
         'effect callback' => 'canvasactions_aspect_effect',
         'dimensions callback' => 'canvasactions_aspect_dimensions',
         'form callback' => 'canvasactions_aspect_form',
@@ -67,8 +68,8 @@ function drupalife_store_core_shop_image_default_styles() {
         'weight' => -10,
       ),
       6 => array(
-        'label' => 'Определить холст',
-        'help' => 'Определите размер рабочего холста и цвет фона. Это контролирует разрешение изображения на выходе.',
+        'label' => 'Define canvas',
+        'help' => 'Define the size of the working canvas and background color, this controls the dimensions of the output image.',
         'effect callback' => 'canvasactions_definecanvas_effect',
         'dimensions callback' => 'canvasactions_definecanvas_dimensions',
         'form callback' => 'canvasactions_definecanvas_form',
@@ -104,8 +105,8 @@ function drupalife_store_core_shop_image_default_styles() {
     'label' => 'Category Teaser (horizontal)',
     'effects' => array(
       4 => array(
-        'label' => 'Масштабирование',
-        'help' => 'Масштабирование позволяет изменить размеры изображения с сохранением пропорций. Если введён размер только одной стороны, то размер другой будет вычислен автоматически. Если введены два размера, то каждое будет определять максимальный размер по своему направлению и применяться в зависимости от формата изображения.',
+        'label' => 'Scale',
+        'help' => 'Scaling will maintain the aspect-ratio of the original image. If only a single dimension is specified, the other dimension will be calculated.',
         'effect callback' => 'image_scale_effect',
         'dimensions callback' => 'image_scale_dimensions',
         'form callback' => 'image_scale_form',
@@ -128,8 +129,8 @@ function drupalife_store_core_shop_image_default_styles() {
     'label' => 'Category Teaser (vertical)',
     'effects' => array(
       5 => array(
-        'label' => 'Масштабирование',
-        'help' => 'Масштабирование позволяет изменить размеры изображения с сохранением пропорций. Если введён размер только одной стороны, то размер другой будет вычислен автоматически. Если введены два размера, то каждое будет определять максимальный размер по своему направлению и применяться в зависимости от формата изображения.',
+        'label' => 'Scale',
+        'help' => 'Scaling will maintain the aspect-ratio of the original image. If only a single dimension is specified, the other dimension will be calculated.',
         'effect callback' => 'image_scale_effect',
         'dimensions callback' => 'image_scale_dimensions',
         'form callback' => 'image_scale_form',
@@ -152,8 +153,8 @@ function drupalife_store_core_shop_image_default_styles() {
     'label' => 'Product Medium',
     'effects' => array(
       14 => array(
-        'label' => 'Смена соотношения сторон',
-        'help' => 'Использование различных эффектов в зависимости от того, в портретном',
+        'label' => 'Aspect switcher',
+        'help' => 'Use different effects depending on whether the image is landscape of portrait shaped. This re-uses other preset definitions, and just chooses between them based on the rule.',
         'effect callback' => 'canvasactions_aspect_effect',
         'dimensions callback' => 'canvasactions_aspect_dimensions',
         'form callback' => 'canvasactions_aspect_form',
@@ -168,8 +169,8 @@ function drupalife_store_core_shop_image_default_styles() {
         'weight' => 1,
       ),
       15 => array(
-        'label' => 'Определить холст',
-        'help' => 'Определите размер рабочего холста и цвет фона. Это контролирует разрешение изображения на выходе.',
+        'label' => 'Define canvas',
+        'help' => 'Define the size of the working canvas and background color, this controls the dimensions of the output image.',
         'effect callback' => 'canvasactions_definecanvas_effect',
         'dimensions callback' => 'canvasactions_definecanvas_dimensions',
         'form callback' => 'canvasactions_definecanvas_form',
@@ -205,8 +206,8 @@ function drupalife_store_core_shop_image_default_styles() {
     'label' => 'Product Medium (book)',
     'effects' => array(
       13 => array(
-        'label' => 'Масштабирование',
-        'help' => 'Масштабирование позволяет изменить размеры изображения с сохранением пропорций. Если введён размер только одной стороны, то размер другой будет вычислен автоматически. Если введены два размера, то каждое будет определять максимальный размер по своему направлению и применяться в зависимости от формата изображения.',
+        'label' => 'Scale',
+        'help' => 'Scaling will maintain the aspect-ratio of the original image. If only a single dimension is specified, the other dimension will be calculated.',
         'effect callback' => 'image_scale_effect',
         'dimensions callback' => 'image_scale_dimensions',
         'form callback' => 'image_scale_form',
@@ -229,8 +230,8 @@ function drupalife_store_core_shop_image_default_styles() {
     'label' => 'Product Medium (portrait)',
     'effects' => array(
       12 => array(
-        'label' => 'Масштабирование',
-        'help' => 'Масштабирование позволяет изменить размеры изображения с сохранением пропорций. Если введён размер только одной стороны, то размер другой будет вычислен автоматически. Если введены два размера, то каждое будет определять максимальный размер по своему направлению и применяться в зависимости от формата изображения.',
+        'label' => 'Scale',
+        'help' => 'Scaling will maintain the aspect-ratio of the original image. If only a single dimension is specified, the other dimension will be calculated.',
         'effect callback' => 'image_scale_effect',
         'dimensions callback' => 'image_scale_dimensions',
         'form callback' => 'image_scale_form',
@@ -253,8 +254,8 @@ function drupalife_store_core_shop_image_default_styles() {
     'label' => 'Product Thumb',
     'effects' => array(
       10 => array(
-        'label' => 'Смена соотношения сторон',
-        'help' => 'Использование различных эффектов в зависимости от того, в портретном',
+        'label' => 'Aspect switcher',
+        'help' => 'Use different effects depending on whether the image is landscape of portrait shaped. This re-uses other preset definitions, and just chooses between them based on the rule.',
         'effect callback' => 'canvasactions_aspect_effect',
         'dimensions callback' => 'canvasactions_aspect_dimensions',
         'form callback' => 'canvasactions_aspect_form',
@@ -269,8 +270,8 @@ function drupalife_store_core_shop_image_default_styles() {
         'weight' => 1,
       ),
       11 => array(
-        'label' => 'Определить холст',
-        'help' => 'Определите размер рабочего холста и цвет фона. Это контролирует разрешение изображения на выходе.',
+        'label' => 'Define canvas',
+        'help' => 'Define the size of the working canvas and background color, this controls the dimensions of the output image.',
         'effect callback' => 'canvasactions_definecanvas_effect',
         'dimensions callback' => 'canvasactions_definecanvas_dimensions',
         'form callback' => 'canvasactions_definecanvas_form',
@@ -306,8 +307,8 @@ function drupalife_store_core_shop_image_default_styles() {
     'label' => 'Product Thumb (book)',
     'effects' => array(
       9 => array(
-        'label' => 'Масштабирование',
-        'help' => 'Масштабирование позволяет изменить размеры изображения с сохранением пропорций. Если введён размер только одной стороны, то размер другой будет вычислен автоматически. Если введены два размера, то каждое будет определять максимальный размер по своему направлению и применяться в зависимости от формата изображения.',
+        'label' => 'Scale',
+        'help' => 'Scaling will maintain the aspect-ratio of the original image. If only a single dimension is specified, the other dimension will be calculated.',
         'effect callback' => 'image_scale_effect',
         'dimensions callback' => 'image_scale_dimensions',
         'form callback' => 'image_scale_form',
@@ -330,8 +331,8 @@ function drupalife_store_core_shop_image_default_styles() {
     'label' => 'Product Thumb (portrait)',
     'effects' => array(
       8 => array(
-        'label' => 'Масштабирование',
-        'help' => 'Масштабирование позволяет изменить размеры изображения с сохранением пропорций. Если введён размер только одной стороны, то размер другой будет вычислен автоматически. Если введены два размера, то каждое будет определять максимальный размер по своему направлению и применяться в зависимости от формата изображения.',
+        'label' => 'Scale',
+        'help' => 'Scaling will maintain the aspect-ratio of the original image. If only a single dimension is specified, the other dimension will be calculated.',
         'effect callback' => 'image_scale_effect',
         'dimensions callback' => 'image_scale_dimensions',
         'form callback' => 'image_scale_form',
@@ -355,13 +356,14 @@ function drupalife_store_core_shop_image_default_styles() {
  * Implements hook_node_info().
  */
 function drupalife_store_core_shop_node_info() {
+  $t = get_t();
   $items = array(
     'product_display' => array(
-      'name' => t('Карточка товара'),
+      'name' => $t('Product card'),
       'base' => 'node_content',
-      'description' => t('Добавление товаров со склада на сайт.'),
+      'description' => $t('Adding goods from the warehouse to the site.'),
       'has_title' => '1',
-      'title_label' => t('Заголовок'),
+      'title_label' => $t('Title'),
       'help' => '',
     ),
   );

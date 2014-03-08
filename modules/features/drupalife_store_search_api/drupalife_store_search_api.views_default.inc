@@ -22,15 +22,15 @@ function drupalife_store_search_api_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Поиск по сайту';
+  $handler->display->display_options['title'] = 'Site search';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Поиск';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
-  $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Сбросить';
+  $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Reset';
   $handler->display->display_options['exposed_form']['options']['expose_sort_order'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
@@ -77,10 +77,10 @@ function drupalife_store_search_api_views_default_views() {
   $handler->display->display_options['path'] = 'search';
   $translatables['search'] = array(
     t('Master'),
-    t('Поиск по сайту'),
+    t('Site search'),
     t('more'),
-    t('Поиск'),
-    t('Сбросить'),
+    t('Search'),
+    t('Reset'),
     t('Sort by'),
     t('Asc'),
     t('Desc'),
@@ -91,7 +91,7 @@ function drupalife_store_search_api_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
-    t('По вашему запросу ничего не найдено.'),
+    t('Sorry, no results found.'),
     t('Node ID'),
     t('.'),
     t(','),

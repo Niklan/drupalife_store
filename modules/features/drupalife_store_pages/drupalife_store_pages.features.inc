@@ -17,13 +17,14 @@ function drupalife_store_pages_ctools_plugin_api($module = NULL, $api = NULL) {
  * Implements hook_node_info().
  */
 function drupalife_store_pages_node_info() {
+  $t = get_t();
   $items = array(
     'page' => array(
-      'name' => t('Страница'),
+      'name' => $t('Page'),
       'base' => 'node_content',
-      'description' => t('Добавление обычной страницы на сайт.'),
+      'description' => $t('Adding a page to the site.'),
       'has_title' => '1',
-      'title_label' => t('Заголовок страницы'),
+      'title_label' => $t('Title'),
       'help' => '',
     ),
   );

@@ -8,6 +8,7 @@
  * Implements hook_field_default_field_instances().
  */
 function drupalife_store_core_shop_field_default_field_instances() {
+  $t = get_t();
   $field_instances = array();
 
   // Exported field_instance: 'commerce_product-product-commerce_price'
@@ -83,7 +84,7 @@ function drupalife_store_core_shop_field_default_field_instances() {
     ),
     'entity_type' => 'commerce_product',
     'field_name' => 'commerce_price',
-    'label' => 'Price',
+    'label' => $t('Price'),
     'required' => TRUE,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -157,7 +158,7 @@ function drupalife_store_core_shop_field_default_field_instances() {
     ),
     'entity_type' => 'commerce_product',
     'field_name' => 'field_product_photo',
-    'label' => 'Фотографии',
+    'label' => $t('Photo'),
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
@@ -236,7 +237,7 @@ function drupalife_store_core_shop_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'body',
-    'label' => 'Описание',
+    'label' => $t('Description'),
     'required' => 0,
     'settings' => array(
       'display_summary' => 1,
@@ -285,7 +286,7 @@ function drupalife_store_core_shop_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_product_display_category',
-    'label' => 'Категория',
+    'label' => $t('Category'),
     'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -347,7 +348,7 @@ function drupalife_store_core_shop_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_product_display_products',
-    'label' => 'Товары со склада',
+    'label' => $t('Products'),
     'required' => 1,
     'settings' => array(
       'field_injection' => 1,
@@ -365,8 +366,8 @@ function drupalife_store_core_shop_field_default_field_instances() {
           'allow_existing' => 1,
           'autogenerate_title' => 1,
           'delete_references' => 0,
-          'label_plural' => 'товары',
-          'label_singular' => 'товар',
+          'label_plural' => $t('products'),
+          'label_singular' => $t('product'),
           'match_operator' => 'CONTAINS',
           'override_labels' => 0,
         ),
@@ -415,7 +416,7 @@ function drupalife_store_core_shop_field_default_field_instances() {
     ),
     'entity_type' => 'taxonomy_term',
     'field_name' => 'field_shop_category_image',
-    'label' => 'Изображение',
+    'label' => $t('Image'),
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
@@ -458,15 +459,6 @@ function drupalife_store_core_shop_field_default_field_instances() {
       'weight' => 31,
     ),
   );
-
-  // Translatables
-  // Included for use with string extractors like potx.
-  t('Price');
-  t('Изображение');
-  t('Категория');
-  t('Описание');
-  t('Товары со склада');
-  t('Фотографии');
 
   return $field_instances;
 }

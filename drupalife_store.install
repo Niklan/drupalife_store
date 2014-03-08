@@ -5,6 +5,11 @@
  * Perform actions to set up the site for this profile.
  */
 function drupalife_store_install() {
+  $t = get_t();
+  // We create variable to store all selected data during installation.
+  // This help us to make updates and some other flexibility.
+  variable_set('drupalife_store_installation_settings', '');
+
   // Enable themes.
   $default_theme = 'drupalife_store';
   $admin_theme = 'seven';
@@ -370,7 +375,7 @@ function drupalife_store_install() {
       'menu_name' => 'main-menu',
       'link_path' => '<front>',
       'router_path' => 0,
-      'link_title' => 'Главная',
+      'link_title' => $t('Front'),
       'options' => 'a:1:{s:10:"attributes";a:1:{s:5:"title";s:0:"";}}',
       'module' => 'menu',
       'external' => 1,
@@ -383,7 +388,7 @@ function drupalife_store_install() {
       'menu_name' => 'main-menu',
       'link_path' => 'eform/submit/contact',
       'router_path' => 'eform/submit/%',
-      'link_title' => 'Контакты',
+      'link_title' => $t('Contacts'),
       'options' => 'a:1:{s:10:"attributes";a:1:{s:5:"title";s:0:"";}}',
       'module' => 'menu',
       'external' => 1,
@@ -542,7 +547,7 @@ function drupalife_store_advanced_settings_form() {
 
   $form['submit'] = array(
     '#type' => 'submit',
-    '#value' => t('Submit'),
+    '#value' => st('Submit'),
     '#weight' => 15,
     '#submit' => array('drupalife_store_advanced_settings_form_submit'),
   );
@@ -554,6 +559,13 @@ function drupalife_store_advanced_settings_form() {
  * Submition of advanced settings form.
  */
 function drupalife_store_advanced_settings_form_submit($form, $form_state) {
+  // Save selected options.
+  $installation_settings = variable_get('drupalife_store_installation_settings', '');
+  foreach ($form_state['values'] as $value) {
+    $installation_settings[] = $value;
+  }
+  variable_set('drupalife_store_installation_settings', $installation_settings);
+
   $todo_list = array();
 
   // Search settings.

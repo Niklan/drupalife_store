@@ -8,9 +8,10 @@
  * Implements hook_taxonomy_default_vocabularies().
  */
 function drupalife_store_core_shop_taxonomy_default_vocabularies() {
+  $t = get_t();
   return array(
     'shop_category' => array(
-      'name' => 'Категории',
+      'name' => $t('Catalog categories'),
       'machine_name' => 'shop_category',
       'description' => '',
       'hierarchy' => 1,
