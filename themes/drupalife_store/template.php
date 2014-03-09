@@ -38,8 +38,6 @@ function drupalife_store_preprocess_html(&$variables, $hook) {
  * Implements hook_preprocess_page().
  */
 function drupalife_store_preprocess_page(&$variables, $hook) {
-  $bred = unserialize('a:2:{s:5:"title";a:1:{s:5:"value";s:26:"[node:title] - [site:name]";}s:11:"description";a:1:{s:5:"value";s:14:"[node:summary]";}}');
-  dpm($bred);
   global $user;
 
   // Disable sidebar for product page.
