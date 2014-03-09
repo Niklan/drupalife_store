@@ -3,12 +3,19 @@
  * @file custom Search API ranges Min/Max UI slider widget
  */
 
-// We hide default text and make what we need.
-unset($form['text-range']);
-//print drupal_render($form['text-range']);
-$price_from = number_format($form['range-from']['#default_value'], 0) . ' руб.';
-$price_to = number_format($form['range-to']['#default_value'], 0) . ' руб.';
-$text_range = 'Показаны товары в промежутке от ' . $price_from . ' до ' . $price_to;
+global $language;
+// Text fixes for Russian.
+if ($language->language == 'ru') {
+  // We hide default text and make what we need.
+  unset($form['text-range']);
+  //print drupal_render($form['text-range']);
+  $price_from = number_format($form['range-from']['#default_value'], 0) . ' руб.';
+  $price_to = number_format($form['range-to']['#default_value'], 0) . ' руб.';
+  $text_range = 'Показаны товары в промежутке от ' . $price_from . ' до ' . $price_to;
+}
+else {
+  $text_range = render($form['text-range']);
+}
 ?>
 <?php print $text_range; ?>
 <div class="yui3-g">

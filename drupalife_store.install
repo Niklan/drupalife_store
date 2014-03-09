@@ -231,13 +231,9 @@ function drupalife_store_install() {
   // features can't handle all data. They move display types, but not save
   // what to show, and how to show data for each content type and display.
   variable_set('field_bundle_settings_commerce_product__product', unserialize('a:2:{s:10:"view_modes";a:12:{s:9:"line_item";a:1:{s:15:"custom_settings";b:1;}s:11:"node_teaser";a:1:{s:15:"custom_settings";b:1;}s:4:"full";a:1:{s:15:"custom_settings";b:0;}s:5:"token";a:1:{s:15:"custom_settings";b:0;}s:26:"commerce_line_item_display";a:1:{s:15:"custom_settings";b:0;}s:24:"commerce_line_item_token";a:1:{s:15:"custom_settings";b:0;}s:9:"node_full";a:1:{s:15:"custom_settings";b:1;}s:8:"node_rss";a:1:{s:15:"custom_settings";b:0;}s:17:"node_search_index";a:1:{s:15:"custom_settings";b:0;}s:18:"node_search_result";a:1:{s:15:"custom_settings";b:1;}s:10:"node_token";a:1:{s:15:"custom_settings";b:0;}s:13:"node_revision";a:1:{s:15:"custom_settings";b:0;}}s:12:"extra_fields";a:2:{s:4:"form";a:3:{s:3:"sku";a:1:{s:6:"weight";s:3:"-10";}s:5:"title";a:1:{s:6:"weight";s:2:"-5";}s:6:"status";a:1:{s:6:"weight";s:2:"35";}}s:7:"display";a:3:{s:3:"sku";a:5:{s:7:"default";a:2:{s:6:"weight";s:3:"-10";s:7:"visible";b:1;}s:9:"line_item";a:2:{s:6:"weight";s:1:"0";s:7:"visible";b:1;}s:11:"node_teaser";a:2:{s:6:"weight";s:1:"0";s:7:"visible";b:1;}s:9:"node_full";a:2:{s:6:"weight";s:3:"-10";s:7:"visible";b:1;}s:18:"node_search_result";a:2:{s:6:"weight";s:3:"-10";s:7:"visible";b:1;}}s:5:"title";a:5:{s:7:"default";a:2:{s:6:"weight";s:2:"-5";s:7:"visible";b:1;}s:9:"line_item";a:2:{s:6:"weight";s:1:"1";s:7:"visible";b:1;}s:11:"node_teaser";a:2:{s:6:"weight";s:1:"1";s:7:"visible";b:1;}s:9:"node_full";a:2:{s:6:"weight";s:2:"-5";s:7:"visible";b:1;}s:18:"node_search_result";a:2:{s:6:"weight";s:2:"-5";s:7:"visible";b:1;}}s:6:"status";a:5:{s:7:"default";a:2:{s:6:"weight";s:1:"5";s:7:"visible";b:1;}s:9:"line_item";a:2:{s:6:"weight";s:1:"3";s:7:"visible";b:1;}s:11:"node_teaser";a:2:{s:6:"weight";s:1:"3";s:7:"visible";b:1;}s:9:"node_full";a:2:{s:6:"weight";s:1:"5";s:7:"visible";b:1;}s:18:"node_search_result";a:2:{s:6:"weight";s:1:"5";s:7:"visible";b:1;}}}}}'));
-
   variable_set('field_bundle_settings_node__news', unserialize('a:2:{s:10:"view_modes";a:8:{s:6:"teaser";a:1:{s:15:"custom_settings";b:1;}s:12:"search_index";a:1:{s:15:"custom_settings";b:0;}s:4:"full";a:1:{s:15:"custom_settings";b:0;}s:3:"rss";a:1:{s:15:"custom_settings";b:0;}s:13:"search_result";a:1:{s:15:"custom_settings";b:1;}s:5:"token";a:1:{s:15:"custom_settings";b:0;}s:8:"revision";a:1:{s:15:"custom_settings";b:0;}s:9:"frontpage";a:1:{s:15:"custom_settings";b:1;}}s:12:"extra_fields";a:2:{s:4:"form";a:1:{s:5:"title";a:1:{s:6:"weight";s:1:"0";}}s:7:"display";a:0:{}}}'));
-
   variable_set('field_bundle_settings_node__page', unserialize('a:2:{s:10:"view_modes";a:7:{s:6:"teaser";a:1:{s:15:"custom_settings";b:1;}s:13:"search_result";a:1:{s:15:"custom_settings";b:1;}s:4:"full";a:1:{s:15:"custom_settings";b:0;}s:3:"rss";a:1:{s:15:"custom_settings";b:0;}s:12:"search_index";a:1:{s:15:"custom_settings";b:0;}s:5:"token";a:1:{s:15:"custom_settings";b:0;}s:8:"revision";a:1:{s:15:"custom_settings";b:0;}}s:12:"extra_fields";a:2:{s:4:"form";a:1:{s:5:"title";a:1:{s:6:"weight";s:2:"-5";}}s:7:"display";a:0:{}}}'));
-
   variable_set('field_bundle_settings_node__product_display', unserialize('a:2:{s:10:"view_modes";a:7:{s:6:"teaser";a:1:{s:15:"custom_settings";b:1;}s:4:"full";a:1:{s:15:"custom_settings";b:0;}s:3:"rss";a:1:{s:15:"custom_settings";b:0;}s:12:"search_index";a:1:{s:15:"custom_settings";b:0;}s:13:"search_result";a:1:{s:15:"custom_settings";b:1;}s:5:"token";a:1:{s:15:"custom_settings";b:0;}s:8:"revision";a:1:{s:15:"custom_settings";b:0;}}s:12:"extra_fields";a:2:{s:4:"form";a:1:{s:5:"title";a:1:{s:6:"weight";s:2:"-5";}}s:7:"display";a:5:{s:11:"product:sku";a:3:{s:7:"default";a:2:{s:6:"weight";s:3:"-10";s:7:"visible";b:0;}s:6:"teaser";a:2:{s:6:"weight";s:1:"4";s:7:"visible";b:0;}s:13:"search_result";a:2:{s:6:"weight";s:3:"-10";s:7:"visible";b:0;}}s:13:"product:title";a:3:{s:7:"default";a:2:{s:6:"weight";s:2:"-5";s:7:"visible";b:0;}s:6:"teaser";a:2:{s:6:"weight";s:1:"5";s:7:"visible";b:0;}s:13:"search_result";a:2:{s:6:"weight";s:2:"-5";s:7:"visible";b:0;}}s:14:"product:status";a:3:{s:7:"default";a:2:{s:6:"weight";s:1:"5";s:7:"visible";b:0;}s:6:"teaser";a:2:{s:6:"weight";s:2:"14";s:7:"visible";b:0;}s:13:"search_result";a:2:{s:6:"weight";s:1:"5";s:7:"visible";b:0;}}s:22:"product:commerce_price";a:3:{s:7:"default";a:2:{s:6:"weight";s:1:"0";s:7:"visible";b:1;}s:6:"teaser";a:2:{s:6:"weight";s:1:"1";s:7:"visible";b:1;}s:13:"search_result";a:2:{s:6:"weight";s:1:"0";s:7:"visible";b:1;}}s:27:"product:field_product_photo";a:3:{s:7:"default";a:2:{s:6:"weight";s:2:"36";s:7:"visible";b:1;}s:6:"teaser";a:2:{s:6:"weight";s:1:"2";s:7:"visible";b:1;}s:13:"search_result";a:2:{s:6:"weight";s:2:"36";s:7:"visible";b:1;}}}}}'));
-
   variable_set('field_bundle_settings_taxonomy_term__shop_category', unserialize('a:2:{s:10:"view_modes";a:3:{s:11:"term_teaser";a:1:{s:15:"custom_settings";b:1;}s:4:"full";a:1:{s:15:"custom_settings";b:0;}s:5:"token";a:1:{s:15:"custom_settings";b:0;}}s:12:"extra_fields";a:2:{s:4:"form";a:0:{}s:7:"display";a:1:{s:11:"description";a:2:{s:7:"default";a:2:{s:6:"weight";s:1:"0";s:7:"visible";b:1;}s:11:"term_teaser";a:2:{s:6:"weight";s:1:"0";s:7:"visible";b:1;}}}}}'));
 
   // Set default site currency.
@@ -249,26 +245,41 @@ function drupalife_store_install() {
 
   // Colorbox settings.
   variable_set('colorbox_load', 1);
-  variable_set('colorbox_text_close', 'Закрыть');
-  variable_set('colorbox_text_current', '{current} из {total}');
-  variable_set('colorbox_text_next', 'Следующий »');
-  variable_set('colorbox_text_previous', '« Предыдущий');
+  variable_set('colorbox_text_close', $t('Close'));
+  variable_set('colorbox_text_current', $t('{current} from {total}'));
+  variable_set('colorbox_text_next', $t('Next »'));
+  variable_set('colorbox_text_previous', $t('« Previous'));
 
   // Metatag default settings.
+  $metatag_config = array(
+    'title' => array(
+      'value' => $t('[node:title] - Новости - [site:name]'),
+    ),
+    'image_src' => array(
+      'value' => '[node:field_promo_image]',
+    ),
+  );
   db_insert('metatag_config')
     ->fields(array(
       'cid' => 1,
       'instance' => 'node:news',
-      'config' => 'a:2:{s:5:"title";a:1:{s:5:"value";s:43:"[node:title] - Новости - [site:name]";}s:9:"image_src";a:1:{s:5:"value";s:24:"[node:field_promo_image]";}}'
+      'config' => serialize($metatag_config)
     ))
     ->execute();
+
+  $metatag_config = array(
+    'title' => array(
+      'value' => $t('[node:title] - Catalog - [site:name]'),
+    ),
+  );
   db_insert('metatag_config')
     ->fields(array(
       'cid' => 2,
       'instance' => 'node:product_display',
-      'config' => 'a:2:{s:5:"title";a:1:{s:5:"value";s:43:"[node:title] - Каталог - [site:name]";}s:9:"image_src";a:1:{s:5:"value";s:64:"[node:field-product-display-products:1:field-product-photo:file]";}}'
+      'config' => serialize($metatag_config),
     ))
     ->execute();
+
   db_insert('metatag_config')
     ->fields(array(
       'cid' => 3,
@@ -276,18 +287,36 @@ function drupalife_store_install() {
       'config' => 'a:16:{s:5:"title";a:1:{s:5:"value";s:34:"[current-page:title] - [site:name]";}s:11:"description";a:1:{s:5:"value";s:0:"";}s:8:"abstract";a:1:{s:5:"value";s:0:"";}s:8:"keywords";a:1:{s:5:"value";s:0:"";}s:6:"robots";a:1:{s:5:"value";a:10:{s:5:"index";i:0;s:6:"follow";i:0;s:7:"noindex";i:0;s:8:"nofollow";i:0;s:9:"noarchive";i:0;s:9:"nosnippet";i:0;s:5:"noodp";i:0;s:6:"noydir";i:0;s:12:"noimageindex";i:0;s:11:"notranslate";i:0;}}s:13:"news_keywords";a:1:{s:5:"value";s:0:"";}s:8:"standout";a:1:{s:5:"value";s:0:"";}s:9:"generator";a:1:{s:5:"value";s:28:"Drupal 7 (http://drupal.org)";}s:9:"copyright";a:1:{s:5:"value";s:0:"";}s:9:"image_src";a:1:{s:5:"value";s:0:"";}s:9:"canonical";a:1:{s:5:"value";s:27:"[current-page:url:absolute]";}s:9:"shortlink";a:1:{s:5:"value";s:28:"[current-page:url:unaliased]";}s:9:"publisher";a:1:{s:5:"value";s:0:"";}s:6:"author";a:1:{s:5:"value";s:0:"";}s:15:"original-source";a:1:{s:5:"value";s:0:"";}s:13:"revisit-after";a:2:{s:5:"value";s:0:"";s:6:"period";s:0:"";}}'
     ))
     ->execute();
+
+  $metatag_config = array(
+    'title' => array(
+      'value' => $t('[term:name] - Catalog - [site:name]'),
+    ),
+    'image_src' => array(
+      'value' => '[term:field_shop_category_image]',
+    ),
+  );
   db_insert('metatag_config')
     ->fields(array(
       'cid' => 4,
       'instance' => 'taxonomy_term:shop_category',
-      'config' => 'a:2:{s:5:"title";a:1:{s:5:"value";s:42:"[term:name] - Каталог - [site:name]";}s:9:"image_src";a:1:{s:5:"value";s:32:"[term:field_shop_category_image]";}}'
+      'config' => serialize($metatag_config),
     ))
     ->execute();
+
+  $metatag_config = array(
+    'title' => array(
+      'value' => '[node:title] - [site:name]',
+    ),
+    'description' => array(
+      'value' => '[node:summary]',
+    ),
+  );
   db_insert('metatag_config')
     ->fields(array(
       'cid' => 5,
       'instance' => 'node',
-      'config' => 'a:2:{s:5:"title";a:1:{s:5:"value";s:26:"[node:title] - [site:name]";}s:11:"description";a:1:{s:5:"value";s:14:"[node:summary]";}}'
+      'config' => serialize($metatag_config),
     ))
     ->execute();
 
@@ -315,7 +344,7 @@ function drupalife_store_install() {
 
   // Setup superfish module.
   variable_set('superfish_number', 1);
-  variable_set('superfish_name_1', 'Main Menu');
+  variable_set('superfish_name_1', $t('Main Menu'));
   variable_set('superfish_style_1', 'none');
   _block_rehash('drupalife_store');
   db_update('block')
@@ -671,6 +700,8 @@ function drupalife_store_install_mimemail() {
  * Install Search API + Facet API and configure it to commerce.
  */
 function drupalife_store_install_search_api() {
+  $t = get_t();
+
   // Disable core search module.
   db_update('system')
     ->fields(array(
@@ -754,7 +785,7 @@ function drupalife_store_install_search_api() {
       'status' => 1,
       'weight' => -10,
       'region' => 'sidebar_first',
-      'title' => 'Фильтрация по цене',
+      'title' => $t('Filter by price'),
     ))
     ->condition('module', 'facetapi')
     ->condition('delta', 'eUql62WyfFMGgz42ZEmFllY4VrQC7oB0')
@@ -767,7 +798,7 @@ function drupalife_store_install_search_api() {
       'status' => 1,
       'weight' => -9,
       'region' => 'sidebar_first',
-      'title' => 'Фильтрация по категории',
+      'title' => $t('Filter by category'),
     ))
     ->condition('module', 'facetapi')
     ->condition('delta', 'QjWzY1OW3LLst9QkfvsA05ttxV3jWo0q')

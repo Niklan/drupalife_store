@@ -7,27 +7,8 @@
  * @see https://drupal.org/node/1728096
  */
 
-
 /**
- * Override or insert variables into the maintenance page template.
- *
- * @param $variables
- *   An array of variables to pass to the theme template.
- * @param $hook
- *   The name of the template being rendered ("maintenance_page" in this case.)
- */
-/* -- Delete this line if you want to use this function
-function STARTERKIT_preprocess_maintenance_page(&$variables, $hook) {
-  // When a variable is manipulated or added in preprocess_html or
-  // preprocess_page, that same work is probably needed for the maintenance page
-  // as well, so we can just re-use those functions to do that work here.
-  STARTERKIT_preprocess_html($variables, $hook);
-  STARTERKIT_preprocess_page($variables, $hook);
-}
-// */
-
-/**
- * Override or insert variables into the html templates.
+ * Implements hook_preprocess_html().
  */
 function drupalife_store_preprocess_html(&$variables, $hook) {
   // Change bg image if new is set in theme settings.
@@ -54,162 +35,75 @@ function drupalife_store_preprocess_html(&$variables, $hook) {
 // */
 
 /**
- * Override or insert variables into the page templates.
- *
- * @param $variables
- *   An array of variables to pass to the theme template.
- * @param $hook
- *   The name of the template being rendered ("page" in this case.)
+ * Implements hook_preprocess_page().
  */
-
 function drupalife_store_preprocess_page(&$variables, $hook) {
-  // Отключаем сайдбар для продуктов.
+  $bred = unserialize('a:2:{s:5:"title";a:1:{s:5:"value";s:26:"[node:title] - [site:name]";}s:11:"description";a:1:{s:5:"value";s:14:"[node:summary]";}}');
+  dpm($bred);
+  global $user;
+
+  // Disable sidebar for product page.
   if (isset($variables['node']) && $variables['node']->type == "product_display") {
     unset($variables['page']['sidebar_first']);
   }
-}
-// */
 
-/**
- * Override or insert variables into the node templates.
- *
- * @param $variables
- *   An array of variables to pass to the theme template.
- * @param $hook
- *   The name of the template being rendered ("node" in this case.)
- */
-/* -- Delete this line if you want to use this function
-function STARTERKIT_preprocess_node(&$variables, $hook) {
-  $variables['sample_variable'] = t('Lorem ipsum.');
-
-  // Optionally, run node-type-specific preprocess functions, like
-  // STARTERKIT_preprocess_node_page() or STARTERKIT_preprocess_node_story().
-  $function = __FUNCTION__ . '_' . $variables['node']->type;
-  if (function_exists($function)) {
-    $function($variables, $hook);
-  }
-}
-// */
-
-/**
- * Override or insert variables into the comment templates.
- *
- * @param $variables
- *   An array of variables to pass to the theme template.
- * @param $hook
- *   The name of the template being rendered ("comment" in this case.)
- */
-/* -- Delete this line if you want to use this function
-function STARTERKIT_preprocess_comment(&$variables, $hook) {
-  $variables['sample_variable'] = t('Lorem ipsum.');
-}
-// */
-
-/**
- * Override or insert variables into the region templates.
- *
- * @param $variables
- *   An array of variables to pass to the theme template.
- * @param $hook
- *   The name of the template being rendered ("region" in this case.)
- */
-/* -- Delete this line if you want to use this function
-function STARTERKIT_preprocess_region(&$variables, $hook) {
-  // Don't use Zen's region--sidebar.tpl.php template for sidebars.
-  //if (strpos($variables['region'], 'sidebar_') === 0) {
-  //  $variables['theme_hook_suggestions'] = array_diff($variables['theme_hook_suggestions'], array('region__sidebar'));
-  //}
-}
-// */
-
-/**
- * Override or insert variables into the block templates.
- *
- * @param $variables
- *   An array of variables to pass to the theme template.
- * @param $hook
- *   The name of the template being rendered ("block" in this case.)
- */
-/* -- Delete this line if you want to use this function
-function STARTERKIT_preprocess_block(&$variables, $hook) {
-  // Add a count to all the blocks in the region.
-  // $variables['classes_array'][] = 'count-' . $variables['block_id'];
-
-  // By default, Zen will use the block--no-wrapper.tpl.php for the main
-  // content. This optional bit of code undoes that:
-  //if ($variables['block_html_id'] == 'block-system-main') {
-  //  $variables['theme_hook_suggestions'] = array_diff($variables['theme_hook_suggestions'], array('block__no_wrapper'));
-  //}
-}
-// */
-
-/**
- * Функция для склонений.
- */
-function getNumEnding($number, $endingArray) {
-  $number = $number % 100;
-  if ($number>=11 && $number<=19) {
-    $ending=$endingArray[2];
+  // Top links for user.
+  if ($variables['logged_in']) {
+    $variables['header_user_links'] = t("<a href='@user_link'>My profile</a> | <a href='@user_orders'>My orders</a>",
+      array(
+        '@user_link' => '/user',
+        '@user_orders' => "/user/{$user->uid}/orders",
+      )
+    );
   }
   else {
-    $i = $number % 10;
-    switch ($i)
-    {
-      case (0): $ending = $endingArray[2]; break;
-      case (1): $ending = $endingArray[0]; break;
-      case (2):
-      case (3):
-      case (4): $ending = $endingArray[1]; break;
-      default: $ending=$endingArray[2];
-    }
+    $variables['header_user_links'] = t("Welcome, you can <a href='@user_login'>sign in</a> or <a href='@user_register'>sign up</a>.",
+      array(
+        '@user_login' => '/user',
+        '@user_register' => "/user/register",
+      )
+    );
   }
-  return $ending;
+
+  // Social buttons from theme settings.
+  $social = '';
+  if ($vk = theme_get_setting('social_vk')) {
+    $social .= "<a href='{$vk}' target='_blank' class='social vk'>&nbsp;</a>";
+  }
+  if ($fb = theme_get_setting('social_facebook')) {
+    $social .= "<a href='{$fb}' target='_blank' class='social fb'>&nbsp;</a>";
+  }
+  if ($ggl = theme_get_setting('social_google')) {
+    $social .= "<a href='{$ggl}' target='_blank' class='social ggl'>&nbsp;</a>";
+  }
+  if ($tw = theme_get_setting('social_twitter')) {
+    $social .= "<a href='{$tw}' target='_blank' class='social twitter'>&nbsp;</a>";
+  }
+  $variables['social'] = $social;
+
+  $variables['drupalife_store'] = t('Powered by Drupalife Store');
 }
 
 /**
- * Получение корзины в упрощеном варианте.
- */
-function get_simple_cart() {
-  global $user;
-
-  $order = commerce_cart_order_load($user->uid);
-  if(!empty($order)) {
-    $wrapper = entity_metadata_wrapper('commerce_order', $order);
-    $line_items = $wrapper->commerce_line_items;
-    $total = commerce_line_items_total($line_items);
-    $currency = commerce_currency_load($total['currency_code']);
-    $quantity = commerce_line_items_quantity($line_items, commerce_product_line_item_types());
-    $summ = commerce_currency_format($total['amount'], $total['currency_code']);
-
-    $quantity_label = getNumEnding($quantity, array('товар','товара','товаров'));
-
-    $output = "<div id='cart-wrapper'><span class='icon-bag'></span>";
-    $output .= "<div class='right-side'><span class='label'>Ваша корзина</span><a href='/cart'>{$quantity} {$quantity_label} - {$summ}</a></div></div>";
-
-  }
-  else {
-    $output = "<div id='cart-wrapper'><span class='icon-bag'></span>";
-    $output .= "<div class='right-side'><span class='label'>Ваша корзина</span>0 товаров - 0 руб.</div></div>";
-  }
-
-  return $output;
-}
-
-/**
- * Темизация формы авторизации.
+ * Theme auth form.
  */
 function drupalife_store_form_user_login_block_alter(&$form, &$form_state, $form_id) {
-  $form['links']['#markup'] = ' <a class="user-register" href="/user/register">Регистрация</a>' . ' <div class="divider">&nbsp;</div> ' . ' <a class="user-password" href="/user/password">Восстановление</a>'; // Remove Request New Password from Block form
-  $form['name']['#title'] = Null; // Change text on form
-  $form['name']['#attributes'] = array('placeholder' => 'Логин');
+  $register = t('Sign up');
+  $forget = t('Restore');
+
+  $form['links']['#markup'] = '<div class="links"><div class="divider">&nbsp;</div> <a class="user-register" href="/user/register">' . $register .'</a><a class="user-password" href="/user/password">' . $forget . '</a></div>';
+  $form['name']['#title'] = Null;
+  $form['name']['#attributes'] = array('placeholder' => t('Login'));
   $form['name']['#size'] = 20;
   $form['pass']['#title'] = Null;
-  $form['pass']['#attributes'] = array('placeholder' => 'Пароль');
+  $form['pass']['#attributes'] = array('placeholder' => t('Password'));
   $form['pass']['#size'] = 20;
 }
 
 /**
- * Темизация контактной формы.
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Contact form.
  */
 function drupalife_store_form_entityform_edit_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'contact_entityform_edit_form') {
@@ -249,4 +143,95 @@ function drupalife_store_block_view_alter(&$data, $block) {
     $data['content']['#markup'] = str_replace('views-submit-button', 'views-submit-button grid-1-6 left', $data['content']['#markup']);
     $data['content']['#markup'] = str_replace('views-reset-button', 'views-reset-button grid-1-6 left', $data['content']['#markup']);
   }
+}
+
+/**
+ * Plural function for Russian words.
+ */
+function getNumEnding($number, $endingArray) {
+  $number = $number % 100;
+  if ($number>=11 && $number<=19) {
+    $ending=$endingArray[2];
+  }
+  else {
+    $i = $number % 10;
+    switch ($i)
+    {
+      case (0): $ending = $endingArray[2]; break;
+      case (1): $ending = $endingArray[0]; break;
+      case (2):
+      case (3):
+      case (4): $ending = $endingArray[1]; break;
+      default: $ending=$endingArray[2];
+    }
+  }
+  return $ending;
+}
+
+/**
+ * Получение корзины в упрощеном варианте.
+ */
+function get_simple_cart() {
+  global $user;
+  global $language;
+
+  $cart_label = t('Your cart');
+  $order = commerce_cart_order_load($user->uid);
+  if(!empty($order)) {
+    $wrapper = entity_metadata_wrapper('commerce_order', $order);
+    $line_items = $wrapper->commerce_line_items;
+    $total = commerce_line_items_total($line_items);
+    $currency = commerce_currency_load($total['currency_code']);
+    $quantity = commerce_line_items_quantity($line_items, commerce_product_line_item_types());
+    $summ = commerce_currency_format($total['amount'], $total['currency_code']);
+
+    // For Russian cart we need plural function.
+    if ($language->language == 'ru') {
+      $quantity_label = getNumEnding($quantity, array('товар','товара','товаров'));
+    }
+    else {
+      $quantity_label = 'item(s)';
+    }
+
+    $output = "<div id='cart-wrapper'><span class='icon-bag'></span>";
+    $output .= "<div class='right-side'><span class='label'>{$cart_label}</span><a href='/cart'>{$quantity} {$quantity_label} - {$summ}</a></div></div>";
+
+  }
+  else {
+    $cart_empty_label = t('Your cart is empty');
+    $output = "<div id='cart-wrapper'><span class='icon-bag'></span>";
+    $output .= "<div class='right-side'><span class='label'>{$cart_label}</span>{$cart_empty_label}</div></div>";
+  }
+
+  return $output;
+}
+
+/**
+ * This function returns search box based on selected search during
+ * installation.
+ */
+function get_search_box() {
+  $site_search = variable_get('drupalife_store_selected_search');
+
+  $search_input_placeholder = t('Enter your search query');
+  if ($site_search == 'default' || empty($site_search)) {
+    $block = module_invoke('search', 'block_view', 0);
+    $block['content']['actions']['submit']['#value'] = "";
+    $block['content']['search_block_form']['#attributes'] = array('placeholder' => $search_input_placeholder);
+    $search = render($block['content']);
+  }
+  else if ($site_search == 'search_api') {
+    if (arg(0) == 'search') {
+      $default_query = isset($_GET['s']) ? $_GET['s'] : '';
+    }
+
+    isset($default_query) ? $query = $default_query : $query = '';
+
+    $search = "<form action=\"/search\" id=\"search-api-header\">
+    <input name=\"s\" value=\"{$query}\" maxlength=\"128\" class=\"form-text\" type=\"text\" placeholder=\"{$search_input_placeholder}\">
+    <div class=\"submit-wrapper\"><input type=\"submit\" value=\"\"></div>
+</form>";
+  }
+
+  return $search;
 }

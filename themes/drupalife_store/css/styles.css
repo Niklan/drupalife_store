@@ -829,7 +829,7 @@ a.tabledrag-handle .handle {
     right: 0px;
 }
 #search-api-header .submit-wrapper:before {
-    content: '';
+    content: '';
     font-family: fontello;
     position: absolute;
     top: 6px;
@@ -905,10 +905,26 @@ a.tabledrag-handle .handle {
     width: 100%;
 }
 #user-login-form .divider {
-    display: inline-block;
-    width: 53px;
+    position: absolute;
+    width: 100%;
     border-bottom: 1px solid #F1F1F1;
-    height: 14px;
+    bottom: 11px;
+    z-index: 0;
+}
+#user-login-form .links {
+    position: relative;
+}
+#user-login-form .links a {
+    background: white;
+    z-index: 5;
+    position: relative;
+}
+#user-login-form .links .user-register {
+    padding-right: 5px;
+}
+#user-login-form .links .user-password {
+    float: right;
+    padding-left: 5px;
 }
 
 /* ------- Постраничная навигация ------- */
@@ -1027,8 +1043,14 @@ a.tabledrag-handle .handle {
     box-shadow: 0px 1px 5px 0px rgba(74, 74, 74, 0.18);
 }
 
-/* ------- Классы для фонового изображения из настроек темы ------- */
-
+/* ------- Views grid ------- */
+.row {
+    position: relative;
+}
+.row .col {
+    display: inline-block;
+    vertical-align: top;
+}
 
 /* ------- Планшеты ------- */
 @media only screen

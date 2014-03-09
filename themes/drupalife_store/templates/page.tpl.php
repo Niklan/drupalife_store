@@ -17,29 +17,11 @@ global $user;
   <header id="header">
     <div id="header-top-line">
       <div class="grid-2-3 left">
-        <?php if ($logged_in): ?>
-          <a href="/user">Мой профиль</a> | <a href="/user/<?php print $user->uid; ?>/orders">Мои заказы</a>
-        <?php else: ?>
-          Добро пожаловать, вы можете <a href="/user">авторизоваться</a> или <a href="/user/register">зарегистрироваться</a> на сайте.
-        <?php endif; ?>
+        <?php print $header_user_links; ?>
       </div>
 
       <div id="socials" class="grid-1-3 right">
-        <?php
-        // Выводим соц. кнопки на основе настроек темы.
-        if ($vk = theme_get_setting('social_vk')) {
-          print "<a href='{$vk}' target='_blank' class='social vk'>&nbsp;</a>";
-        }
-        if ($fb = theme_get_setting('social_facebook')) {
-          print "<a href='{$fb}' target='_blank' class='social fb'>&nbsp;</a>";
-        }
-        if ($ggl = theme_get_setting('social_google')) {
-          print "<a href='{$ggl}' target='_blank' class='social ggl'>&nbsp;</a>";
-        }
-        if ($tw = theme_get_setting('social_twitter')) {
-          print "<a href='{$tw}' target='_blank' class='social twitter'>&nbsp;</a>";
-        }
-        ?>
+        <?php print $social; ?>
       </div>
     </div>
 
@@ -67,25 +49,7 @@ global $user;
       </div>
 
       <div class="grid-1-3 left">
-        <?php
-        $site_search = variable_get('drupalife_store_selected_search');
-
-        if ($site_search == 'default') {
-          $block = module_invoke('search', 'block_view', 0);
-          $block['content']['actions']['submit']['#value'] = "";
-          $block['content']['search_block_form']['#attributes'] = array('placeholder' => 'Введите поисковый запрос');
-          echo render($block['content']);
-        }
-        else if ($site_search == 'search_api') {
-          if (arg(0) == 'search') {
-            $default_query = isset($_GET['s']) ? $_GET['s'] : '';
-          }
-        ?>
-          <form action="/search" id="search-api-header">
-            <input name="s" value="<?php isset($default_query) ? print $default_query : print ''; ?>" maxlength="128" class="form-text" type="text" placeholder="Введите поисковый запрос">
-            <div class="submit-wrapper"><input type="submit" value=""></div>
-          </form>
-        <?php } ?>
+        <?php print get_search_box(); ?>
       </div>
 
       <div class="grid-1-3 left">
@@ -134,11 +98,11 @@ global $user;
 
     <div id="copyright">
       <div class="grid-1-2 left">
-        &COPY; <?php print date('Y'); ?> Все права защищены.
+        &COPY; <?php print date('Y'); ?> <?php print t('All rights reserved'); ?>
       </div>
 
       <div class="grid-1-2 right">
-        <a href="http://drupalife.com/" title="Создано на основе Drupalife Store" target="_blank">Создано на основе Drupalife Store</a>
+        <a href="http://drupalife.com/" title="<?php print $drupalife_store; ?>" target="_blank"><?php print $drupalife_store; ?></a>
       </div>
     </div>
   </footer>

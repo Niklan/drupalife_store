@@ -1,5 +1,7 @@
 /**
- * Резиновая сетка.
+ * Grid with responsive.
+ * @author Niklan (Nikita Malyshev)
+ *  http://niklan.net/ hello@niklan.net
  */
 
 /* Чтобы было проще работать с шириной блоков. */
@@ -11,96 +13,74 @@
     padding: 0 10px;
     overflow: hidden;
 }
-
 [class*="grid-"]:first-child {
     padding-left: 0;
 }
-
 [class*="grid-"]:last-child {
     padding-right: 0;
 }
-
 .left {
     float: left;
 }
-
 .right {
     float: right;
 }
-
 .grid-content {
     padding: 0;
 }
-
 .grid-row {
     padding: 0;
 }
-
 .grid-row:after {
     content: " ";
     display: block;
     height: 0;
     clear: both;
 }
-
 .grid-full {
     width: 100%;
     padding: 0;
     margin: 0;
 }
-
 .grid-1-2 {
     width: 50%;
 }
-
 .grid-1-3 {
     width: 33.333333333%;
 }
-
 .grid-1-4 {
     width: 25%;
 }
-
 .grid-1-5 {
     width: 20%;
 }
-
 .grid-1-6 {
     width: 16.6666667%;
 }
-
 .grid-2-3 {
     width: 66.666666666%;
 }
-
 .grid-2-4 {
     width: 50%;
 }
-
 .grid-2-5 {
     width: 40%;
 }
-
 .grid-2-6 {
     width: 33.333333333%;
 }
-
 .grid-3-4 {
     width: 75%;
 }
-
 .grid-3-5 {
     width: 60%;
 }
-
 .grid-4-5 {
     width: 80%;
 }
-
 .grid-4-6 {
     width: 66.666666667%;
 }
-
 .grid-5-6 {
     width: 83.3333333%;
 }
