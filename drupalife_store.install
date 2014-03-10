@@ -321,31 +321,167 @@ function drupalife_store_install() {
     ->execute();
 
   // Path Breadcrumbs default settings.
+  variable_set('path_breadcrumbs_home_link_title', $t('Home'));
+  variable_set('path_breadcrumbs_hide_single_breadcrumb', 1);
+
+  $breadcrumbs_settings = array(
+    'titles' => array(
+      $t('Catalog'),
+      '%nid:field-product-display-category:pb-join:name',
+    ),
+    'paths' => array(
+      'catalog',
+      '%nid:field-product-display-category:pb-join:url',
+    ),
+    'home' => 1,
+    'translatable' => 0,
+    'arguments' => array(
+      'nid' => array(
+        'position' => 1,
+        'argument' => 'entity_id:node',
+        'settings' => array(
+          'identifier' => 'nid',
+        ),
+      ),
+    ),
+    'access' => array(
+      'plugins' => array(
+        '0' => array(
+          'name' => 'node_type',
+          'settings' => array(
+            'type' => array(
+              'product_display' => 'product_display',
+            ),
+          ),
+          'context' => 'nid',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'and',
+    ),
+  );
   db_insert('path_breadcrumbs')
     ->fields(array(
       'path_id' => 1,
       'machine_name' => 'product',
       'name' => 'Product',
       'path' => 'node/%nid',
-      'data' => 'a:6:{s:6:"titles";a:2:{i:0;s:14:"Каталог";i:1;s:48:"%nid:field-product-display-category:pb-join:name";}s:5:"paths";a:2:{i:0;s:7:"catalog";i:1;s:47:"%nid:field-product-display-category:pb-join:url";}s:4:"home";i:1;s:12:"translatable";i:0;s:9:"arguments";a:1:{s:3:"nid";a:3:{s:8:"position";i:1;s:8:"argument";s:14:"entity_id:node";s:8:"settings";a:1:{s:10:"identifier";s:20:"Материал: ID";}}}s:6:"access";a:2:{s:7:"plugins";a:1:{i:0;a:4:{s:4:"name";s:9:"node_type";s:8:"settings";a:1:{s:4:"type";a:1:{s:15:"product_display";s:15:"product_display";}}s:7:"context";s:3:"nid";s:3:"not";b:0;}}s:5:"logic";s:3:"and";}}',
+      'data' => serialize($breadcrumbs_settings),
       'weight' => 0,
     ))
     ->execute();
+
+  $breadcrumbs_settings = array(
+    'titles' => array(
+      $t('Catalog'),
+      '%tid:pb-join:name',
+    ),
+    'paths' => array(
+      'catalog',
+      '%tid:pb-join:url',
+    ),
+    'home' => 1,
+    'translatable' => 0,
+    'arguments' => array(
+      'tid' => array(
+        'position' => 2,
+        'argument' => 'term',
+        'settings' => array(
+          'input_form' => 'tid',
+          'identifier' => 'tid',
+        ),
+        'vids' => array(
+          '1' => 0,
+        ),
+        'breadcrumb' => 0,
+        'transform' => 0,
+      ),
+    ),
+    'access' => array(
+      'plugins' => array(
+        '0' => array(
+          'name' => 'term_vocabulary',
+          'settings' => array(
+            'machine_name' => array(
+              'shop_category' => 'shop_category',
+            ),
+          ),
+          'context' => 'tid',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'and',
+    ),
+  );
   db_insert('path_breadcrumbs')
     ->fields(array(
       'path_id' => 2,
       'machine_name' => 'catalog',
       'name' => 'Catalog',
       'path' => 'taxonomy/term/%tid',
-      'data' => 'a:6:{s:6:"titles";a:2:{i:0;s:14:"Каталог";i:1;s:17:"%tid:pb-join:name";}s:5:"paths";a:2:{i:0;s:7:"catalog";i:1;s:16:"%tid:pb-join:url";}s:4:"home";i:1;s:12:"translatable";i:0;s:9:"arguments";a:1:{s:3:"tid";a:3:{s:8:"position";i:2;s:8:"argument";s:4:"term";s:8:"settings";a:5:{s:10:"identifier";s:17:"Taxonomy term: ID";s:10:"input_form";s:3:"tid";s:4:"vids";a:1:{i:1;i:0;}s:10:"breadcrumb";i:0;s:9:"transform";i:0;}}}s:6:"access";a:2:{s:7:"plugins";a:1:{i:0;a:4:{s:4:"name";s:15:"term_vocabulary";s:8:"settings";a:1:{s:12:"machine_name";a:1:{s:13:"shop_category";s:13:"shop_category";}}s:7:"context";s:3:"tid";s:3:"not";b:0;}}s:5:"logic";s:3:"and";}}',
+      'data' => serialize($breadcrumbs_settings),
       'weight' => 0,
     ))
     ->execute();
+
+  $breadcrumbs_settings = array(
+    'titles' => array(
+      $t('News'),
+    ),
+    'paths' => array(
+      'news',
+    ),
+    'home' => 1,
+    'translatable' => 0,
+    'arguments' => array(
+      'nid' => array(
+        'position' => 1,
+        'argument' => 'entity_id:node',
+        'settings' => array(
+          'identifier' => 'nid',
+        ),
+      ),
+    ),
+    'access' => array(
+      'plugins' => array(
+        '0' => array(
+          'name' => 'node_type',
+          'settings' => array(
+            'type' => array(
+              'news' => 'news',
+            ),
+          ),
+          'context' => 'nid',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'and',
+    ),
+  );
+  db_insert('path_breadcrumbs')
+    ->fields(array(
+      'path_id' => 3,
+      'machine_name' => 'news',
+      'name' => 'News',
+      'path' => 'node/%nid',
+      'data' => serialize($breadcrumbs_settings),
+      'weight' => 0,
+    ))
+    ->execute();
+
+  // Disable comment title for news comments.
+  variable_set('comment_subject_field_news', 0);
 
   // Setup superfish module.
   variable_set('superfish_number', 1);
   variable_set('superfish_name_1', $t('Main Menu'));
   variable_set('superfish_style_1', 'none');
+  variable_set('superfish_itemcounter_1', 0);
+  variable_set('superfish_itemcount_1', 0);
+  variable_set('superfish_itemdepth_1', 0);
+  variable_set('superfish_zebra_1', 0);
+  variable_set('superfish_firstlast_1', 0);
+
   _block_rehash('drupalife_store');
   db_update('block')
     ->fields(array(
@@ -361,6 +497,17 @@ function drupalife_store_install() {
 
   // Set default value for search type.
   variable_set('drupalife_store_selected_search', 'default');
+
+  // User pictures (avatars).
+  variable_set('user_pictures', 1);
+  variable_set('user_picture_default', 'profiles/drupalife_store/themes/drupalife_store/noavatar.png');
+  variable_set('user_picture_dimensions', '150x150');
+  variable_set('user_picture_file_size', '500');
+  variable_set('user_picture_path', 'pictures');
+  variable_set('user_picture_style', 'thumbnail');
+
+  // Enable registration without approval.
+  variable_set('user_register', 1);
 
   // Work with permissions.
   user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array(

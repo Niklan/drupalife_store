@@ -11,6 +11,24 @@
  * Implements hook_preprocess_html().
  */
 function drupalife_store_preprocess_html(&$variables, $hook) {
+  $image_file = DRUPAL_ROOT . '/profiles/drupalife_store/themes/drupalife_store/noimage.png';
+  $image = file_get_contents($image_file);
+  $file = file_save_data($image, 'public://default_images/noimage.png',FILE_EXISTS_REPLACE);
+  // Change default image in field settings.
+  $result = db_select('field_config_instance', 'c')
+    ->fields('c')
+    ->condition('c.field_name', 'field_shop_category_image')
+    ->execute()
+    ->fetchAssoc();
+  $new_data = unserialize($result['data']);
+  dpm($image);
+  $new_data['settings']['default_image'] = $file->fid;
+  db_update('field_config_instance')
+    ->fields(array(
+      'data' => serialize($new_data),
+    ))
+    ->condit;ion('field_name', 'field_shop_category_image')
+    ->execute()
   // Change bg image if new is set in theme settings.
   if (variable_get('drupalife_store_theme_background_image', FALSE)) {
     $file = file_load(variable_get('drupalife_store_theme_background_image'));
@@ -232,4 +250,20 @@ function get_search_box() {
   }
 
   return $search;
+}
+
+/**
+ * Plural function for comment label.
+ */
+function get_comments_label($comment_count = 0) {
+  global $language;
+
+  $label = format_plural($comment_count, t('@count comment'), t('@count comments'), array('@count' => $comment_count));
+
+  if ($language->language == 'ru') {
+    $plural = getNumEnding($comment_count, array('комментарий','комментария','комментариев'));
+    $label = $comment_count . ' ' . $plural;
+  }
+
+  return $label;
 }

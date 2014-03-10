@@ -4,7 +4,7 @@
     <?php if ($picture): ?>
       <?php print $picture; ?>
     <?php else: ?>
-      <img src="/sites/all/themes/drupalife_store/noavatar.png" alt="Аватар" class="user-picture">
+      <img src="/profile/drupalife_store/themes/drupalife_store/noavatar.png" alt="Аватар" class="user-picture">
     <?php endif; ?>
   </div>
 

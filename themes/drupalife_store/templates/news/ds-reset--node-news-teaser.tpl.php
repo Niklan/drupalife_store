@@ -1,9 +1,9 @@
 <?php
-// Содержимое.
+// Content.
 $body_values = field_get_items('node', $node, 'body');
 $body = $body_values[0]['safe_value'];
 
-// Промо-изображение.
+// Promo-image.
 $promo_img_values = field_get_items('node', $node, 'field_promo_image');
 if ($promo_img_values) {
   $promo_img = image_style_url('news_teaser', $promo_img_values[0]['uri']);
@@ -23,7 +23,7 @@ if ($promo_img_values) {
       <li>
         <span class="icon-comment-alt"></span>
         <a href="<?php print $node_url; ?>#comments">
-          <?php print $node->comment_count; ?> <?php print getNumEnding($node->comment_count, array('комментарий','комментария','комментариев')); ?>
+          <?php print get_comments_label($node->comment_count); ?>
         </a>
       </li>
     </ul>
