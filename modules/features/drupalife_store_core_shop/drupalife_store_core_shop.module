@@ -5,3 +5,19 @@
  */
 
 include_once 'drupalife_store_core_shop.features.inc';
+
+/**
+ * Implements hook_update_projects_alter().
+ *
+ * We disable our custom module and features from update.
+ * They update with distribution, not separate.
+ */
+function drupalife_store_core_shop_update_projects_alter(&$projects) {
+  unset($projects['drupalife_store_core_shop']);
+  unset($projects['drupalife_store_contact']);
+  unset($projects['drupalife_store_news']);
+  unset($projects['drupalife_store_pages']);
+  unset($projects['drupalife_store_search_api']);
+  unset($projects['drupalife_store_slider']);
+  unset($projects['drupalife_store_custom']);
+}

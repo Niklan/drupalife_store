@@ -2,3 +2,6 @@
 .idea/*
 themes/drupalife_store/.idea/*
 modules/custom/drupalife_store_custom/.idea/*
+libraries/*
+modules/contrib/*
+themes/zen/*

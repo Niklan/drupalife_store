@@ -165,9 +165,9 @@ function drupalife_store_theme_settings_form_submit($form, &$form_state) {
   else {
     // We goes here if file is not uploaded or removed on this submit.
     $file = file_load(variable_get('drupalife_store_theme_background_image'));
-    if ($file->fid) {
+    if ($file) {
       file_delete($file, TRUE);
+      variable_del('drupalife_store_theme_background_image');
     }
-    variable_del('drupalife_store_theme_background_image');
   }
 }

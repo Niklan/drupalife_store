@@ -14,3 +14,10 @@ features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
 features[views_view][] = search
 features_exclude[dependencies][commerce_search_api] = commerce_search_api
+
+; Information added by Drupal.org packaging script on 2014-03-10
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "drupalife_store"
+datestamp = "1394453006"
+

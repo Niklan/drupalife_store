@@ -71,3 +71,10 @@ features[views_view][] = catalog
 features[views_view][] = shop
 features_exclude[dependencies][drupalife_store_pages] = drupalife_store_pages
 features_exclude[menu_custom][main-menu] = main-menu
+
+; Information added by Drupal.org packaging script on 2014-03-10
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "drupalife_store"
+datestamp = "1394453006"
+

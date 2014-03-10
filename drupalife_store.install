@@ -155,7 +155,7 @@ function drupalife_store_install() {
   // Set default image for taxonomy category term.
   $image_file = DRUPAL_ROOT . '/profiles/drupalife_store/themes/drupalife_store/noimage.png';
   $image = file_get_contents($image_file);
-  $file = file_save_data($image, 'public://default_images/noimage.png',FILE_EXISTS_REPLACE);
+  $file = file_save_data($image, 'public://noimage.png', FILE_EXISTS_REPLACE);
   // Change default image in field settings.
   $result = db_select('field_config_instance', 'c')
     ->fields('c')
@@ -179,9 +179,6 @@ function drupalife_store_install() {
     ->fetchAssoc();
   $addressfield_new = unserialize($addressfield['data']);
   $addressfield_new['widget']['active'] = 1;
-  $addressfield_new['widget']['settings']['available_countries'] = array(
-    'RU' => 'RU',
-  );
   $addressfield_new['widget']['settings']['format_handlers'] = array(
     'address' => 'address',
     'address-hide-country' => 'address-hide-country',
@@ -235,9 +232,6 @@ function drupalife_store_install() {
   variable_set('field_bundle_settings_node__page', unserialize('a:2:{s:10:"view_modes";a:7:{s:6:"teaser";a:1:{s:15:"custom_settings";b:1;}s:13:"search_result";a:1:{s:15:"custom_settings";b:1;}s:4:"full";a:1:{s:15:"custom_settings";b:0;}s:3:"rss";a:1:{s:15:"custom_settings";b:0;}s:12:"search_index";a:1:{s:15:"custom_settings";b:0;}s:5:"token";a:1:{s:15:"custom_settings";b:0;}s:8:"revision";a:1:{s:15:"custom_settings";b:0;}}s:12:"extra_fields";a:2:{s:4:"form";a:1:{s:5:"title";a:1:{s:6:"weight";s:2:"-5";}}s:7:"display";a:0:{}}}'));
   variable_set('field_bundle_settings_node__product_display', unserialize('a:2:{s:10:"view_modes";a:7:{s:6:"teaser";a:1:{s:15:"custom_settings";b:1;}s:4:"full";a:1:{s:15:"custom_settings";b:0;}s:3:"rss";a:1:{s:15:"custom_settings";b:0;}s:12:"search_index";a:1:{s:15:"custom_settings";b:0;}s:13:"search_result";a:1:{s:15:"custom_settings";b:1;}s:5:"token";a:1:{s:15:"custom_settings";b:0;}s:8:"revision";a:1:{s:15:"custom_settings";b:0;}}s:12:"extra_fields";a:2:{s:4:"form";a:1:{s:5:"title";a:1:{s:6:"weight";s:2:"-5";}}s:7:"display";a:5:{s:11:"product:sku";a:3:{s:7:"default";a:2:{s:6:"weight";s:3:"-10";s:7:"visible";b:0;}s:6:"teaser";a:2:{s:6:"weight";s:1:"4";s:7:"visible";b:0;}s:13:"search_result";a:2:{s:6:"weight";s:3:"-10";s:7:"visible";b:0;}}s:13:"product:title";a:3:{s:7:"default";a:2:{s:6:"weight";s:2:"-5";s:7:"visible";b:0;}s:6:"teaser";a:2:{s:6:"weight";s:1:"5";s:7:"visible";b:0;}s:13:"search_result";a:2:{s:6:"weight";s:2:"-5";s:7:"visible";b:0;}}s:14:"product:status";a:3:{s:7:"default";a:2:{s:6:"weight";s:1:"5";s:7:"visible";b:0;}s:6:"teaser";a:2:{s:6:"weight";s:2:"14";s:7:"visible";b:0;}s:13:"search_result";a:2:{s:6:"weight";s:1:"5";s:7:"visible";b:0;}}s:22:"product:commerce_price";a:3:{s:7:"default";a:2:{s:6:"weight";s:1:"0";s:7:"visible";b:1;}s:6:"teaser";a:2:{s:6:"weight";s:1:"1";s:7:"visible";b:1;}s:13:"search_result";a:2:{s:6:"weight";s:1:"0";s:7:"visible";b:1;}}s:27:"product:field_product_photo";a:3:{s:7:"default";a:2:{s:6:"weight";s:2:"36";s:7:"visible";b:1;}s:6:"teaser";a:2:{s:6:"weight";s:1:"2";s:7:"visible";b:1;}s:13:"search_result";a:2:{s:6:"weight";s:2:"36";s:7:"visible";b:1;}}}}}'));
   variable_set('field_bundle_settings_taxonomy_term__shop_category', unserialize('a:2:{s:10:"view_modes";a:3:{s:11:"term_teaser";a:1:{s:15:"custom_settings";b:1;}s:4:"full";a:1:{s:15:"custom_settings";b:0;}s:5:"token";a:1:{s:15:"custom_settings";b:0;}}s:12:"extra_fields";a:2:{s:4:"form";a:0:{}s:7:"display";a:1:{s:11:"description";a:2:{s:7:"default";a:2:{s:6:"weight";s:1:"0";s:7:"visible";b:1;}s:11:"term_teaser";a:2:{s:6:"weight";s:1:"0";s:7:"visible";b:1;}}}}}'));
-
-  // Set default site currency.
-  variable_set('commerce_default_currency', 'RUB');
 
   // Set default settings to our theme. This will disable 'rebuild theme
   // registry on every page' and some other things.
@@ -637,6 +631,8 @@ function drupalife_store_install_tasks(&$install_state) {
  * Advanced settings form.
  */
 function drupalife_store_advanced_settings_form() {
+  global $language;
+
   $form['information'] = array(
     '#weight' => 0,
     '#markup' => '<p>These settings allow you to add new functionality to the site. This operation is performed only once, at the time of installation, in the future you will have to configure these capabilities themselves.</p>',
@@ -708,16 +704,36 @@ function drupalife_store_advanced_settings_form() {
   $form['commerce_settings'] = array(
     '#type' => 'fieldset',
     '#title' => st('Commerce settings'),
-    '#description' => st('Here you can change the settings store.'),
+    '#description' => st('Here you can change store settings.'),
     '#weight' => 4,
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
   );
 
+  $currency_list = array();
+  foreach (commerce_currencies(FALSE, TRUE) as $currency_code => $currency_info) {
+    $currency_list[$currency_code] = $currency_code . ' - ' . $currency_info['name'];
+  }
+  $form['commerce_settings']['default_currency'] = array(
+    '#type' => 'select',
+    '#title' => t('Default currency'),
+    '#options' => $currency_list,
+    '#default_value' => $language->language == 'ru' ? 'RUB' : 'USD',
+    '#description' => t('Store default currency. You may change it in the future.'),
+  );
+
+  $form['commerce_settings']['default_country'] = array(
+    '#type' => 'select',
+    '#title' => t('Default country for orders'),
+    '#options' => country_get_list(),
+    '#default_value' => $language->language == 'ru' ? 'RU' : 'US',
+    '#description' => t('Default country for orders. You may change it in the future.'),
+  );
+
   $form['commerce_settings']['hide_state_field'] = array(
     '#type' => 'checkbox',
     '#title' => st('Hide State field in checkout'),
-    '#default_value' => 1,
+    '#default_value' => $language->language == 'ru' ? 1 : 0,
     '#description' => st('This option hide the State field. For ex., Russia don\'t need this field, so we can hide it.')
   );
 
@@ -737,8 +753,8 @@ function drupalife_store_advanced_settings_form() {
 function drupalife_store_advanced_settings_form_submit($form, $form_state) {
   // Save selected options.
   $installation_settings = variable_get('drupalife_store_installation_settings', '');
-  foreach ($form_state['values'] as $value) {
-    $installation_settings[] = $value;
+  foreach ($form_state['values'] as $value_name => $value) {
+    $installation_settings[$value_name] = $value;
   }
   variable_set('drupalife_store_installation_settings', $installation_settings);
 
@@ -768,6 +784,26 @@ function drupalife_store_advanced_settings_form_submit($form, $form_state) {
   if ($form_state['values']['hide_state_field'] == 1) {
     $todo_list[] = array('drupalife_store_install_hide_state_field', array());
   }
+
+  // Default currency.
+  variable_set('commerce_default_currency', $form_state['values']['default_currency']);
+
+  // Default country.
+  $addressfield = db_select('field_config_instance', 'c')
+    ->fields('c')
+    ->condition('c.field_name', 'commerce_customer_address')
+    ->execute()
+    ->fetchAssoc();
+  $addressfield_new = unserialize($addressfield['data']);
+  $addressfield_new['widget']['settings']['available_countries'] = array(
+    $form_state['values']['default_country'] => $form_state['values']['default_country'],
+  );
+  db_update('field_config_instance')
+    ->fields(array(
+      'data' => serialize($addressfield_new),
+    ))
+    ->condition('field_name', 'commerce_customer_address')
+    ->execute();
 
   if (!empty($todo_list)) {
     variable_set('drupalife_store_install_advanced_settings', $todo_list);
