@@ -627,6 +627,9 @@ a.tabledrag-handle .handle {
     float: left;
     margin-right: 10px;
 }
+#comment-form .user-name {
+    font-weight: bold;
+}
 
 /* ------- Сообщения ------- */
 .messages {

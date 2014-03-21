@@ -21,4 +21,6 @@
       <?php print render($content['product:field_product_photo']); ?>
     </div>
   </div>
+
+  <?php print render($content['comments']); ?>
 </article>

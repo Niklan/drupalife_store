@@ -144,6 +144,22 @@ function drupalife_store_block_view_alter(&$data, $block) {
 }
 
 /**
+ * Implements hook_theme().
+ */
+function drupalife_store_theme(){
+  $theme = array();
+
+  // Comment form.
+  $theme['comment_form'] = array(
+    'arguments' => array('form' => NULL),
+    'render element' => 'form',
+    'template' => 'templates/comment-form',
+  );
+
+  return $theme;
+}
+
+/**
  * Plural function for Russian words.
  */
 function getNumEnding($number, $endingArray) {
@@ -167,7 +183,7 @@ function getNumEnding($number, $endingArray) {
 }
 
 /**
- * Получение корзины в упрощеном варианте.
+ * Simple cart.
  */
 function get_simple_cart() {
   global $user;

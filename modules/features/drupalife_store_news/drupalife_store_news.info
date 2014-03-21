@@ -1,7 +1,7 @@
 name = Drupalife Store - News
 core = 7.x
 package = Drupalife Store
-version = 7.x-1.0-alpha3
+version = 7.x-1.x
 project = drupalife_store_news
 dependencies[] = ctools
 dependencies[] = drupalife_store_core_shop
@@ -30,10 +30,3 @@ features[image][] = news_teaser
 features[node][] = news
 features[views_view][] = news
 features_exclude[dependencies][drupalife_store_pages] = drupalife_store_pages
-
-; Information added by Drupal.org packaging script on 2014-03-10
-version = "7.x-1.x-dev"
-core = "7.x"
-project = "drupalife_store"
-datestamp = "1394453006"
-

@@ -1,7 +1,7 @@
 name = Drupalife Store - Pages
 core = 7.x
 package = Drupalife Store
-version = 7.x-1.0-alpha3
+version = 7.x-1.x
 project = drupalife_store_pages
 dependencies[] = ctools
 dependencies[] = drupalife_store_core_shop
@@ -18,10 +18,3 @@ features[field_base][] = field_file_attachments
 features[field_instance][] = node-page-body
 features[field_instance][] = node-page-field_file_attachments
 features[node][] = page
-
-; Information added by Drupal.org packaging script on 2014-03-10
-version = "7.x-1.x-dev"
-core = "7.x"
-project = "drupalife_store"
-datestamp = "1394453006"
-

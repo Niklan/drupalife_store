@@ -1,17 +1,10 @@
 name = Drupalife Store - Slider
 core = 7.x
 package = Drupalife Store
-version = 7.x-1.0-alpha3
+version = 7.x-1.x
 project = drupalife_store_slider
 dependencies[] = drupalife_store_core_shop
 dependencies[] = image
 dependencies[] = nivo_slider
 features[features_api][] = api:2
 features[image][] = slider
-
-; Information added by Drupal.org packaging script on 2014-03-10
-version = "7.x-1.x-dev"
-core = "7.x"
-project = "drupalife_store"
-datestamp = "1394453006"
-

@@ -503,6 +503,9 @@ function drupalife_store_install() {
   // Enable registration without approval.
   variable_set('user_register', 1);
 
+  // Disable comment adding for product display.
+  variable_set('comment_product_display', '1');
+
   // Work with permissions.
   user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array(
     'access checkout',
@@ -536,8 +539,6 @@ function drupalife_store_install() {
     'drupalife_store_pages',
     'drupalife_store_slider'
   );
-
-  features_revert($features);
 
   // Add menu entries.
   $menus = array(
@@ -586,6 +587,7 @@ function drupalife_store_install() {
   }
   $query->execute();
 
+  features_revert($features);
   // ignore any rebuild messages
   node_access_needs_rebuild(FALSE);
   // ignore any other install messages
