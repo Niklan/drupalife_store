@@ -31,7 +31,7 @@ function drupalife_store_form_system_theme_settings_alter(&$form, &$form_state, 
   $form['bg']['background_image_x'] = array(
     '#type' => 'radios',
     '#title' => t('Horizontal position'),
-    '#default_value' => theme_get_setting('background_image_x') ? theme_get_setting('background_image_x') : 'center',
+    '#default_value' => theme_get_setting('background_image_x'),
     '#options' => array(
       'left' => t('Left'),
       'center' => t('Center'),
@@ -42,7 +42,7 @@ function drupalife_store_form_system_theme_settings_alter(&$form, &$form_state, 
   $form['bg']['background_image_y'] = array(
     '#type' => 'radios',
     '#title' => t('Vertical position'),
-    '#default_value' => theme_get_setting('background_image_y') ? theme_get_setting('background_image_y') : 'center',
+    '#default_value' => theme_get_setting('background_image_y'),
     '#options' => array(
       'top' => t('Top'),
       'center' => t('Center'),
@@ -53,7 +53,7 @@ function drupalife_store_form_system_theme_settings_alter(&$form, &$form_state, 
   $form['bg']['background_image_size'] = array(
     '#type' => 'radios',
     '#title' => t('Image sizing'),
-    '#default_value' => theme_get_setting('background_image_size') ? theme_get_setting('background_image_size') : 'auto',
+    '#default_value' => theme_get_setting('background_image_size'),
     '#options' => array(
       'auto' => t('Auto'),
       'cover' => t('Cover'),
@@ -64,7 +64,7 @@ function drupalife_store_form_system_theme_settings_alter(&$form, &$form_state, 
   $form['bg']['background_image_repeat'] = array(
     '#type' => 'radios',
     '#title' => t('Image repeat'),
-    '#default_value' => theme_get_setting('background_image_repeat') ? theme_get_setting('background_image_repeat') : 'no-repeat',
+    '#default_value' => theme_get_setting('background_image_repeat'),
     '#options' => array(
       'no-repeat' => t('No repeat'),
       'repeat' => t('Repeat')
@@ -83,7 +83,7 @@ function drupalife_store_form_system_theme_settings_alter(&$form, &$form_state, 
   $form['theme_social_settings']['social_vk'] = array(
     '#type' => 'textfield',
     '#title' => t('VK'),
-    '#default_value' => theme_get_setting('social_vk') ? theme_get_setting('social_vk') : '',
+    '#default_value' => theme_get_setting('social_vk'),
     '#size' => 60,
     '#maxlength' => 128,
     '#required' => FALSE,
@@ -92,7 +92,7 @@ function drupalife_store_form_system_theme_settings_alter(&$form, &$form_state, 
   $form['theme_social_settings']['social_facebook'] = array(
     '#type' => 'textfield',
     '#title' => t('Facebook'),
-    '#default_value' => theme_get_setting('social_facebook') ? theme_get_setting('social_facebook') : '',
+    '#default_value' => theme_get_setting('social_facebook'),
     '#size' => 60,
     '#maxlength' => 128,
     '#required' => FALSE,
@@ -101,7 +101,7 @@ function drupalife_store_form_system_theme_settings_alter(&$form, &$form_state, 
   $form['theme_social_settings']['social_google'] = array(
     '#type' => 'textfield',
     '#title' => t('Google'),
-    '#default_value' => theme_get_setting('social_google') ? theme_get_setting('social_google') : '',
+    '#default_value' => theme_get_setting('social_google'),
     '#size' => 60,
     '#maxlength' => 128,
     '#required' => FALSE,
@@ -110,7 +110,7 @@ function drupalife_store_form_system_theme_settings_alter(&$form, &$form_state, 
   $form['theme_social_settings']['social_twitter'] = array(
     '#type' => 'textfield',
     '#title' => t('Twitter'),
-    '#default_value' => theme_get_setting('social_twitter') ? theme_get_setting('social_twitter') : '',
+    '#default_value' => theme_get_setting('social_twitter'),
     '#size' => 60,
     '#maxlength' => 128,
     '#required' => FALSE,
@@ -148,7 +148,7 @@ function drupalife_store_theme_settings_form_submit($form, &$form_state) {
   global $user;
 
   // Save image.
-  if (is_numeric($form_state['values']['background_image']) && $form_state['values']['background_image'] > 0) {
+  if ($form_state['values']['background_image']) {
     // Load file
     $file = file_load($form_state['values']['background_image']);
     if ($file) {
@@ -164,10 +164,12 @@ function drupalife_store_theme_settings_form_submit($form, &$form_state) {
   }
   else {
     // We goes here if file is not uploaded or removed on this submit.
-    $file = file_load(variable_get('drupalife_store_theme_background_image'));
-    if ($file) {
-      file_delete($file, TRUE);
-      variable_del('drupalife_store_theme_background_image');
+    if (variable_get('drupalife_store_theme_background_image')) {
+      $file = file_load(variable_get('drupalife_store_theme_background_image'));
+      if ($file) {
+        file_delete($file, TRUE);
+        variable_del('drupalife_store_theme_background_image');
+      }
     }
   }
 }
