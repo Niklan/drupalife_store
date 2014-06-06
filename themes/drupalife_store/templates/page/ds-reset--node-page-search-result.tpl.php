@@ -1,6 +1,5 @@
 <?php
 $url = 'http://' . $_SERVER['HTTP_HOST'] . $node_url;
-
 ?>
 <article class="news search">
   <h2 class="title"><a href="<?php print $node_url; ?>"><?php print $node->title; ?></a></h2>

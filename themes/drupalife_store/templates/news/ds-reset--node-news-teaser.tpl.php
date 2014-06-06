@@ -9,7 +9,7 @@ if ($promo_img_values) {
   $promo_img = image_style_url('news_teaser', $promo_img_values[0]['uri']);
 }
 ?>
-<article class="news teaser"<?php print $attributes; ?>>
+<article class="news teaser contextual-links-region"<?php print $attributes; ?>>
   <header>
     <h2 property="dc:title" class="title"><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>
 

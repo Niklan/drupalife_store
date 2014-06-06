@@ -1,14 +1,14 @@
 <?php
 /**
- * Темизация вывода фотографий, которые меняются в зависимости от варианта товара.
+ * Theme photos.
  */
-// Тизер продукта.
+//  Product teaser.
 if ($element['#view_mode'] == "node_teaser") {
   $items[0]['#image_style'] = 'product_thumb';
   print render($items[0]);
 }
 
-// Полное отображение.
+// Full display.
 if ($element['#view_mode'] == "node_full") {
   $items[0]['#image_style'] = 'product_medium';
   $full_img = file_create_url($items[0]['#item']['uri']);
@@ -38,7 +38,7 @@ if ($element['#view_mode'] == "node_full") {
 
 <?php }
 
-// Результаты поиска.
+// Search results.
 if ($element['#view_mode'] == "node_search_result") {
   $items[0]['#image_style'] = 'product_thumb';
   print render($items[0]);

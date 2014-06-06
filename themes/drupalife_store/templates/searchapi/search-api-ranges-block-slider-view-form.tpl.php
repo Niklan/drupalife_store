@@ -4,14 +4,15 @@
  */
 
 global $language;
+$default_currency = commerce_default_currency();
 // Text fixes for Russian.
 if ($language->language == 'ru') {
   // We hide default text and make what we need.
   unset($form['text-range']);
   //print drupal_render($form['text-range']);
-  $price_from = number_format($form['range-from']['#default_value'], 0) . ' руб.';
-  $price_to = number_format($form['range-to']['#default_value'], 0) . ' руб.';
-  $text_range = 'Показаны товары в промежутке от ' . $price_from . ' до ' . $price_to;
+  $price_from = number_format($form['range-from']['#default_value'], 0) . ' ' . $default_currency;
+  $price_to = number_format($form['range-to']['#default_value'], 0) . ' ' . $default_currency;
+  $text_range = t('Shown items in the interval from @price_start - @price_finish', array('price_start' => $price_from, 'price_finish' => $price_to));
 }
 else {
   $text_range = render($form['text-range']);
