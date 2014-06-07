@@ -1,0 +1,62 @@
+; DON'T FORGET TO REMOVE .txt EXTENSION FROM THIS FILE.
+; Correct file name: youtheme.info - after that theme will available.
+name        = Your theme name
+description = Your theme description
+core        = 7.x
+base theme  = drupalife_store
+
+; BE ATTENTION! Name style and js files as base theme, they will be overridden.
+; Your stylesheet.
+stylesheets[all][] = css/new_styles.css
+; Do not remove color.css. It's used by color module.
+stylesheets[all][] = color/color.css
+
+; Your js file.
+scripts[] = js/new_script.js
+
+; Base theme regions.
+regions[navigation]     = Navigation
+regions[help]           = Help
+regions[content]        = Content
+regions[content_front]  = Front content
+regions[sidebar_first]  = Sidebar
+regions[footer]         = Footer
+
+; Drupal core regions.
+regions[page_top]       = Page top
+regions[page_bottom]    = Page bottom
+
+; Features.
+features[] = logo
+features[] = name
+features[] = slogan
+features[] = node_user_picture
+features[] = comment_user_picture
+features[] = favicon
+features[] = main_menu
+features[] = secondary_menu
+
+
+; Default Zen settings.
+settings[zen_breadcrumb]           = yes
+settings[zen_breadcrumb_separator] = ' › '
+settings[zen_breadcrumb_home]      = 1
+settings[zen_breadcrumb_trailing]  = 0
+settings[zen_breadcrumb_title]     = 0
+settings[zen_skip_link_anchor]     = main-menu
+settings[zen_skip_link_text]       = Jump to navigation
+settings[zen_html5_respond_meta][] = respond
+settings[zen_html5_respond_meta][] = html5
+settings[zen_html5_respond_meta][] = meta
+settings[zen_rebuild_registry]     = 0
+settings[zen_wireframes]           = 0
+
+; Theme specific settings.
+settings[background_image_x]       = 'center'
+settings[background_image_y]       = 'center'
+settings[background_image_size]    = 'auto'
+settings[background_image_repeat]  = 'repeat'
+settings[social_vk]                = ''
+settings[social_facebook]          = ''
+settings[social_google]            = ''
+settings[social_twitter]           = ''

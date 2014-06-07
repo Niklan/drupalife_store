@@ -1,0 +1,6 @@
+/**
+ * Your styles goes here.
+ */
+#page-title {
+    color: red
+}

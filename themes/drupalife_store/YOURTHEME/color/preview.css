@@ -1,0 +1,115 @@
+#container-wrapper * {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+#container-wrapper div:after,
+#container-wrapper header:after,
+#container-wrapper aside:after,
+#container-wrapper ul:after {
+    content: '';
+    display: block;
+    clear: both;
+    float: none;
+}
+#container-wrapper {
+    background: #FAFAFA;
+    overflow: hidden;
+}
+#container {
+    width: 500px;
+    margin: 0 auto;
+    background: white;
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.19);
+}
+#header-top-line {
+    padding: 10px 20px;
+    background: #F3F3F3;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0px -1px 0 0 rgba(255, 255, 255, 0.64);
+}
+.pseudo-text-1 {
+    background: #919191;
+    height: 14px;
+    width: 100px;
+    display: inline-block;
+}
+.pseudo-link-1 {
+    background: #75bb73;
+    height: 14px;
+    width: 100px;
+    display: inline-block;
+}
+.pseudo-link-2 {
+    background: #fff;
+    height: 14px;
+    width: 50px;
+    display: inline-block;
+    margin-right: 30px;
+}
+.header-block {
+    float: left;
+    width: 166px;
+    padding: 10px;
+}
+.pseudo-search {
+    width: 100%;
+    box-shadow: inset 0px 2px 3px 0 #EBEBEB;
+    padding: 8px 36px 8px 8px;
+    color: #777;
+    border: 1px solid rgba(0, 0, 0, 0.17);
+    height: 24px;
+}
+.header-block .left-side {
+    float: left;
+}
+.header-block .right-side {
+    float: left;
+}
+#cart {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 300px;
+    background: #75bb73;
+}
+#main-menu {
+    margin: 0px 10px;
+    background: #75BB73;
+    border-radius: 4px;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.11), inset 0px 2px 0 0 rgba(255, 255, 255, 0.38), inset 0px 1px 0 0 rgba(0, 0, 0, 0.21);
+    display: block;
+    height: 21px;
+}
+#main-menu ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+#main-menu ul li {
+    float: left;
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+    border-left: 1px solid rgba(255, 255, 255, 0.19);
+    padding-left: 10px;
+}
+#main-menu ul li:first-child {
+    border-left: none;
+    padding-left: 10px;
+}
+#main-menu ul li:last-child {
+    border-right: none;
+}
+#main-menu ul li a {
+    display: block;
+    padding: 0px;
+    color: #FFF !important;
+    font-size: 11px;
+    text-shadow: 0px 2px 0 rgba(0, 0, 0, 0.13);
+}
+#main-menu ul li.active-trail a {
+    background: rgba(255, 255, 255, 0.23);
+    text-decoration: none;
+}
+#main-menu select {
+    display: none;
+}
