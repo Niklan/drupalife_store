@@ -31,6 +31,19 @@ function drupalife_store_preprocess_html(&$variables, $hook) {
   else {
     $variables['bg_style'] = FALSE;
   }
+
+  // Add template suggestions for 404 and 403 errors.
+  // F.e.: html--404.tpl.php
+  $status = drupal_get_http_header("status");
+  if($status == "404 Not Found") {
+    $variables['theme_hook_suggestions'][] = 'html__404';
+    $variables['classes_array'][] = 'error-404';
+  }
+
+  if($status == "403 Forbidden") {
+    $variables['theme_hook_suggestions'][] = 'html__403';
+    $variables['classes_array'][] = 'error-403';
+  }
 }
 // */
 
@@ -61,6 +74,17 @@ function drupalife_store_preprocess_page(&$variables, $hook) {
         '@user_register' => "/user/register",
       )
     );
+  }
+
+  // Add template suggestions for 404 and 403 errors.
+  // F.e.: page--404.tpl.php
+  $status = drupal_get_http_header("status");
+  if($status == "404 Not Found") {
+    $variables['theme_hook_suggestions'][] = 'page__404';
+  }
+
+  if($status == "403 Forbidden") {
+    $variables['theme_hook_suggestions'][] = 'page__403';
   }
 
   // Social buttons from theme settings.
@@ -121,7 +145,7 @@ function drupalife_store_form_entityform_edit_form_alter(&$form, &$form_state, $
 }
 
 /**
- * Implements template_preprocess_html();
+ * Implements template_process_html();
  */
 function drupalife_store_process_html(&$variables) {
   if (module_exists('color')) {

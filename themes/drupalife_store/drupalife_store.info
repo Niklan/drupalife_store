@@ -1,6 +1,6 @@
 screenshot  = screenshot.png
 name        = Drupalife Store
-description = Default Drupalfie Store theme.
+description = Default Drupalife Store theme.
 core        = 7.x
 base theme  = zen
 
