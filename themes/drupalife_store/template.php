@@ -35,16 +35,17 @@ function drupalife_store_preprocess_html(&$variables, $hook) {
   // Add template suggestions for 404 and 403 errors.
   // F.e.: html--404.tpl.php
   $status = drupal_get_http_header("status");
-  if($status == "404 Not Found") {
+  if ($status == "404 Not Found") {
     $variables['theme_hook_suggestions'][] = 'html__404';
     $variables['classes_array'][] = 'error-404';
   }
 
-  if($status == "403 Forbidden") {
+  if ($status == "403 Forbidden") {
     $variables['theme_hook_suggestions'][] = 'html__403';
     $variables['classes_array'][] = 'error-403';
   }
 }
+
 // */
 
 /**
@@ -79,11 +80,11 @@ function drupalife_store_preprocess_page(&$variables, $hook) {
   // Add template suggestions for 404 and 403 errors.
   // F.e.: page--404.tpl.php
   $status = drupal_get_http_header("status");
-  if($status == "404 Not Found") {
+  if ($status == "404 Not Found") {
     $variables['theme_hook_suggestions'][] = 'page__404';
   }
 
-  if($status == "403 Forbidden") {
+  if ($status == "403 Forbidden") {
     $variables['theme_hook_suggestions'][] = 'page__403';
   }
 
@@ -113,36 +114,15 @@ function drupalife_store_form_user_login_block_alter(&$form, &$form_state, $form
   $register = t('Sign up');
   $forget = t('Restore');
 
-  $form['links']['#markup'] = '<div class="links"><div class="divider">&nbsp;</div> <a class="user-register" href="/user/register">' . $register .'</a><a class="user-password" href="/user/password">' . $forget . '</a></div>';
-  $form['name']['#title'] = Null;
+  $form['links']['#markup'] = '<div class="links"><div class="divider">&nbsp;</div> <a class="user-register" href="/user/register">' . $register . '</a><a class="user-password" href="/user/password">' . $forget . '</a></div>';
+  $form['name']['#title'] = NULL;
   $form['name']['#attributes'] = array('placeholder' => t('Login'));
   $form['name']['#size'] = 20;
-  $form['pass']['#title'] = Null;
+  $form['pass']['#title'] = NULL;
   $form['pass']['#attributes'] = array('placeholder' => t('Password'));
   $form['pass']['#size'] = 20;
 }
 
-/**
- * Implements hook_form_FORM_ID_alter().
- *
- * Contact form.
- */
-function drupalife_store_form_entityform_edit_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id == 'contact_entityform_edit_form') {
-    $form_inner = array();
-    foreach (element_children($form) as $child_key) {
-      $form_inner[$child_key] = $form[$child_key];
-      unset($form[$child_key]);
-    }
-
-    $form['contact_form'] = $form_inner;
-    $form['contact_form']['#prefix'] = '<div class="contact-form">';
-    $form['contact_form']['#suffix'] = '</div>';
-
-    $form['#prefix'] = '<div class="contact-wrapper">';
-    $form['#suffix'] = '</div>';
-  }
-}
 
 /**
  * Implements template_process_html();
@@ -170,7 +150,7 @@ function drupalife_store_block_view_alter(&$data, $block) {
 /**
  * Implements hook_theme().
  */
-function drupalife_store_theme(){
+function drupalife_store_theme() {
   $theme = array();
 
   // Comment form.
@@ -178,6 +158,13 @@ function drupalife_store_theme(){
     'arguments' => array('form' => NULL),
     'render element' => 'form',
     'template' => 'templates/comment-form',
+  );
+
+  // Contact form.
+  $theme['contact_entityform_edit_form'] = array(
+    'arguments' => array('form' => NULL),
+    'template' => 'templates/contact/contact-form',
+    'render element' => 'form',
   );
 
   return $theme;
@@ -188,19 +175,25 @@ function drupalife_store_theme(){
  */
 function getNumEnding($number, $endingArray) {
   $number = $number % 100;
-  if ($number>=11 && $number<=19) {
-    $ending=$endingArray[2];
+  if ($number >= 11 && $number <= 19) {
+    $ending = $endingArray[2];
   }
   else {
     $i = $number % 10;
-    switch ($i)
-    {
-      case (0): $ending = $endingArray[2]; break;
-      case (1): $ending = $endingArray[0]; break;
+    switch ($i) {
+      case (0):
+        $ending = $endingArray[2];
+        break;
+      case (1):
+        $ending = $endingArray[0];
+        break;
       case (2):
       case (3):
-      case (4): $ending = $endingArray[1]; break;
-      default: $ending=$endingArray[2];
+      case (4):
+        $ending = $endingArray[1];
+        break;
+      default:
+        $ending = $endingArray[2];
     }
   }
   return $ending;
@@ -215,7 +208,7 @@ function get_simple_cart() {
 
   $cart_label = t('Your cart');
   $order = commerce_cart_order_load($user->uid);
-  if(!empty($order)) {
+  if (!empty($order)) {
     $wrapper = entity_metadata_wrapper('commerce_order', $order);
     $line_items = $wrapper->commerce_line_items;
     $total = commerce_line_items_total($line_items);
@@ -225,7 +218,7 @@ function get_simple_cart() {
 
     // For Russian cart we need plural function.
     if ($language->language == 'ru') {
-      $quantity_label = getNumEnding($quantity, array('товар','товара','товаров'));
+      $quantity_label = getNumEnding($quantity, array('товар', 'товара', 'товаров'));
     }
     else {
       $quantity_label = 'item(s)';
@@ -258,17 +251,19 @@ function get_search_box() {
     $block['content']['search_block_form']['#attributes'] = array('placeholder' => $search_input_placeholder);
     $search = render($block['content']);
   }
-  else if ($site_search == 'search_api') {
-    if (arg(0) == 'search') {
-      $default_query = isset($_GET['s']) ? $_GET['s'] : '';
-    }
+  else {
+    if ($site_search == 'search_api') {
+      if (arg(0) == 'search') {
+        $default_query = isset($_GET['s']) ? $_GET['s'] : '';
+      }
 
-    isset($default_query) ? $query = $default_query : $query = '';
+      isset($default_query) ? $query = $default_query : $query = '';
 
-    $search = "<form action=\"/search\" id=\"search-api-header\">
+      $search = "<form action=\"/search\" id=\"search-api-header\">
     <input name=\"s\" value=\"{$query}\" maxlength=\"128\" class=\"form-text\" type=\"text\" placeholder=\"{$search_input_placeholder}\">
     <div class=\"submit-wrapper\"><input type=\"submit\" value=\"\"></div>
 </form>";
+    }
   }
 
   return $search;
@@ -283,7 +278,7 @@ function get_comments_label($comment_count = 0) {
   $label = format_plural($comment_count, t('@count comment'), t('@count comments'), array('@count' => $comment_count));
 
   if ($language->language == 'ru') {
-    $plural = getNumEnding($comment_count, array('комментарий','комментария','комментариев'));
+    $plural = getNumEnding($comment_count, array('комментарий', 'комментария', 'комментариев'));
     $label = $comment_count . ' ' . $plural;
   }
 

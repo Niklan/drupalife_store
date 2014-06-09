@@ -952,16 +952,14 @@ a.tabledrag-handle .handle {
 }
 
 /* ------- Контакты ------- */
-.contact-wrapper .pre-intructions ~ .contact-form {
+#contact-form {
     background: #FCFCFC;
     float: right;
     width: 320px;
     padding: 10px 20px;
     border: 1px solid #EBEBEB;
 }
-.contact-wrapper .pre-intructions {
-    float: left;
-}
+
 .mappy img {
     max-width: none;
 }
@@ -1084,7 +1082,7 @@ body.error-403 {
 #wrapper-403 .description {
     display: inline-block;
     vertical-align: middle;
-    width: 500px;
+    width: 450px;
     padding-right: 30px;
     font-size: 30px;
     line-height: 1;
@@ -1093,6 +1091,7 @@ body.error-403 {
 #wrapper-403 .links {
     display: inline-block;
     vertical-align: middle;
+    width: 280px;
     margin: 0;
     padding: 0;
     list-style: none;
