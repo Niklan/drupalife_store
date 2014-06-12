@@ -93,5 +93,4 @@ if (!empty($rows)): ?>
 <?php endif; ?>
 
 </div><?php /* class view */ ?>
-
 <?php endif; /* empty($rows) */ ?>

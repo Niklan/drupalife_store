@@ -6,7 +6,7 @@ else:
   $category_img_url = '/sites/all/themes/drupalife_store/noimage.png';
 endif;
 
-$url = '/' . drupal_get_path_alias('taxonomy/term/' . $term->tid);
+$url = url('taxonomy/term/' . $term->tid);
 ?>
 <article class="category teaser">
   <a href="<?php print $url; ?>" class="link">

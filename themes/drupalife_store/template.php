@@ -123,6 +123,15 @@ function drupalife_store_form_user_login_block_alter(&$form, &$form_state, $form
   $form['pass']['#size'] = 20;
 }
 
+/**
+ * Implements hook_form_FORM_ID_alter():commerce_checkout_form_checkout
+ * Makes 'Order total' label on checkout page translatable without i18n module.
+ */
+function drupalife_store_form_commerce_checkout_form_checkout_alter(&$form, &$form_state, $form_id) {
+  if (isset($form['cart_contents'])) {
+    $form['cart_contents']['cart_contents_view']['#markup'] = str_replace('Order total', t('Order total'), $form['cart_contents']['cart_contents_view']['#markup']);
+  }
+}
 
 /**
  * Implements template_process_html();
@@ -182,7 +191,7 @@ function drupalife_store_theme_registry_alter(&$theme_registry) {
   if (isset($theme_registry['checkbox'])) {
     $theme_registry['checkbox']['type'] = 'theme';
     $theme_registry['checkbox']['theme path'] = $dl_theme_path;
-    $theme_registry['checkbox']['template'] = $theme_path. '/templates/fields/field--type-checkbox';
+    $theme_registry['checkbox']['template'] = $theme_path . '/templates/fields/field--type-checkbox';
     unset($theme_registry['checkbox']['function']);
   }
 
