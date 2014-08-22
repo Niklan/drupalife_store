@@ -55942,3 +55942,5 @@ msgstr ""
 msgid "Hide menu tab"
 msgstr "Скрыть вкладку меню"
 
+msgid "Best regards"
+msgstr "С уважением"

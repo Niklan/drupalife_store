@@ -8,6 +8,14 @@
  */
 
 /**
+ * Auto rebuild theme registry.
+ */
+if (theme_get_setting('rebuild_theme_registry') && !defined('MAINTENANCE_MODE')) {
+  system_rebuild_theme_data();
+  drupal_theme_rebuild();
+}
+
+/**
  * Implements hook_preprocess_html().
  */
 function drupalife_store_preprocess_html(&$variables, $hook) {
@@ -56,7 +64,7 @@ function drupalife_store_preprocess_page(&$variables, $hook) {
 
   // Disable sidebar for product page.
   if (isset($variables['node']) && $variables['node']->type == "product_display") {
-    unset($variables['page']['sidebar_first']);
+    hide($variables['page']['sidebar_first']);
   }
 
   // Top links for user.
@@ -176,33 +184,23 @@ function drupalife_store_theme() {
     'render element' => 'form',
   );
 
-  return $theme;
-}
-
-/**
- * Implements hook_theme_registry_alter().
- */
-function drupalife_store_theme_registry_alter(&$theme_registry) {
-  $theme_path = path_to_theme();
-  // For subthemes.
-  $dl_theme_path = drupal_get_path('theme', 'drupalife_store');
-
   // Checkboxes.
-  if (isset($theme_registry['checkbox'])) {
-    $theme_registry['checkbox']['type'] = 'theme';
-    $theme_registry['checkbox']['theme path'] = $dl_theme_path;
-    $theme_registry['checkbox']['template'] = $theme_path . '/templates/fields/field--type-checkbox';
-    unset($theme_registry['checkbox']['function']);
+  if (theme_get_setting('restyle_checkboxes')) {
+    $theme['checkbox'] = array(
+      'render element' => 'element',
+      'template' => 'templates/fields/field--type-checkbox',
+    );
   }
 
   // Radios.
-  if (isset($theme_registry['radio'])) {
-    $theme_registry['radio']['type'] = 'theme';
-    $theme_registry['radio']['theme path'] = $dl_theme_path;
-    $theme_registry['radio']['template'] = $theme_path . '/templates/fields/field--type-radio';
-    unset($theme_registry['radio']['function']);
+  if (theme_get_setting('restyle_radios')) {
+    $theme['radio'] = array(
+      'render element' => 'element',
+      'template' => 'templates/fields/field--type-radio',
+    );
   }
 
+  return $theme;
 }
 
 /**

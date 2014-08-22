@@ -16,7 +16,7 @@ function drupalife_store_form_system_theme_settings_alter(&$form, &$form_state, 
     '#collapsed' => TRUE,
   );
 
-  // Фоновое изображение.
+  // Background image.
   $form['bg']['background_image'] = array(
     '#title' => t('Background image'),
     '#type' => 'managed_file',
@@ -71,7 +71,7 @@ function drupalife_store_form_system_theme_settings_alter(&$form, &$form_state, 
     ),
   );
 
-  // Соц. сети.
+  // Social networks.
   $form['theme_social_settings'] = array(
     '#type' => 'fieldset',
     '#title' => t('Social settings'),
@@ -124,7 +124,34 @@ function drupalife_store_form_system_theme_settings_alter(&$form, &$form_state, 
     '#collapsed' => TRUE,
   );
 
-  // Переносим дефолтные настройки в наш филдсет.
+  // Developers settings.
+  $form['developers_settings'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Developers settings'),
+    '#weight' => 6,
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+
+  $form['developers_settings']['rebuild_theme_registry'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Rebuild Theme Registry on Page Reload'),
+    '#default_value' => theme_get_setting('rebuild_theme_registry'),
+  );
+
+  $form['developers_settings']['restyle_checkboxes'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Restyle system checkboxes'),
+    '#default_value' => theme_get_setting('restyle_checkboxes'),
+  );
+
+  $form['developers_settings']['restyle_radios'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Restyle system radios'),
+    '#default_value' => theme_get_setting('restyle_radios'),
+  );
+
+  // Move default settings to our new fieldset.
   $form['theme_settings_fieldset']['theme_settings'] = $form['theme_settings'];
   unset($form['theme_settings']);
   $form['theme_settings_fieldset']['logo'] = $form['logo'];

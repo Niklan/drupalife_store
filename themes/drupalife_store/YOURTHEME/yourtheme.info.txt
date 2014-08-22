@@ -60,3 +60,6 @@ settings[social_vk]                = ''
 settings[social_facebook]          = ''
 settings[social_google]            = ''
 settings[social_twitter]           = ''
+settings[rebuild_theme_registry]   = 0
+settings[restyle_checkboxes]       = 1
+settings[restyle_radios]           = 1

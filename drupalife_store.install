@@ -655,8 +655,8 @@ function drupalife_store_advanced_settings_form() {
     '#title' => st('Search type'),
     '#default_value' => 0,
     '#options' => array(
-      0 => st('Standart Drupal search'),
-      1 => st('Standart Drupal search + DisplaySuite Search'),
+      0 => st('Standard Drupal search'),
+      1 => st('Standard Drupal search + DisplaySuite Search'),
       2 => st('Search API + Facet API'),
     ),
     '#description' => st('If you need search other the default Drupal Search, you can chose one here.'),

@@ -68,7 +68,7 @@
           <tbody>
           <tr>
             <td>
-              С уважением команда <?php print $site_name; ?>.
+              <?php print t('Best regards'); ?>, <?php print $site_name; ?>.
             </td>
           </tr>
           </tbody>
