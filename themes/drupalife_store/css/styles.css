@@ -509,6 +509,9 @@ input[type="checkbox"].dls-checkbox:disabled ~ .dls-checkbox-wrapper {
     top: 1px;
     right: 1px;
 }
+#search-block-form .form-item-search-block-form {
+    display: block;
+}
 #cart-wrapper {
     font-size: 14px;
     margin: 0;
