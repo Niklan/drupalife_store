@@ -135,19 +135,21 @@ function drupalife_store_form_system_theme_settings_alter(&$form, &$form_state, 
 
   $form['developers_settings']['rebuild_theme_registry'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Rebuild Theme Registry on Page Reload'),
+    '#title' => t('Rebuild the theme registry on page reload.'),
     '#default_value' => theme_get_setting('rebuild_theme_registry'),
   );
 
   $form['developers_settings']['restyle_checkboxes'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Restyle system checkboxes'),
+    '#title' => t('Restyle the system checkboxes.'),
+    '#description' => t('If checked checkboxes will be replaced with an html/css version, otherwise they will use the system default settings.'),
     '#default_value' => theme_get_setting('restyle_checkboxes'),
   );
 
   $form['developers_settings']['restyle_radios'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Restyle system radios'),
+    '#title' => t('Restyle the system radio buttons.'),
+    '#description' => t('If checked radio buttons will be replaced with an html/css version, otherwise they will use the system default settings.'),
     '#default_value' => theme_get_setting('restyle_radios'),
   );
 
