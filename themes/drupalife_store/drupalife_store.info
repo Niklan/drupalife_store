@@ -21,7 +21,6 @@ stylesheets[all][] = color/color.css
 
 scripts[] = js/script.js
 
-
 regions[navigation]     = Navigation
 regions[help]           = Help
 regions[content]        = Content
@@ -73,10 +72,4 @@ settings[social_twitter]           = ''
 settings[rebuild_theme_registry]   = 0
 settings[restyle_checkboxes]       = 1
 settings[restyle_radios]           = 1
-
-; Information added by Drupal.org packaging script on 2014-03-10
-version = "7.x-1.x-dev"
-core = "7.x"
-project = "drupalife_store"
-datestamp = "1394453006"
 
