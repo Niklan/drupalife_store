@@ -63,8 +63,11 @@ function drupalife_store_preprocess_page(&$variables, $hook) {
   global $user;
 
   // Disable sidebar for product page.
-  if (isset($variables['node']) && $variables['node']->type == "product_display") {
-    hide($variables['page']['sidebar_first']);
+  if (isset($variables['node']->type) && $variables['node']->type == "product_display") {
+    $variables['hide_sidebar'] = TRUE;
+  }
+  else {
+    $variables['hide_sidebar'] = FALSE;
   }
 
   // Top links for user.

@@ -746,6 +746,21 @@ function drupalife_store_advanced_settings_form() {
     '#submit' => array('drupalife_store_advanced_settings_form_submit'),
   );
 
+  // Demo content settings.
+  $form['demo'] = array(
+    '#type' => 'fieldset',
+    '#title' => st('Demo content'),
+    '#weight' => 5,
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+
+  $form['demo']['install_demo'] = array(
+    '#type' => 'checkbox',
+    '#title' => st('Create demo content'),
+    '#description' => st('If you check this box, demo content will be created.')
+  );
+
   return $form;
 }
 
@@ -764,7 +779,10 @@ function drupalife_store_advanced_settings_form_submit($form, $form_state) {
 
   // Search settings.
   if ($form_state['values']['search_type'] == 1) {
-    $todo_list[] = array('drupalife_store_install_displaysuite_search', array());
+    $todo_list[] = array(
+      'drupalife_store_install_displaysuite_search',
+      array()
+    );
   }
   else {
     if ($form_state['values']['search_type'] == 2) {
@@ -785,6 +803,11 @@ function drupalife_store_advanced_settings_form_submit($form, $form_state) {
   // Hide state field.
   if ($form_state['values']['hide_state_field'] == 1) {
     $todo_list[] = array('drupalife_store_install_hide_state_field', array());
+  }
+
+  // Install demo.
+  if ($form_state['values']['install_demo'] == 1) {
+    $todo_list[] = array('drupalife_store_install_demo_content', array());
   }
 
   // Default currency.
@@ -899,7 +922,7 @@ function drupalife_store_install_search_api() {
   // have some problems.
   module_enable(array('search_api_db'));
   module_enable(array('search_api_facetapi'));
-  module_enable(array('search_api_ranges','search_api_views'));
+  module_enable(array('search_api_ranges', 'search_api_views'));
   module_enable(array('commerce_search_api'));
   module_enable(array('drupalife_store_search_api'));
 
@@ -1019,4 +1042,135 @@ function drupalife_store_install_hide_state_field() {
     ))
     ->condition('field_name', 'commerce_customer_address')
     ->execute();
+}
+
+/**
+ * Demo content installation.
+ */
+function drupalife_store_install_demo_content() {
+  $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http';
+  $base_url = $protocol . '://' . $_SERVER['SERVER_NAME'] . '/';
+  $demo_content_file = file_get_contents($base_url . drupal_get_path('profile', 'drupalife_store') . '/demo_content.json', 'r');
+  $demo_content = json_decode($demo_content_file, TRUE);
+
+  foreach ($demo_content as $key => $content) {
+    switch ($content['type']) {
+      case 'news':
+        drupalife_store_install_demo_create_news($content);
+        break;
+      case 'product':
+        drupalife_store_install_demo_create_product($content);
+        break;
+    }
+  }
+}
+
+/**
+ * Creates demo News node.
+ * @param $content (array):
+ *  - title
+ *  - body
+ *  - image (url)
+ */
+function drupalife_store_install_demo_create_news($content) {
+  $title = $content['title'];
+  $body = $content['body'];
+  $image = $content['image'];
+
+  $node = new stdClass();
+  $node->type = 'news';
+  $node->title = $title;
+  $node->language = LANGUAGE_NONE;
+  // Default node settings.
+  node_object_prepare($node);
+  $node->uid = 1;
+  $node->body[$node->language][0]['value'] = $body;
+  $node->body[$node->language][0]['format'] = 'full_html';
+
+  if (!empty($image)) {
+    $file_load = file_get_contents($image);
+    $file = file_save_data($file_load);
+    $node->field_promo_image = array(
+      LANGUAGE_NONE => array(
+        '0' => (array) $file,
+      )
+    );
+  }
+
+  $node = node_submit($node);
+  node_save($node);
+}
+
+/**
+ * Creates demo commerce Product.
+ * @param $content (array):
+ *  - title
+ *  - body
+ *  - images (array) (url)
+ *  - category
+ *  - price
+ */
+function drupalife_store_install_demo_create_product($content) {
+  $title = $content['title'];
+  $body = $content['body'];
+  $images = $content['images'];
+  $category = $content['category'];
+  $price = $content['price'];
+  $sku = $content['sku'];
+
+  // Create commerce product.
+  $product = commerce_product_new('product');
+  $product->uid = 1;
+  $product->sku = $sku;
+  $product->title = $title;
+  $product->language = LANGUAGE_NONE;
+  $product->commerce_price = array(
+    LANGUAGE_NONE => array(
+      0 => array(
+        'amount' => $price,
+        'currency_code' => commerce_default_currency(),
+      )
+    )
+  );
+  if (!empty($images)) {
+    foreach ($images as $image) {
+      $file_load = file_get_contents($image);
+      $file = file_save_data($file_load);
+      $product->field_product_photo[$product->language][] = (array) $file;
+    }
+  }
+
+  commerce_product_save($product);
+
+  // Create product display node.
+  $node = new stdClass();
+  $node->type = 'product_display';
+  $node->title = $title;
+  $node->language = LANGUAGE_NONE;
+  // Default node settings.
+  node_object_prepare($node);
+  $node->uid = 1;
+  $node->body[$node->language][0]['value'] = $body;
+  $node->body[$node->language][0]['format'] = 'full_html';
+  $product = commerce_product_load_by_sku($sku);
+  $node->field_product_display_products[$node->language][0]['product_id'] = $product->product_id;
+  //field_product_display_category
+  $category_term = taxonomy_get_term_by_name($category, 'shop_category');
+  $category_term = array_shift($category_term);
+  if (empty($category_term)) {
+    $term = new stdClass();
+    $term->name = $category;
+    $term->vid = 1;
+    taxonomy_term_save($term);
+
+    $category_term = taxonomy_get_term_by_name($category, 'shop_category');
+    $category_term = array_shift($category_term);
+    $node->field_product_display_category[$node->language][]['tid'] = $category_term->tid;
+  }
+  else {
+    $node->field_product_display_category[$node->language][]['tid'] = $category_term->tid;
+  }
+
+  $node = node_submit($node);
+  node_save($node);
 }

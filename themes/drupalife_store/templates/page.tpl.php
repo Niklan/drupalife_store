@@ -4,13 +4,12 @@ $sidebar  = render($page['sidebar_first']);
 // В зависимости от того, есть ли сайдбар или нет, мы меняем класс у
 // основного контента, чтобы растянуть его на всю ширину в случае отсутствия
 // сайдбара.
-if ($sidebar) {
+if (!$hide_sidebar ) {
   $main_content_class = 'grid-3-4';
 }
 else {
   $main_content_class = 'grid-full';
 }
-
 global $user;
 ?>
 <div id="page-wrapper">
@@ -87,9 +86,11 @@ global $user;
         <?php print $feed_icons; ?>
       </div>
 
+      <?php if ($sidebar && !$hide_sidebar): ?>
       <aside id="sidebar" class="grid-1-4 left" role="sidebar">
         <?php print $sidebar; ?>
       </aside>
+      <?php endif; ?>
     <?php endif; ?>
   </div>
 

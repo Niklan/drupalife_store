@@ -1,0 +1,55 @@
+{
+    "0": {
+        "type": "news",
+        "title": "Rockefeller stakeholders",
+        "body": "Rockefeller stakeholders; agenda catalytic effect agriculture social worker collaborative consumption treatment. Honesty policymakers integrity giving evolution public institutions dignity tackling. Bono equality accelerate progress working alongside medical change movements developing focus on impact. Strengthen democracy grantees foundation social challenges promising development partnership. Empower justice, Medecins du Monde, disruptor incubation efficient lifting people up results. Cause making progress; reduce child mortality Kony 2012 effect minority. Equal opportunity free-speech, political women and children fellows affordable health care Jane Addams. Insurmountable challenges communities recognize potential progressive human experience diversity think tank activist combat poverty. Action Against Hunger, fight against malnutrition economic independence, Cesar.",
+        "image": "https://farm6.staticflickr.com/5609/15491184185_8c3d636a0f_k_d.jpg"
+    },
+    "1": {
+        "type": "news",
+        "title": "Respond focus on impact UNHCR",
+        "body": "Respond focus on impact UNHCR catalytic effect giving asylum community approach. Design thinking Millennium Development Goals; equity NGO, communities, achieve inspire breakthroughs tackling metrics. Fundraise making progress disrupt, humanitarian relief overcome injustice civil society future. Democracy inclusive capitalism strengthen democracy; deep engagement facilitate time of extraordinary change voice. Volunteer catalyst; affordable health care change lives, change opportunity climate change youth. Action challenges, aid open source, provide prevention vaccines. Capacity building storytelling; empower, accessibility local Rockefeller. Participatory monitoring social responsibility, initiative; social movement reduce child mortality connect. Impact tackle; cooperation solutions recognize potential readiness dedicated Rosa Parks equal opportunity, effectiveness save.",
+        "image": "http://farm2.staticflickr.com/1009/751993517_3c95cc1128_z_d.jpg"
+    },
+    "2": {
+        "type": "news",
+        "title": "Respond inspiration",
+        "body": "Respond inspiration invest turmoil poverty informal economies. Human potential; educate education; sustainable celebrate global participatory monitoring. Cause collaborative, social good governance, initiative detection cornerstone, social empower. Pursue these aspirations Action Against Hunger catalyst momentum new approaches. Martin Luther King Jr. justice, agency affiliate catalytic effect women and children transform. Accessibility; legal aid The Elders global network criteria climate change necessities gender rights. Deep engagement cross-cultural; agenda support, change lives; marginalized communities committed Ford Foundation. Research, civic engagement; fairness rural social worker disruption. Involvement equity peace; small-scale farmers; combat poverty synthesize. Global health humanitarian partnership donors Nelson Mandela developing Arab Spring.",
+        "image": "http://farm1.staticflickr.com/49/174720678_2cd1353c62_b_d.jpg"
+    },
+    "3": {
+        "type": "news",
+        "title": "Cornerstone crowdsourcing",
+        "body": "Cornerstone crowdsourcing, strengthen democracy international Nelson Mandela local solutions. Millennium Development Goals health humanitarian deep engagement inspire breakthroughs micro-finance inspire social change challenges of our times rural development. Integrity global leaders; public institutions expanding community ownership cooperation. Democratizing the global financial system impact our grantees and partners dialogue fighting poverty governance initiative. Leverage, Bono sustainability progress, focus on impact pursue these aspirations 501(c)(3). Minority vaccine hack planned giving foundation global countries. Process reproductive rights; Rockefeller, design thinking, agenda philanthropy resolve. Relief free expression proper resources, Peace Corps nutrition recognize potential educate. Investment meaningful, recognition donation, outcomes, fundraise progressive dedicated developing.",
+        "image": "http://farm7.staticflickr.com/6015/5942994577_5f5c40d11b_z_d.jpg"
+    },
+    "4": {
+        "type": "news",
+        "title": "Equality replicable carbon",
+        "body": "Equality replicable carbon emissions reductions, overcome injustice investment safeguards Rosa Parks asylum. Board of directors raise awareness philanthropy accessibility development. Contribution catalyst lifting people up meaningful; crowdsourcing natural resources inspiration. Public sector urban accelerate progress global citizens democratizing the global financial system altruism. Jane Jacobs; positive social change small-scale farmers education Gandhi immunize climate change campaign conflict resolution. Assessment expert health fighting poverty social movement fight against oppression. Invest evolution progressive visionary gender equality voice, social challenges grantees. Long-term revitalize non-partisan developing nations, breakthrough insights affiliate empower. Worldwide, inspire social change, activist support medical. Ford Foundation, prevention, global clean water.",
+        "image": "http://farm5.staticflickr.com/4011/4692928715_95dd1925d5_z_d.jpg"
+    },
+    "5": {
+        "type": "product",
+        "title": "iPhone 6",
+        "sku": "iphone6",
+        "body": "The iPhone 6 and iPhone 6 Plus are iOS smartphones developed by Apple Inc. The devices are part of the iPhone series, and were released on September 19, 2014. The iPhone 6 series jointly serves as a successor to the iPhone 5S. The iPhone 6 series includes a number of major changes over its predecessor, including a streamlined design, models with larger 4.7-inch and 5.5-inch displays, a faster processor, upgraded cameras, improved LTE and Wi-Fi connectivity, and support for a near-field communications-based mobile payments offering.",
+        "images": {
+            "0": "https://farm6.staticflickr.com/5591/14664616480_11a0201784_z_d.jpg",
+            "1": "https://farm6.staticflickr.com/5585/15299141645_fd463046b6_z_d.jpg"
+        },
+        "category": "Phones",
+        "price": "100"
+    },
+    "6": {
+        "type": "product",
+        "title": "iPad 4",
+        "sku": "ipad4",
+        "body": "The fourth generation iPad (marketed as iPad with Retina display, colloquially referred to as the iPad 4)[15][16] is a tablet computer produced and marketed by Apple Inc. Compared to its predecessor, the fourth generation iPad maintained the Retina Display but featured new and upgraded components such as the Apple A6X chip, and the Lightning connector, which was introduced on September 12, 2012. It shipped with iOS 6.0, which provides a platform for audio-visual media, including electronic books, periodicals, films, music, computer games, presentations and web content.\n It was announced at a media conference on October 23, 2012 as the fourth generation of the iPad line, succeeding the third-generation iPad, and was first released on November 2, 2012 in thirty-five countries. The device was released throughout December in ten other countries including China, India and Brazil. The third generation was discontinued following the fourth's announcement.",
+        "images": {
+            "0": "http://farm5.staticflickr.com/4011/4692928715_95dd1925d5_z_d.jpg"
+        },
+        "category": "Tablets",
+        "price": "100"
+    }
+}

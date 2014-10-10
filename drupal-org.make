@@ -8,10 +8,10 @@ projects[addressfield][subdir] = contrib
 projects[ctools][version] = "1.4"
 projects[ctools][subdir] = contrib
 
-projects[ckeditor][version] = "1.14"
+projects[ckeditor][version] = "1.15"
 projects[ckeditor][subdir] = contrib
 
-projects[commerce][version] = "1.9"
+projects[commerce][version] = "1.10"
 projects[commerce][subdir] = contrib
 
 projects[commerce_features][version] = "1.0"
@@ -23,13 +23,13 @@ projects[ds][subdir] = contrib
 projects[entity][version] = "1.5"
 projects[entity][subdir] = contrib
 
-projects[entityform][version] = "2.0-beta3"
+projects[entityform][version] = "2.0-beta4"
 projects[entityform][subdir] = contrib
 
-projects[colorbox][version] = "2.6"
+projects[colorbox][version] = "2.8"
 projects[colorbox][subdir] = contrib
 
-projects[features][version] = "2.0"
+projects[features][version] = "2.2"
 projects[features][subdir] = contrib
 
 projects[filefield_paths][version] = "1.0-beta4"
@@ -50,13 +50,13 @@ projects[libraries][subdir] = contrib
 projects[mappy][version] = "1.3"
 projects[mappy][subdir] = contrib
 
-projects[metatag][version] = "1.0-beta9"
+projects[metatag][version] = "1.4"
 projects[metatag][subdir] = contrib
 
 projects[nivo_slider][version] = "1.11"
 projects[nivo_slider][subdir] = contrib
 
-projects[path_breadcrumbs][version] = "3.0-rc2"
+projects[path_breadcrumbs][version] = "3.0"
 projects[path_breadcrumbs][subdir] = contrib
 
 projects[pathauto][version] = "1.2"
