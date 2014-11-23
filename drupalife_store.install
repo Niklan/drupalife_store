@@ -779,10 +779,7 @@ function drupalife_store_advanced_settings_form_submit($form, $form_state) {
 
   // Search settings.
   if ($form_state['values']['search_type'] == 1) {
-    $todo_list[] = array(
-      'drupalife_store_install_displaysuite_search',
-      array()
-    );
+    $todo_list[] = array('drupalife_store_install_displaysuite_search', array());
   }
   else {
     if ($form_state['values']['search_type'] == 2) {
@@ -1054,11 +1051,11 @@ function drupalife_store_install_demo_content() {
   $demo_content = json_decode($demo_content_file, TRUE);
 
   foreach ($demo_content as $key => $content) {
-    switch ($content['type']) {
+    switch ($key) {
       case 'news':
         drupalife_store_install_demo_create_news($content);
         break;
-      case 'product':
+      case 'products':
         drupalife_store_install_demo_create_product($content);
         break;
     }
@@ -1073,32 +1070,34 @@ function drupalife_store_install_demo_content() {
  *  - image (url)
  */
 function drupalife_store_install_demo_create_news($content) {
-  $title = $content['title'];
-  $body = $content['body'];
-  $image = $content['image'];
+  foreach ($content as $news) {
+    $title = $news['title'];
+    $body = $news['body'];
+    $image = $news['image'];
 
-  $node = new stdClass();
-  $node->type = 'news';
-  $node->title = $title;
-  $node->language = LANGUAGE_NONE;
-  // Default node settings.
-  node_object_prepare($node);
-  $node->uid = 1;
-  $node->body[$node->language][0]['value'] = $body;
-  $node->body[$node->language][0]['format'] = 'full_html';
+    $node = new stdClass();
+    $node->type = 'news';
+    $node->title = $title;
+    $node->language = LANGUAGE_NONE;
+    // Default node settings.
+    node_object_prepare($node);
+    $node->uid = 1;
+    $node->body[$node->language][0]['value'] = $body;
+    $node->body[$node->language][0]['format'] = 'full_html';
 
-  if (!empty($image)) {
-    $file_load = file_get_contents($image);
-    $file = file_save_data($file_load);
-    $node->field_promo_image = array(
-      LANGUAGE_NONE => array(
-        '0' => (array) $file,
-      )
-    );
+    if (!empty($image)) {
+      $file_load = file_get_contents($image);
+      $file = file_save_data($file_load);
+      $node->field_promo_image = array(
+        LANGUAGE_NONE => array(
+          '0' => (array) $file,
+        )
+      );
+    }
+
+    $node = node_submit($node);
+    node_save($node);
   }
-
-  $node = node_submit($node);
-  node_save($node);
 }
 
 /**
@@ -1111,66 +1110,71 @@ function drupalife_store_install_demo_create_news($content) {
  *  - price
  */
 function drupalife_store_install_demo_create_product($content) {
-  $title = $content['title'];
-  $body = $content['body'];
-  $images = $content['images'];
-  $category = $content['category'];
-  $price = $content['price'];
-  $sku = $content['sku'];
+  foreach ($content as $product) {
+    // Create products.
+    $title = $product['title'];
+    $body = $product['body'];
+    $category = $product['category'];
+    $items = $product['items'];
 
-  // Create commerce product.
-  $product = commerce_product_new('product');
-  $product->uid = 1;
-  $product->sku = $sku;
-  $product->title = $title;
-  $product->language = LANGUAGE_NONE;
-  $product->commerce_price = array(
-    LANGUAGE_NONE => array(
-      0 => array(
-        'amount' => $price,
-        'currency_code' => commerce_default_currency(),
-      )
-    )
-  );
-  if (!empty($images)) {
-    foreach ($images as $image) {
-      $file_load = file_get_contents($image);
-      $file = file_save_data($file_load);
-      $product->field_product_photo[$product->language][] = (array) $file;
+    // Create commerce products.
+    foreach ($items as $item) {
+      $product = commerce_product_new('product');
+      $product->uid = 1;
+      $product->sku = $item['sku'];
+      $product->title = $item['title'];
+      $product->language = LANGUAGE_NONE;
+      $product->commerce_price = array(
+        LANGUAGE_NONE => array(
+          0 => array(
+            'amount' => $item['price'],
+            'currency_code' => commerce_default_currency(),
+          )
+        )
+      );
+      if (!empty($item['images'])) {
+        foreach ($item['images'] as $image) {
+          $file_load = file_get_contents($image);
+          $file = file_save_data($file_load);
+          $product->field_product_photo[$product->language][] = (array) $file;
+        }
+      }
+
+      commerce_product_save($product);
     }
-  }
 
-  commerce_product_save($product);
-
-  // Create product display node.
-  $node = new stdClass();
-  $node->type = 'product_display';
-  $node->title = $title;
-  $node->language = LANGUAGE_NONE;
-  // Default node settings.
-  node_object_prepare($node);
-  $node->uid = 1;
-  $node->body[$node->language][0]['value'] = $body;
-  $node->body[$node->language][0]['format'] = 'full_html';
-  $product = commerce_product_load_by_sku($sku);
-  $node->field_product_display_products[$node->language][0]['product_id'] = $product->product_id;
-  //field_product_display_category
-  $category_term = taxonomy_get_term_by_name($category, 'shop_category');
-  $category_term = array_shift($category_term);
-  if (empty($category_term)) {
-    $term = new stdClass();
-    $term->name = $category;
-    $term->vid = 1;
-    taxonomy_term_save($term);
-
+    // Create product display node.
+    $node = new stdClass();
+    $node->type = 'product_display';
+    $node->title = $title;
+    $node->language = LANGUAGE_NONE;
+    // Default node settings.
+    node_object_prepare($node);
+    $node->uid = 1;
+    $node->body[$node->language][0]['value'] = $body;
+    $node->body[$node->language][0]['format'] = 'full_html';
+    foreach ($items as $id => $item) {
+      $product = commerce_product_load_by_sku($item['sku']);
+      $node->field_product_display_products[$node->language][$id]['product_id'] = $product->product_id;
+    }
+    //field_product_display_category
     $category_term = taxonomy_get_term_by_name($category, 'shop_category');
     $category_term = array_shift($category_term);
-    $node->field_product_display_category[$node->language][]['tid'] = $category_term->tid;
-  }
-  else {
-    $node->field_product_display_category[$node->language][]['tid'] = $category_term->tid;
-  }
+    if (empty($category_term)) {
+      $term = new stdClass();
+      $term->name = $category;
+      $term->vid = 1;
+      taxonomy_term_save($term);
 
-  $node = node_submit($node);
-  node_save($node);
+      $category_term = taxonomy_get_term_by_name($category, 'shop_category');
+      $category_term = array_shift($category_term);
+      $node->field_product_display_category[$node->language][]['tid'] = $category_term->tid;
+    }
+    else {
+      $node->field_product_display_category[$node->language][]['tid'] = $category_term->tid;
+    }
+
+    $node = node_submit($node);
+    node_save($node);
+  }
 }

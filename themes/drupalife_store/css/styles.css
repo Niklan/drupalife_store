@@ -891,7 +891,7 @@ input[type="checkbox"].dls-checkbox:disabled ~ .dls-checkbox-wrapper {
 .shop .col {
     display: inline-block;
     vertical-align: top;
-    padding: 0 10px;
+    padding: 5px 4px;
 }
 .shop .col:first-child {
     padding-left: 0;

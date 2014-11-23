@@ -47,7 +47,7 @@ projects[jquery_update][subdir] = contrib
 projects[libraries][version] = "2.2"
 projects[libraries][subdir] = contrib
 
-projects[mappy][version] = "1.3"
+projects[mappy][version] = "1.4"
 projects[mappy][subdir] = contrib
 
 projects[metatag][version] = "1.4"

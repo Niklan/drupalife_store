@@ -263,7 +263,11 @@ function get_simple_cart() {
 
     // For Russian cart we need plural function.
     if ($language->language == 'ru') {
-      $quantity_label = getNumEnding($quantity, array('товар', 'товара', 'товаров'));
+      $quantity_label = getNumEnding($quantity, array(
+        'товар',
+        'товара',
+        'товаров'
+      ));
     }
     else {
       $quantity_label = 'item(s)';
@@ -323,7 +327,11 @@ function get_comments_label($comment_count = 0) {
   $label = format_plural($comment_count, t('@count comment'), t('@count comments'), array('@count' => $comment_count));
 
   if ($language->language == 'ru') {
-    $plural = getNumEnding($comment_count, array('комментарий', 'комментария', 'комментариев'));
+    $plural = getNumEnding($comment_count, array(
+      'комментарий',
+      'комментария',
+      'комментариев'
+    ));
     $label = $comment_count . ' ' . $plural;
   }
 
