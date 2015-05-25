@@ -1119,28 +1119,31 @@ function drupalife_store_install_demo_create_product($content) {
 
     // Create commerce products.
     foreach ($items as $item) {
-      $product = commerce_product_new('product');
-      $product->uid = 1;
-      $product->sku = $item['sku'];
-      $product->title = $item['title'];
-      $product->language = LANGUAGE_NONE;
-      $product->commerce_price = array(
-        LANGUAGE_NONE => array(
-          0 => array(
-            'amount' => $item['price'],
-            'currency_code' => commerce_default_currency(),
+      // If product exist, we skip.
+      if (!commerce_product_load_by_sku($item['sku']) {
+        $product = commerce_product_new('product');
+        $product->uid = 1;
+        $product->sku = $item['sku'];
+        $product->title = $item['title'];
+        $product->language = LANGUAGE_NONE;
+        $product->commerce_price = array(
+          LANGUAGE_NONE => array(
+            0 => array(
+              'amount' => $item['price'],
+              'currency_code' => commerce_default_currency(),
+            )
           )
-        )
-      );
-      if (!empty($item['images'])) {
-        foreach ($item['images'] as $image) {
-          $file_load = file_get_contents($image);
-          $file = file_save_data($file_load);
-          $product->field_product_photo[$product->language][] = (array) $file;
+        );
+        if (!empty($item['images'])) {
+          foreach ($item['images'] as $image) {
+            $file_load = file_get_contents($image);
+            $file = file_save_data($file_load);
+            $product->field_product_photo[$product->language][] = (array) $file;
+          }
         }
-      }
 
-      commerce_product_save($product);
+        commerce_product_save($product);
+      }
     }
 
     // Create product display node.
